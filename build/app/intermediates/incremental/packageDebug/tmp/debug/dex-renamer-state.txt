@@ -1,4 +1,10 @@
-#Tue Nov 26 14:15:24 EST 2019
-base.0=/home/ryanpnayr/Documents/splitlegal/SplitLegal/build/app/intermediates/transforms/dexMerger/debug/0
+#Mon Dec 16 18:53:34 EST 2019
+path.2=classes.dex
+path.1=classes.dex
 path.0=classes.dex
+renamed.2=classes3.dex
+renamed.1=classes2.dex
 renamed.0=classes.dex
+base.2=/home/ryanpnayr/Documents/splitlegal/SplitLegal/build/app/intermediates/transforms/dexMerger/debug/0
+base.1=/home/ryanpnayr/Documents/splitlegal/SplitLegal/build/app/intermediates/transforms/dexMerger/debug/1
+base.0=/home/ryanpnayr/Documents/splitlegal/SplitLegal/build/app/intermediates/transforms/dexMerger/debug/2

@@ -1,10 +1,38 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:1:1-33:12
-INJECTED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:1:1-33:12
-INJECTED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:1:1-33:12
-INJECTED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:1:1-33:12
-MERGED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:1:1-33:12
+ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:1:1-38:12
+INJECTED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:1:1-38:12
+INJECTED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:1:1-38:12
+INJECTED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:1:1-38:12
+MERGED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:1:1-38:12
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/legacy-support-v4-1.0.0.aar/d1eed6e9b6606d3c6c59a95508d0753e/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.recyclerview:recyclerview:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/recyclerview-1.0.0.aar/33682722a1a5fda523d3979eb594041b/AndroidManifest.xml:17:1-22:12
+MERGED from [com.surveymonkey:surveymonkey-android-sdk:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/jetified-surveymonkey-android-sdk-2.0.0.aar/869085ff3a323451cdc519a1dcb013b3/AndroidManifest.xml:2:1-25:12
+MERGED from [:fluttertoast] /home/ryanpnayr/Documents/splitlegal/SplitLegal/build/fluttertoast/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.media:media:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/media-1.0.0.aar/3a1f634d7ed979305b1a195d48ab9bfb/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.fragment:fragment:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/fragment-1.0.0.aar/5aab6b2f68edb36eb883bb14dfc03fbf/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/legacy-support-core-ui-1.0.0.aar/75a498ed20a70ade8c1fa0605f9be224/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/legacy-support-core-utils-1.0.0.aar/11bc3bab360b06bd72b276ab65f01ca4/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/loader-1.0.0.aar/f7ed1128c4d3ccb1c71aaf3f6c371ef5/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/viewpager-1.0.0.aar/5a071d8f3e659ee77ce0a450546da12c/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-1.0.0.aar/673afd833515e84b54d2ed0f333e55b3/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/drawerlayout-1.0.0.aar/ce07e8f70a2320f6e560bb1147935458/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-1.0.0.aar/284bad61df6673966d8f845be7b2c50e/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/customview-1.0.0.aar/4430733decf6c32a2d588432fced4c62/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-1.0.0.aar/3e217a7858f3011184fff7ce568e665d/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-1.0.0.aar/ca478d0dd00368471201f56d5283a032/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/core-1.0.0.aar/c859a0cc66abaa68a756e0914551b684/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.0.0.aar/602c88e8d77e38688ca440bcd2626496/AndroidManifest.xml:17:1-25:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/lifecycle-runtime-2.0.0.aar/f665d889f474e2252e13f3cffec18f98/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/documentfile-1.0.0.aar/3f5a56300740b46dabed8b9f802bed79/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-1.0.0.aar/b4ecbbceb363b30702ba08b08c60591d/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/print-1.0.0.aar/ef95e402679114b1c7bbf43af208baef/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/interpolator-1.0.0.aar/d22634aed15339adebc575fb060e51ce/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/cursoradapter-1.0.0.aar/587fe9de6bc8c7955cf582d99617f534/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/lifecycle-viewmodel-2.0.0.aar/337d478eae3085798e3c31b90298b501/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-2.0.0.aar/55206b79a8d3c13220a92e56b3bda724/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-core-2.0.0.aar/af49029617d44b9048ea753824237d99/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/core-runtime-2.0.0.aar/110a3de0c5e128dccb5ea51ca94a766a/AndroidManifest.xml:17:1-22:12
 INJECTED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/debug/AndroidManifest.xml:1:1-7:12
 INJECTED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/debug/AndroidManifest.xml:1:1-7:12
 INJECTED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/debug/AndroidManifest.xml:1:1-7:12
@@ -14,56 +42,136 @@ INJECTED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/de
 		INJECTED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/debug/AndroidManifest.xml
 	android:versionName
 		INJECTED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml
-		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:1:1-33:12
+		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:1:1-38:12
 		INJECTED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/debug/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml
-		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:1:1-33:12
+		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:1:1-38:12
 		INJECTED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/debug/AndroidManifest.xml
 	xmlns:android
 		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:1:11-69
+uses-permission#android.permission.INTERNET
+ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:9:5-66
+MERGED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:9:5-66
+MERGED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:9:5-66
+MERGED from [com.surveymonkey:surveymonkey-android-sdk:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/jetified-surveymonkey-android-sdk-2.0.0.aar/869085ff3a323451cdc519a1dcb013b3/AndroidManifest.xml:11:5-67
+MERGED from [com.surveymonkey:surveymonkey-android-sdk:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/jetified-surveymonkey-android-sdk-2.0.0.aar/869085ff3a323451cdc519a1dcb013b3/AndroidManifest.xml:11:5-67
+	android:name
+		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:9:22-64
 application
-ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:9:5-32:19
+ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:10:5-37:19
+MERGED from [com.surveymonkey:surveymonkey-android-sdk:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/jetified-surveymonkey-android-sdk-2.0.0.aar/869085ff3a323451cdc519a1dcb013b3/AndroidManifest.xml:14:5-23:19
+MERGED from [com.surveymonkey:surveymonkey-android-sdk:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/jetified-surveymonkey-android-sdk-2.0.0.aar/869085ff3a323451cdc519a1dcb013b3/AndroidManifest.xml:14:5-23:19
+MERGED from [androidx.core:core:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/core-1.0.0.aar/c859a0cc66abaa68a756e0914551b684/AndroidManifest.xml:22:5-89
+MERGED from [androidx.core:core:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/core-1.0.0.aar/c859a0cc66abaa68a756e0914551b684/AndroidManifest.xml:22:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.0.0.aar/602c88e8d77e38688ca440bcd2626496/AndroidManifest.xml:22:5-23:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.0.0.aar/602c88e8d77e38688ca440bcd2626496/AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/core-1.0.0.aar/c859a0cc66abaa68a756e0914551b684/AndroidManifest.xml:22:18-86
 	android:label
-		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:11:9-35
+		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:12:9-35
+	android:allowBackup
+		ADDED from [com.surveymonkey:surveymonkey-android-sdk:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/jetified-surveymonkey-android-sdk-2.0.0.aar/869085ff3a323451cdc519a1dcb013b3/AndroidManifest.xml:14:18-44
 	android:icon
-		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:12:9-43
+		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:13:9-43
 	android:name
-		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:10:9-57
+		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:11:9-57
 activity#com.example.splitlegal.MainActivity
-ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:13:9-31:20
+ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:14:9-32:20
 	android:launchMode
-		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:15:13-43
+		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:16:13-43
 	android:hardwareAccelerated
-		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:18:13-47
+		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:19:13-47
 	android:windowSoftInputMode
-		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:19:13-55
+		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:20:13-55
 	android:configChanges
-		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:17:13-144
+		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:18:13-144
 	android:theme
-		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:16:13-47
+		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:17:13-47
 	android:name
-		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:14:13-41
+		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:15:13-41
 meta-data#io.flutter.app.android.SplashScreenUntilFirstFrame
-ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:24:13-26:40
+ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:25:13-27:40
 	android:value
-		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:26:17-37
+		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:27:17-37
 	android:name
-		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:25:17-82
+		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:26:17-82
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:27:13-30:29
+ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:28:13-31:29
 action#android.intent.action.MAIN
-ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:28:17-68
+ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:29:17-68
 	android:name
-		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:28:25-66
+		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:29:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:29:17-76
+ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:30:17-76
 	android:name
-		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:29:27-74
+		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:30:27-74
+activity#com.example.splitlegal.SMActivity
+ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:33:9-36:20
+	android:label
+		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:35:13-51
+	android:name
+		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml:34:13-39
 uses-sdk
 INJECTED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml
 INJECTED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/legacy-support-v4-1.0.0.aar/d1eed6e9b6606d3c6c59a95508d0753e/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/legacy-support-v4-1.0.0.aar/d1eed6e9b6606d3c6c59a95508d0753e/AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/recyclerview-1.0.0.aar/33682722a1a5fda523d3979eb594041b/AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/recyclerview-1.0.0.aar/33682722a1a5fda523d3979eb594041b/AndroidManifest.xml:20:5-44
+MERGED from [com.surveymonkey:surveymonkey-android-sdk:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/jetified-surveymonkey-android-sdk-2.0.0.aar/869085ff3a323451cdc519a1dcb013b3/AndroidManifest.xml:7:5-9:41
+MERGED from [com.surveymonkey:surveymonkey-android-sdk:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/jetified-surveymonkey-android-sdk-2.0.0.aar/869085ff3a323451cdc519a1dcb013b3/AndroidManifest.xml:7:5-9:41
+MERGED from [:fluttertoast] /home/ryanpnayr/Documents/splitlegal/SplitLegal/build/fluttertoast/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:fluttertoast] /home/ryanpnayr/Documents/splitlegal/SplitLegal/build/fluttertoast/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [androidx.media:media:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/media-1.0.0.aar/3a1f634d7ed979305b1a195d48ab9bfb/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/media-1.0.0.aar/3a1f634d7ed979305b1a195d48ab9bfb/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/fragment-1.0.0.aar/5aab6b2f68edb36eb883bb14dfc03fbf/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/fragment-1.0.0.aar/5aab6b2f68edb36eb883bb14dfc03fbf/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/legacy-support-core-ui-1.0.0.aar/75a498ed20a70ade8c1fa0605f9be224/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/legacy-support-core-ui-1.0.0.aar/75a498ed20a70ade8c1fa0605f9be224/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/legacy-support-core-utils-1.0.0.aar/11bc3bab360b06bd72b276ab65f01ca4/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/legacy-support-core-utils-1.0.0.aar/11bc3bab360b06bd72b276ab65f01ca4/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/loader-1.0.0.aar/f7ed1128c4d3ccb1c71aaf3f6c371ef5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/loader-1.0.0.aar/f7ed1128c4d3ccb1c71aaf3f6c371ef5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/viewpager-1.0.0.aar/5a071d8f3e659ee77ce0a450546da12c/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/viewpager-1.0.0.aar/5a071d8f3e659ee77ce0a450546da12c/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-1.0.0.aar/673afd833515e84b54d2ed0f333e55b3/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-1.0.0.aar/673afd833515e84b54d2ed0f333e55b3/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/drawerlayout-1.0.0.aar/ce07e8f70a2320f6e560bb1147935458/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/drawerlayout-1.0.0.aar/ce07e8f70a2320f6e560bb1147935458/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-1.0.0.aar/284bad61df6673966d8f845be7b2c50e/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-1.0.0.aar/284bad61df6673966d8f845be7b2c50e/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/customview-1.0.0.aar/4430733decf6c32a2d588432fced4c62/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/customview-1.0.0.aar/4430733decf6c32a2d588432fced4c62/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-1.0.0.aar/3e217a7858f3011184fff7ce568e665d/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-1.0.0.aar/3e217a7858f3011184fff7ce568e665d/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-1.0.0.aar/ca478d0dd00368471201f56d5283a032/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-1.0.0.aar/ca478d0dd00368471201f56d5283a032/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/core-1.0.0.aar/c859a0cc66abaa68a756e0914551b684/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/core-1.0.0.aar/c859a0cc66abaa68a756e0914551b684/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.0.0.aar/602c88e8d77e38688ca440bcd2626496/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.0.0.aar/602c88e8d77e38688ca440bcd2626496/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/lifecycle-runtime-2.0.0.aar/f665d889f474e2252e13f3cffec18f98/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/lifecycle-runtime-2.0.0.aar/f665d889f474e2252e13f3cffec18f98/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/documentfile-1.0.0.aar/3f5a56300740b46dabed8b9f802bed79/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/documentfile-1.0.0.aar/3f5a56300740b46dabed8b9f802bed79/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-1.0.0.aar/b4ecbbceb363b30702ba08b08c60591d/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-1.0.0.aar/b4ecbbceb363b30702ba08b08c60591d/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/print-1.0.0.aar/ef95e402679114b1c7bbf43af208baef/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/print-1.0.0.aar/ef95e402679114b1c7bbf43af208baef/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/interpolator-1.0.0.aar/d22634aed15339adebc575fb060e51ce/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/interpolator-1.0.0.aar/d22634aed15339adebc575fb060e51ce/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/cursoradapter-1.0.0.aar/587fe9de6bc8c7955cf582d99617f534/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/cursoradapter-1.0.0.aar/587fe9de6bc8c7955cf582d99617f534/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/lifecycle-viewmodel-2.0.0.aar/337d478eae3085798e3c31b90298b501/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/lifecycle-viewmodel-2.0.0.aar/337d478eae3085798e3c31b90298b501/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-2.0.0.aar/55206b79a8d3c13220a92e56b3bda724/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-2.0.0.aar/55206b79a8d3c13220a92e56b3bda724/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-core-2.0.0.aar/af49029617d44b9048ea753824237d99/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-core-2.0.0.aar/af49029617d44b9048ea753824237d99/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/core-runtime-2.0.0.aar/110a3de0c5e128dccb5ea51ca94a766a/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/core-runtime-2.0.0.aar/110a3de0c5e128dccb5ea51ca94a766a/AndroidManifest.xml:20:5-44
 INJECTED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/debug/AndroidManifest.xml
 INJECTED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/debug/AndroidManifest.xml
 	android:targetSdkVersion
@@ -72,7 +180,17 @@ INJECTED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/de
 	android:minSdkVersion
 		INJECTED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/main/AndroidManifest.xml
 		INJECTED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/debug/AndroidManifest.xml
-uses-permission#android.permission.INTERNET
-ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/debug/AndroidManifest.xml:6:5-66
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [com.surveymonkey:surveymonkey-android-sdk:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/jetified-surveymonkey-android-sdk-2.0.0.aar/869085ff3a323451cdc519a1dcb013b3/AndroidManifest.xml:12:5-79
 	android:name
-		ADDED from /home/ryanpnayr/Documents/splitlegal/SplitLegal/android/app/src/debug/AndroidManifest.xml:6:22-64
+		ADDED from [com.surveymonkey:surveymonkey-android-sdk:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/jetified-surveymonkey-android-sdk-2.0.0.aar/869085ff3a323451cdc519a1dcb013b3/AndroidManifest.xml:12:22-76
+activity#com.surveymonkey.surveymonkeyandroidsdk.SMFeedbackActivity
+ADDED from [com.surveymonkey:surveymonkey-android-sdk:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/jetified-surveymonkey-android-sdk-2.0.0.aar/869085ff3a323451cdc519a1dcb013b3/AndroidManifest.xml:15:9-22:20
+	android:screenOrientation
+		ADDED from [com.surveymonkey:surveymonkey-android-sdk:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/jetified-surveymonkey-android-sdk-2.0.0.aar/869085ff3a323451cdc519a1dcb013b3/AndroidManifest.xml:17:13-47
+	android:windowSoftInputMode
+		ADDED from [com.surveymonkey:surveymonkey-android-sdk:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/jetified-surveymonkey-android-sdk-2.0.0.aar/869085ff3a323451cdc519a1dcb013b3/AndroidManifest.xml:18:13-55
+	android:name
+		ADDED from [com.surveymonkey:surveymonkey-android-sdk:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/jetified-surveymonkey-android-sdk-2.0.0.aar/869085ff3a323451cdc519a1dcb013b3/AndroidManifest.xml:16:13-86
+intent-filter#action:name:android.intent.action.MAIN
+ADDED from [com.surveymonkey:surveymonkey-android-sdk:2.0.0] /home/ryanpnayr/.gradle/caches/transforms-1/files-1.1/jetified-surveymonkey-android-sdk-2.0.0.aar/869085ff3a323451cdc519a1dcb013b3/AndroidManifest.xml:19:13-21:29
