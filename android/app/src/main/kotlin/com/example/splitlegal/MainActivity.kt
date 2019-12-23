@@ -1,4 +1,4 @@
-package com.example.splitlegal
+package com.splitlegal
 
 import android.os.Bundle
 

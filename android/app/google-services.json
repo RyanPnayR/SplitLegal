@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "756635435903",
+    "firebase_url": "https://splitlegal.firebaseio.com",
+    "project_id": "splitlegal",
+    "storage_bucket": "splitlegal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:756635435903:android:317583ced51f641f31104a",
+        "android_client_info": {
+          "package_name": "com.splitlegal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "756635435903-vc84m22av7nlt6q2f8u3gn537ltrbkga.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNxSN3X4RHGJTgQbWI6MFedygYxWfwIUk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "756635435903-vc84m22av7nlt6q2f8u3gn537ltrbkga.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

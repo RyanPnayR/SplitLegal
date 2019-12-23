@@ -1,43 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:splitlegal/dashboard.dart';
+import 'package:splitlegal/sign-in.dart';
 
+final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
 class HomePage extends StatelessWidget {
-  static const platform =
-      const MethodChannel('com.Rahim.myFlutterApp/surveyMonkey');
-  static String sessionSurveyMonkeyHash = 'TB2927J';
-
-  Future _loadSurveyMonkey() async {
-    try {
-      await platform
-          .invokeMethod('surveyMonkey', sessionSurveyMonkeyHash)
-          .then((result) {
-        Fluttertoast.showToast(
-            msg: result,
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIos: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
-      });
-    } on PlatformException catch (e) {
-      print(e.message);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(""),
-      ),
-      body: Center(
-        child: RaisedButton(
-          onPressed: _loadSurveyMonkey,
-          child: Text("Load SurveyMonkey"),
-        ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+    return StreamBuilder<FirebaseUser>(
+      stream: FirebaseAuth.instance.onAuthStateChanged,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.active) {
+          FirebaseUser user = snapshot.data;
+          if (user == null) {
+            return SignInPage();
+          }
+          return Dashboard();
+        } else {
+          return Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+      },
     );
   }
 }

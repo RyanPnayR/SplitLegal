@@ -1,5 +1,8 @@
-com.example.splitlegal
+com.splitlegal
 attr alpha
+attr buttonSize
+attr circleCrop
+attr colorScheme
 attr coordinatorLayoutStyle
 attr fastScrollEnabled
 attr fastScrollHorizontalThumbDrawable
@@ -16,6 +19,8 @@ attr fontProviderQuery
 attr fontStyle
 attr fontVariationSettings
 attr fontWeight
+attr imageAspectRatio
+attr imageAspectRatioAdjust
 attr keylines
 attr layoutManager
 attr layout_anchor
@@ -25,10 +30,22 @@ attr layout_dodgeInsetEdges
 attr layout_insetEdge
 attr layout_keyline
 attr reverseLayout
+attr scopeUris
 attr spanCount
 attr stackFromEnd
 attr statusBarBackground
 attr ttcIndex
+color common_google_signin_btn_text_dark
+color common_google_signin_btn_text_dark_default
+color common_google_signin_btn_text_dark_disabled
+color common_google_signin_btn_text_dark_focused
+color common_google_signin_btn_text_dark_pressed
+color common_google_signin_btn_text_light
+color common_google_signin_btn_text_light_default
+color common_google_signin_btn_text_light_disabled
+color common_google_signin_btn_text_light_focused
+color common_google_signin_btn_text_light_pressed
+color common_google_signin_btn_tint
 color notification_action_color_filter
 color notification_icon_bg_color
 color notification_material_background_media_default_color
@@ -70,6 +87,27 @@ dimen subtitle_corner_radius
 dimen subtitle_outline_width
 dimen subtitle_shadow_offset
 dimen subtitle_shadow_radius
+drawable common_full_open_on_phone
+drawable common_google_signin_btn_icon_dark
+drawable common_google_signin_btn_icon_dark_focused
+drawable common_google_signin_btn_icon_dark_normal
+drawable common_google_signin_btn_icon_dark_normal_background
+drawable common_google_signin_btn_icon_disabled
+drawable common_google_signin_btn_icon_light
+drawable common_google_signin_btn_icon_light_focused
+drawable common_google_signin_btn_icon_light_normal
+drawable common_google_signin_btn_icon_light_normal_background
+drawable common_google_signin_btn_text_dark
+drawable common_google_signin_btn_text_dark_focused
+drawable common_google_signin_btn_text_dark_normal
+drawable common_google_signin_btn_text_dark_normal_background
+drawable common_google_signin_btn_text_disabled
+drawable common_google_signin_btn_text_light
+drawable common_google_signin_btn_text_light_focused
+drawable common_google_signin_btn_text_light_normal
+drawable common_google_signin_btn_text_light_normal_background
+drawable googleg_disabled_color_18
+drawable googleg_standard_color_18
 drawable launch_background
 drawable notification_action_background
 drawable notification_bg
@@ -90,8 +128,11 @@ id action_divider
 id action_image
 id action_text
 id actions
+id adjust_height
+id adjust_width
 id all
 id async
+id auto
 id blocking
 id bottom
 id cancel_action
@@ -101,6 +142,7 @@ id center_vertical
 id chronometer
 id clip_horizontal
 id clip_vertical
+id dark
 id dialog_first_text_line
 id dialog_header_text_line
 id end
@@ -111,10 +153,12 @@ id fill_vertical
 id forever
 id icon
 id icon_group
+id icon_only
 id info
 id italic
 id item_touch_helper_previous_elevation
 id left
+id light
 id line1
 id line3
 id media_actions
@@ -132,6 +176,7 @@ id sm_feedback_no_network
 id sm_feedback_survey_closed
 id sm_feedback_survey_ended
 id sm_feedback_webview
+id standard
 id start
 id status_bar_latest_event_content
 id survey_closed_title
@@ -144,7 +189,9 @@ id text2
 id time
 id title
 id top
+id wide
 integer cancel_button_image_alpha
+integer google_play_services_version
 integer status_bar_notification_info_maxnum
 layout fragment_dialog
 layout fragment_smfeedback
@@ -169,6 +216,32 @@ layout overlay_survey_ended
 layout surveymonkey
 layout toast_custom
 mipmap ic_launcher
+string common_google_play_services_enable_button
+string common_google_play_services_enable_text
+string common_google_play_services_enable_title
+string common_google_play_services_install_button
+string common_google_play_services_install_text
+string common_google_play_services_install_title
+string common_google_play_services_notification_channel_name
+string common_google_play_services_notification_ticker
+string common_google_play_services_unknown_issue
+string common_google_play_services_unsupported_text
+string common_google_play_services_update_button
+string common_google_play_services_update_text
+string common_google_play_services_update_title
+string common_google_play_services_updating_text
+string common_google_play_services_wear_update_text
+string common_open_on_phone
+string common_signin_button_text
+string common_signin_button_text_long
+string default_web_client_id
+string firebase_database_url
+string gcm_defaultSenderId
+string google_api_key
+string google_app_id
+string google_crash_reporting_api_key
+string google_storage_bucket
+string project_id
 string sm_action_give_feedback
 string sm_action_not_now
 string sm_action_settings
@@ -202,4 +275,6 @@ styleable FontFamily fontProviderAuthority fontProviderCerts fontProviderFetchSt
 styleable FontFamilyFont android_font android_fontWeight android_fontStyle android_ttcIndex android_fontVariationSettings font fontStyle fontVariationSettings fontWeight ttcIndex
 styleable GradientColor android_startColor android_endColor android_type android_centerX android_centerY android_gradientRadius android_tileMode android_centerColor android_startX android_startY android_endX android_endY
 styleable GradientColorItem android_color android_offset
+styleable LoadingImageView circleCrop imageAspectRatio imageAspectRatioAdjust
 styleable RecyclerView android_orientation android_descendantFocusability fastScrollEnabled fastScrollHorizontalThumbDrawable fastScrollHorizontalTrackDrawable fastScrollVerticalThumbDrawable fastScrollVerticalTrackDrawable layoutManager reverseLayout spanCount stackFromEnd
+styleable SignInButton buttonSize colorScheme scopeUris
