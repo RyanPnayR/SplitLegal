@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.surveymonkey:surveymonkey-android-sdk:2.0.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-surveymonkey-android-sdk-2.0.0.aar/869085ff3a323451cdc519a1dcb013b3/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-surveymonkey-android-sdk-2.0.0.aar/869085ff3a323451cdc519a1dcb013b3/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-surveymonkey-android-sdk-2.0.0.aar/40a4bb2b24f2773360ca13839cbad59c/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-surveymonkey-android-sdk-2.0.0.aar/40a4bb2b24f2773360ca13839cbad59c/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

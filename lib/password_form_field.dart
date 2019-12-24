@@ -33,6 +33,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return FormBuilderTextField(
+      maxLines: 1,
       attribute: widget.attribute,
       style: widget.style != null ? widget.style : theme.textTheme.display1,
       obscureText: _showPassword,
@@ -48,7 +49,9 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
             ),
           ),
           labelText: widget.labelText,
-          labelStyle: widget.labelStyle != null ? widget.labelStyle : theme.inputDecorationTheme.labelStyle),
+          labelStyle: widget.labelStyle != null
+              ? widget.labelStyle
+              : theme.inputDecorationTheme.labelStyle),
       validators: widget.validators +
           [
             FormBuilderValidators.minLength(8),

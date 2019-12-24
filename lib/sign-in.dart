@@ -3,23 +3,22 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:google_sign_in/google_sign_in.dart' as prefix0;
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:splitlegal/password_form_field.dart';
 import 'package:splitlegal/sign-up_screen.dart';
 
 class SignInPage extends StatelessWidget {
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final prefix0.GoogleSignIn _googleSignIn = GoogleSignIn(
-  scopes: [
-    'email',
-    'https://www.googleapis.com/auth/contacts.readonly',
-  ],
-);
+  final prefix0.GoogleSignIn _googleSignIn = prefix0.GoogleSignIn(
+    scopes: [
+      'email',
+      'https://www.googleapis.com/auth/contacts.readonly',
+    ],
+  );
   Future<String> signInWithGoogle() async {
-
-    final GoogleSignInAccount googleSignInAccount = GoogleSignIn();
-    final GoogleSignInAuthentication googleSignInAuthentication =
+    final prefix0.GoogleSignInAccount googleSignInAccount =
+        await _googleSignIn.signIn();
+    final prefix0.GoogleSignInAuthentication googleSignInAuthentication =
         await googleSignInAccount.authentication;
 
     final AuthCredential credential = GoogleAuthProvider.getCredential(
@@ -39,7 +38,7 @@ class SignInPage extends StatelessWidget {
   }
 
   void signOutGoogle() async {
-    Google
+    _googleSignIn.signOut();
 
     print("User Sign Out");
   }

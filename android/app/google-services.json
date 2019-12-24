@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "756635435903-51enc540pl095vbc8ei7tmvo6jcfjobg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.splitlegal",
+            "certificate_hash": "6ef32db2fbd8d0b946c7d8f4375fa1135264818f"
+          }
+        },
+        {
+          "client_id": "756635435903-g7o1j38pq4f82gjk4vlqivktitcodf3t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.splitlegal",
+            "certificate_hash": "3e479cd4469d32027d53be56f3d7b91bdc1296c0"
+          }
+        },
+        {
           "client_id": "756635435903-vc84m22av7nlt6q2f8u3gn537ltrbkga.apps.googleusercontent.com",
           "client_type": 3
         }
