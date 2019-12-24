@@ -2,14 +2,51 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:google_sign_in/google_sign_in.dart' as prefix0;
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:splitlegal/password_form_field.dart';
 import 'package:splitlegal/sign-up_screen.dart';
 
 class SignInPage extends StatelessWidget {
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final prefix0.GoogleSignIn _googleSignIn = GoogleSignIn(
+  scopes: [
+    'email',
+    'https://www.googleapis.com/auth/contacts.readonly',
+  ],
+);
+  Future<String> signInWithGoogle() async {
+
+    final GoogleSignInAccount googleSignInAccount = GoogleSignIn();
+    final GoogleSignInAuthentication googleSignInAuthentication =
+        await googleSignInAccount.authentication;
+
+    final AuthCredential credential = GoogleAuthProvider.getCredential(
+      accessToken: googleSignInAuthentication.accessToken,
+      idToken: googleSignInAuthentication.idToken,
+    );
+
+    final FirebaseUser user = await _auth.signInWithCredential(credential);
+
+    assert(!user.isAnonymous);
+    assert(await user.getIdToken() != null);
+
+    final FirebaseUser currentUser = await _auth.currentUser();
+    assert(user.uid == currentUser.uid);
+
+    return 'signInWithGoogle succeeded: $user';
+  }
+
+  void signOutGoogle() async {
+    Google
+
+    print("User Sign Out");
+  }
 
   Future<void> _signIn() async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await _auth.signInWithEmailAndPassword(
         password: _fbKey.currentState.fields['password'].currentState.value,
         email: _fbKey.currentState.fields['email'].currentState.value,
       );
@@ -39,23 +76,24 @@ class SignInPage extends StatelessWidget {
                   'date': DateTime.now(),
                   'accept_terms': false,
                 },
-                autovalidate: true,
                 child: Column(children: <Widget>[
                   FormBuilderTextField(
                     attribute: "email",
-                    decoration: InputDecoration(labelText: "Email"),
+                    decoration: InputDecoration(
+                      labelText: "Email",
+                      labelStyle: TextStyle(color: Color.fromRGBO(0, 0, 0, .5)),
+                    ),
                     validators: [
                       FormBuilderValidators.email(),
                       FormBuilderValidators.required(),
                     ],
                   ),
-                  FormBuilderTextField(
-                    attribute: "password",
-                    decoration: InputDecoration(labelText: "Password"),
-                    validators: [
-                      FormBuilderValidators.minLength(8),
-                      FormBuilderValidators.required(),
-                    ],
+                  PasswordFormField(
+                    attribute: 'password',
+                    labelText: 'Password',
+                    style: TextStyle(color: Colors.black),
+                    labelStyle: TextStyle(color: Color.fromRGBO(0, 0, 0, .5)),
+                    validators: [],
                   ),
                 ]),
               ),
@@ -67,7 +105,7 @@ class SignInPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 MaterialButton(
-                  color: Color.fromRGBO(72, 101, 115, 1),
+                  color: Theme.of(context).buttonColor,
                   textColor: Colors.white,
                   child: Text("Sign Up"),
                   shape: RoundedRectangleBorder(
@@ -86,7 +124,7 @@ class SignInPage extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(18.0),
                   ),
-                  color: Color.fromRGBO(15, 39, 96, 1),
+                  color: Theme.of(context).secondaryHeaderColor,
                   textColor: Colors.white,
                   onPressed: () {
                     if (_fbKey.currentState.saveAndValidate()) {
@@ -104,7 +142,9 @@ class SignInPage extends StatelessWidget {
               height: 30,
             ),
             GoogleSignInButton(
-              onPressed: () {},
+              onPressed: () {
+                signInWithGoogle();
+              },
               darkMode: false, // default: false
             )
           ],
@@ -112,4 +152,6 @@ class SignInPage extends StatelessWidget {
       ],
     ));
   }
+
+  static GoogleSignIn() {}
 }

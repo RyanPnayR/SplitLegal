@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:splitlegal/password_form_field.dart';
 
 class SignUpPage extends StatelessWidget {
   final GlobalKey<FormBuilderState> _signUpKey = GlobalKey<FormBuilderState>();
+  final TextEditingController _passwordController = TextEditingController();
 
   Future<void> _signUp(context) async {
     try {
@@ -24,33 +26,47 @@ class SignUpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Create Your Account'),
         elevation: 0.0,
-        backgroundColor: Color.fromRGBO(64, 64, 64, 1),
+        backgroundColor: theme.primaryColor,
       ),
-      backgroundColor: Color.fromRGBO(64, 64, 64, 1),
+      backgroundColor: theme.primaryColor,
       persistentFooterButtons: <Widget>[
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            MaterialButton(
-              child: Text("Sign up"),
-              shape: RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(18.0),
-              ),
-              color: Color.fromRGBO(15, 39, 96, 1),
-              textColor: Colors.white,
-              onPressed: () {
-                if (_signUpKey.currentState.saveAndValidate()) {
-                  _signUp(context);
-                }
-              },
-            ),
-          ],
-        ),
+        SizedBox(
+          width: 350,
+            height: 90,
+            child: Column(
+              children: <Widget>[
+                Text(
+                  'By creating an account you accept Split Legal’s Terms of Service and Privacy Policy',
+                  style: theme.textTheme.display1,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    MaterialButton(
+                      minWidth: 100,
+                      child: Text("Sign up"),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(18.0),
+                      ),
+                      color: Theme.of(context).secondaryHeaderColor,
+                      textColor: Colors.white,
+                      onPressed: () {
+                        if (_signUpKey.currentState.saveAndValidate()) {
+                          _signUp(context);
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            )),
       ],
       body: ListView(children: <Widget>[
         Column(children: <Widget>[
@@ -62,36 +78,42 @@ class SignUpPage extends StatelessWidget {
                 'date': DateTime.now(),
                 'accept_terms': false,
               },
-              autovalidate: true,
               child: Column(children: <Widget>[
                 FormBuilderTextField(
                   attribute: "first_name",
-                  decoration: InputDecoration(labelText: "First Name"),
+                  style: theme.textTheme.display1,
+                  decoration: InputDecoration(
+                      labelText: "First Name",
+                      labelStyle: theme.inputDecorationTheme.labelStyle),
                   validators: [
                     FormBuilderValidators.required(),
                   ],
                 ),
                 FormBuilderTextField(
                   attribute: "last_name",
-                  decoration: InputDecoration(labelText: "Last Name"),
+                  style: theme.textTheme.display1,
+                  decoration: InputDecoration(
+                      labelText: "Last Name",
+                      labelStyle: theme.inputDecorationTheme.labelStyle),
                   validators: [
                     FormBuilderValidators.required(),
                   ],
                 ),
                 FormBuilderTextField(
                   attribute: "email",
-                  decoration: InputDecoration(labelText: "Email"),
+                  style: theme.textTheme.display1,
+                  decoration: InputDecoration(
+                      labelText: "Email",
+                      labelStyle: theme.inputDecorationTheme.labelStyle),
                   validators: [
                     FormBuilderValidators.email(),
                     FormBuilderValidators.required(),
                   ],
                 ),
-                FormBuilderTextField(
-                  attribute: "password",
-                  decoration: InputDecoration(labelText: "Password"),
+                PasswordFormField(
+                  attribute: 'password',
+                  labelText: 'Password',
                   validators: [
-                    FormBuilderValidators.minLength(8),
-                    FormBuilderValidators.required(),
                     (val) {
                       if (val.toLowerCase() !=
                           _signUpKey.currentState.fields['repeat_password']
@@ -101,12 +123,10 @@ class SignUpPage extends StatelessWidget {
                     },
                   ],
                 ),
-                FormBuilderTextField(
-                  attribute: "repeat_password",
-                  decoration: InputDecoration(labelText: "Repeat Password"),
+                PasswordFormField(
+                  attribute: 'repeat_password',
+                  labelText: 'Repeat Password',
                   validators: [
-                    FormBuilderValidators.minLength(8),
-                    FormBuilderValidators.required(),
                     (val) {
                       if (val.toLowerCase() !=
                           _signUpKey.currentState.fields['password']
@@ -115,7 +135,7 @@ class SignUpPage extends StatelessWidget {
                       }
                     },
                   ],
-                ),
+                )
               ]),
             ),
           ),
