@@ -3,59 +3,24 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:google_sign_in/google_sign_in.dart' as prefix0;
+import 'package:splitlegal/app_state_container.dart';
 import 'package:splitlegal/password_form_field.dart';
 import 'package:splitlegal/sign-up_screen.dart';
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
+  @override
+  SignInPageState createState() {
+    return new SignInPageState();
+  }
+}
+
+class SignInPageState extends State<SignInPage> {
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final prefix0.GoogleSignIn _googleSignIn = prefix0.GoogleSignIn(
-    scopes: [
-      'email',
-      'https://www.googleapis.com/auth/contacts.readonly',
-    ],
-  );
-  Future<String> signInWithGoogle() async {
-    final prefix0.GoogleSignInAccount googleSignInAccount =
-        await _googleSignIn.signIn();
-    final prefix0.GoogleSignInAuthentication googleSignInAuthentication =
-        await googleSignInAccount.authentication;
-
-    final AuthCredential credential = GoogleAuthProvider.getCredential(
-      accessToken: googleSignInAuthentication.accessToken,
-      idToken: googleSignInAuthentication.idToken,
-    );
-
-    final FirebaseUser user = await _auth.signInWithCredential(credential);
-
-    assert(!user.isAnonymous);
-    assert(await user.getIdToken() != null);
-
-    final FirebaseUser currentUser = await _auth.currentUser();
-    assert(user.uid == currentUser.uid);
-
-    return 'signInWithGoogle succeeded: $user';
-  }
-
-  void signOutGoogle() async {
-    _googleSignIn.signOut();
-
-    print("User Sign Out");
-  }
-
-  Future<void> _signIn() async {
-    try {
-      await _auth.signInWithEmailAndPassword(
-        password: _fbKey.currentState.fields['password'].currentState.value,
-        email: _fbKey.currentState.fields['email'].currentState.value,
-      );
-    } catch (e) {
-      print(e); // TODO: show dialog with error
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
+    final container = AppStateContainer.of(context);
+
     return Scaffold(
         body: ListView(
       children: <Widget>[
@@ -112,9 +77,9 @@ class SignInPage extends StatelessWidget {
                   ),
                   onPressed: () {
                     var SignUp = new SignUpPage();
-                    Navigator.push(
+                    Navigator.pushNamed(
                       context,
-                      MaterialPageRoute(builder: (context) => SignUp),
+                      '/signUp'
                     );
                   },
                 ),
@@ -127,7 +92,11 @@ class SignInPage extends StatelessWidget {
                   textColor: Colors.white,
                   onPressed: () {
                     if (_fbKey.currentState.saveAndValidate()) {
-                      _signIn();
+                      container.signIn(
+                          _fbKey
+                              .currentState.fields['email'].currentState.value,
+                          _fbKey.currentState.fields['password'].currentState
+                              .value);
                     }
                   },
                 ),
@@ -142,7 +111,7 @@ class SignInPage extends StatelessWidget {
             ),
             GoogleSignInButton(
               onPressed: () {
-                signInWithGoogle();
+                container.logIntoFirebase();
               },
               darkMode: false, // default: false
             )

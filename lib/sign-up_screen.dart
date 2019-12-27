@@ -1,32 +1,29 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:splitlegal/password_form_field.dart';
 
-class SignUpPage extends StatelessWidget {
-  final GlobalKey<FormBuilderState> _signUpKey = GlobalKey<FormBuilderState>();
-  final TextEditingController _passwordController = TextEditingController();
+import 'app_state_container.dart';
+import 'models/app_state.dart';
 
-  Future<void> _signUp(context) async {
-    try {
-      print('hellow');
-      FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-              email: _signUpKey.currentState.fields['email'].currentState.value,
-              password:
-                  _signUpKey.currentState.fields['password'].currentState.value)
-          .then((res) async {
-        Navigator.pop(context);
-      });
-    } catch (e) {
-      print(e); // TODO: show dialog with error
-    }
+class SignUpPage extends StatefulWidget {
+  @override
+  SignUpPageState createState() {
+    return new SignUpPageState();
   }
+}
+
+class SignUpPageState extends State<SignUpPage> {
+  final GlobalKey<FormBuilderState> _signUpKey = GlobalKey<FormBuilderState>();
+  AppState appState;
 
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    var container = AppStateContainer.of(context);
+    appState = container.state;
 
     return Scaffold(
       appBar: AppBar(
@@ -37,7 +34,7 @@ class SignUpPage extends StatelessWidget {
       backgroundColor: theme.primaryColor,
       persistentFooterButtons: <Widget>[
         SizedBox(
-          width: 350,
+            width: 350,
             height: 90,
             child: Column(
               children: <Widget>[
@@ -59,7 +56,8 @@ class SignUpPage extends StatelessWidget {
                       textColor: Colors.white,
                       onPressed: () {
                         if (_signUpKey.currentState.saveAndValidate()) {
-                          _signUp(context);
+                          container.signUp(_signUpKey.currentState);
+                          Navigator.pushNamed(context, '/');
                         }
                       },
                     ),

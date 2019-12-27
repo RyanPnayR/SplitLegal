@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:splitlegal/app_state_container.dart';
 
 class Dashboard extends StatelessWidget {
   static const platform =
@@ -27,16 +28,10 @@ class Dashboard extends StatelessWidget {
     }
   }
 
-  Future<void> _signOut() async {
-    try {
-      await FirebaseAuth.instance.signOut();
-    } catch (e) {
-      print(e); // TODO: show dialog with error
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    var container = AppStateContainer.of(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(""),
@@ -49,7 +44,7 @@ class Dashboard extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            onPressed: _signOut,
+            onPressed: container.signOutGoogle,
           ),
         ],
       ),
