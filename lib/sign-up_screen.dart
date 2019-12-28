@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:splitlegal/app.dart';
 import 'package:splitlegal/password_form_field.dart';
+import 'package:splitlegal/screens/home_screen.dart';
 
 import 'app_state_container.dart';
 import 'models/app_state.dart';
@@ -56,8 +58,23 @@ class SignUpPageState extends State<SignUpPage> {
                       textColor: Colors.white,
                       onPressed: () {
                         if (_signUpKey.currentState.saveAndValidate()) {
-                          container.signUp(_signUpKey.currentState);
-                          Navigator.pushNamed(context, '/');
+                          container.showLoadingDialog(context);
+                          container.signUp(_signUpKey.currentState).then((res) {
+                            Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (context) => HomeScreen()),
+                              (Route<dynamic> route) => false,
+                            );
+                          }).catchError((e) {
+                            container.hideDialog(context);
+                            container.showErrorDialog(context, [
+                              Text(
+                                'Uh, oh!',
+                                style: Theme.of(context).textTheme.title,
+                              ),
+                              Text(e.message)
+                            ]);
+                          });
                         }
                       },
                     ),

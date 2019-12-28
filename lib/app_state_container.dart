@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
@@ -55,24 +55,13 @@ class _AppStateContainerState extends State<AppStateContainer> {
   }
 
   Future<void> signIn(email, password) async {
-    setState(() {
-      state.isLoading = true;
-    });
-    try {
       FirebaseUser user = await _auth.signInWithEmailAndPassword(
         password: password,
-        email: email,
+        email: email.trim(),
       );
       setState(() {
-        state.isLoading = false;
         state.user = user;
       });
-    } catch (e) {
-      setState(() {
-        state.isLoading = false;
-      });
-      print(e); // TODO: show dialog with error
-    }
   }
 
   @override
@@ -100,7 +89,7 @@ class _AppStateContainerState extends State<AppStateContainer> {
   setAppLoading([bool isLoading = true]) {
     print(isLoading);
     setState(() {
-      state.isLoading = true;
+      state.isLoading = isLoading;
     });
   }
 
@@ -130,9 +119,14 @@ class _AppStateContainerState extends State<AppStateContainer> {
 
   Future<dynamic> _ensureLoggedInOnStartUp() async {
     GoogleSignInAccount user = googleSignIn.currentUser;
-    if (user == null) {
-      user = await googleSignIn.signInSilently();
+    try {
+      if (user == null) {
+        user = await googleSignIn.signInSilently();
+      }
+    } catch (e) {
+      user = null;
     }
+
     googleUser = user;
     return user;
   }
@@ -151,26 +145,74 @@ class _AppStateContainerState extends State<AppStateContainer> {
   }
 
   Future<void> signUp(FormBuilderState signUpFormState) async {
-    setAppLoading();
-    try {
-      _auth
-          .createUserWithEmailAndPassword(
-              email: signUpFormState.fields['email'].currentState.value,
-              password: signUpFormState.fields['password'].currentState.value)
-          .then((res) async {
-        setState(() {
-          state.user = res;
-        });
-        store.collection('users').document(res.uid).setData({
-          'first_name': signUpFormState.fields['first_name'].currentState.value,
-          'last_name': signUpFormState.fields['last_name'].currentState.value,
-        });
-        setAppLoading(false);
+    return _auth
+        .createUserWithEmailAndPassword(
+            email: signUpFormState.fields['email'].currentState.value,
+            password: signUpFormState.fields['password'].currentState.value)
+        .then((res) async {
+      setState(() {
+        state.user = res;
       });
-    } catch (e) {
-      print(e); // TODO: show dialog with error
-      Navigator.pushNamed(context, '/signUp');
-    }
+      store.collection('users').document(res.uid).setData({
+        'first_name': signUpFormState.fields['first_name'].currentState.value,
+        'last_name': signUpFormState.fields['last_name'].currentState.value,
+      });
+    });
+  }
+
+  Widget get _loadingView {
+    return new Center(
+      child: new CircularProgressIndicator(
+        backgroundColor: Color.fromRGBO(255, 255, 255, 0),
+      ),
+    );
+  }
+
+  Future<void> showLoadingDialog(BuildContext context) {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          elevation: 0,
+          content: _loadingView,
+          backgroundColor: Color.fromRGBO(255, 255, 255, 0),
+
+        );
+      },
+    );
+  }
+
+  Future<void> showErrorDialog(BuildContext context,
+      [List<Widget> displayText, List<Widget> actions]) {
+    displayText =
+        displayText != null ? displayText : [Text('An error has occurred.')];
+    actions = actions != null
+        ? actions
+        : [
+            FlatButton(
+              child: Text('Ok'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ];
+    return showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: displayText,
+                ),
+              ),
+              actions: actions);
+        });
+  }
+
+  void hideDialog(BuildContext context) {
+    Navigator.of(context, rootNavigator: true).pop('dialog');
   }
 
   @override

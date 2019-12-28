@@ -77,10 +77,7 @@ class SignInPageState extends State<SignInPage> {
                   ),
                   onPressed: () {
                     var SignUp = new SignUpPage();
-                    Navigator.pushNamed(
-                      context,
-                      '/signUp'
-                    );
+                    Navigator.pushNamed(context, '/signUp');
                   },
                 ),
                 MaterialButton(
@@ -92,11 +89,25 @@ class SignInPageState extends State<SignInPage> {
                   textColor: Colors.white,
                   onPressed: () {
                     if (_fbKey.currentState.saveAndValidate()) {
-                      container.signIn(
-                          _fbKey
-                              .currentState.fields['email'].currentState.value,
-                          _fbKey.currentState.fields['password'].currentState
-                              .value);
+                      container.showLoadingDialog(context);
+                      container
+                          .signIn(
+                              _fbKey.currentState.fields['email'].currentState
+                                  .value,
+                              _fbKey.currentState.fields['password']
+                                  .currentState.value)
+                          .then((res) {
+                        container.hideDialog(context);
+                      }).catchError((e) {
+                        container.hideDialog(context);
+                        container.showErrorDialog(context, [
+                          Text(
+                            'Uh, oh!',
+                            style: Theme.of(context).textTheme.title,
+                          ),
+                          Text(e.message)
+                        ]);
+                      });
                     }
                   },
                 ),
