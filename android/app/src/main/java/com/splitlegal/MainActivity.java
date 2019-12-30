@@ -2,6 +2,7 @@ package com.splitlegal;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 
 import io.flutter.app.FlutterActivity;
 import io.flutter.plugin.common.MethodCall;
@@ -43,5 +44,10 @@ public class MainActivity extends FlutterActivity {
       String resultString = data.getStringExtra("isSuccess");
       result.success(resultString);
     }
+  }
+
+  @Override
+  public void onBackPressed() {
+      return;
   }
 }

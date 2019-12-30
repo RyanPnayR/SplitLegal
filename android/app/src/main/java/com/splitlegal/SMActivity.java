@@ -66,4 +66,9 @@ public class SMActivity extends FlutterActivity {
     protected void onStop() {
         super.onStop();
     }
+
+    @Override
+    public void onBackPressed() {
+        return;
+    }
 }

@@ -121,7 +121,7 @@ class _AppStateContainerState extends State<AppStateContainer> {
     GoogleSignInAccount user = googleSignIn.currentUser;
     try {
       if (user == null) {
-        user = await googleSignIn.signInSilently();
+        user = await googleSignIn.signInSilently(suppressErrors: true);
       }
     } catch (e) {
       user = null;

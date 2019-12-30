@@ -10,22 +10,23 @@ class Dashboard extends StatelessWidget {
   static String sessionSurveyMonkeyHash = 'TB2927J';
 
   Future _loadSurveyMonkey() async {
-    try {
-      await platform
-          .invokeMethod('surveyMonkey', sessionSurveyMonkeyHash)
-          .then((result) {
-        Fluttertoast.showToast(
-            msg: result,
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIos: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
-      });
-    } on PlatformException catch (e) {
-      print(e.message);
-    }
+    // try {
+    //   await platform
+    //       .invokeMethod('surveyMonkey', sessionSurveyMonkeyHash)
+    //       .then((result) {
+    //     Fluttertoast.showToast(
+    //         msg: result,
+    //         toastLength: Toast.LENGTH_SHORT,
+    //         gravity: ToastGravity.CENTER,
+    //         timeInSecForIos: 1,
+    //         backgroundColor: Colors.red,
+    //         textColor: Colors.white,
+    //         fontSize: 16.0);
+    //   });
+    // } on PlatformException catch (e) {
+    //   print(e.message);
+    // }
+
   }
 
   @override
@@ -50,7 +51,9 @@ class Dashboard extends StatelessWidget {
       ),
       body: Center(
         child: RaisedButton(
-          onPressed: _loadSurveyMonkey,
+          onPressed: () {
+            Navigator.of(context).pushNamed('/survey');
+          },
           child: Text("Load SurveyMonkey"),
         ),
       ),
