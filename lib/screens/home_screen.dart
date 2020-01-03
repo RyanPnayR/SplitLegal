@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:splitlegal/dashboard.dart';
+import 'package:splitlegal/screens/divorce_form_select.dart';
 import 'package:splitlegal/sign-in.dart';
 import '../app_state_container.dart';
 import '../models/app_state.dart';
@@ -29,7 +30,11 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   Widget get _homeView {
-    return new Dashboard();
+    if (appState.userData.forms.length == 0) {
+      return DivorceFormSelect();
+    } else {
+      return new Dashboard();
+    }
   }
 
   @override

@@ -51,17 +51,16 @@ class _AppStateContainerState extends State<AppStateContainer> {
     setState(() {
       state.user = null;
     });
-    print("User Sign Out");
   }
 
   Future<void> signIn(email, password) async {
-      FirebaseUser user = await _auth.signInWithEmailAndPassword(
-        password: password,
-        email: email.trim(),
-      );
-      setState(() {
-        state.user = user;
-      });
+    FirebaseUser user = await _auth.signInWithEmailAndPassword(
+      password: password,
+      email: email.trim(),
+    );
+    setState(() {
+      state.user = user;
+    });
   }
 
   @override
@@ -78,16 +77,25 @@ class _AppStateContainerState extends State<AppStateContainer> {
   Future initUser() async {
     googleUser = await _ensureLoggedInOnStartUp();
     if (googleUser == null) {
-      setState(() {
-        state.isLoading = false;
-      });
+      setAppLoading(false);
     } else {
       var firebaseUser = await logIntoFirebase();
     }
   }
 
+  setUpUserData() async {
+    DocumentSnapshot userDoc =
+        await store.collection('users').document(state.user.uid).get();
+    setState(() {
+      state.userData = UserData.fromMap(userDoc.data);
+    });
+  }
+
+  Stream<QuerySnapshot> getForms() {
+    return store.collection('forms').snapshots();
+  }
+
   setAppLoading([bool isLoading = true]) {
-    print(isLoading);
     setState(() {
       state.isLoading = isLoading;
     });
@@ -108,9 +116,10 @@ class _AppStateContainerState extends State<AppStateContainer> {
       GoogleSignInAccount account = await _googleSignIn.signIn();
       FirebaseUser user = await signIntoFirebase(account);
       setState(() {
-        state.isLoading = false;
         state.user = user;
       });
+      await setUpUserData();
+      setAppLoading(false);
     } catch (error) {
       print(error);
       return null;
@@ -177,7 +186,6 @@ class _AppStateContainerState extends State<AppStateContainer> {
           elevation: 0,
           content: _loadingView,
           backgroundColor: Color.fromRGBO(255, 255, 255, 0),
-
         );
       },
     );
