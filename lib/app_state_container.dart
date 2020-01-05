@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:uuid/uuid.dart';
 
 import 'models/app_state.dart';
 
@@ -37,6 +38,7 @@ class _AppStateContainerState extends State<AppStateContainer> {
   final googleSignIn = new GoogleSignIn();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final Firestore store = Firestore.instance;
+  var uuid = Uuid();
 
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: [
@@ -169,6 +171,19 @@ class _AppStateContainerState extends State<AppStateContainer> {
     });
   }
 
+  Future<void> startForm(SplitLegalForm form) async {
+    store.collection('users').document(state.user.uid).updateData({
+      'forms': FieldValue.arrayUnion([{
+        'id': uuid.v4(),
+        'form_id': form.id,
+        'created_at': new DateTime.now(),
+        'name': form.displayName,
+        'status': 'pending',
+        'updated_at': new DateTime.now(),
+      }]),
+    });
+  }
+
   Widget get _loadingView {
     return new Center(
       child: new CircularProgressIndicator(
@@ -192,7 +207,9 @@ class _AppStateContainerState extends State<AppStateContainer> {
   }
 
   Future<void> showErrorDialog(BuildContext context,
-      [List<Widget> displayText, List<Widget> actions, bool barrierDismissable = false]) {
+      [List<Widget> displayText,
+      List<Widget> actions,
+      bool barrierDismissable = false]) {
     displayText =
         displayText != null ? displayText : [Text('An error has occurred.')];
     actions = actions != null

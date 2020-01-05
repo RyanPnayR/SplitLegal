@@ -1,19 +1,20 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class Form {
+class SplitLegalForm {
   String id;
   String displayName;
   bool enabled;
   String formUrl;
   String formstackId;
   int order;
-  Form(this.id, this.displayName, this.enabled, this.formUrl, this.formstackId,
-      this.order);
+  String form_info;
+  SplitLegalForm(this.id, this.displayName, this.enabled, this.formUrl, this.formstackId,
+      this.order, this.form_info);
 
-  factory Form.fromMap(id, Map<String, dynamic> json) {
-    return Form(id, json['display_name'], json['enabled'], json['form_url'],
-        json['formstack_id'], json['order']);
+  factory SplitLegalForm.fromMap(id, Map<String, dynamic> json) {
+    return SplitLegalForm(id, json['display_name'], json['enabled'], json['form_url'],
+        json['formstack_id'], json['order'], json['form_info']);
   }
 }
 
@@ -23,7 +24,7 @@ class UserForm {
   String status;
 
   UserForm(this.formId, this.name, this.status);
-  factory UserForm.fromMap(Map<String, dynamic> json) {
+  factory UserForm.fromMap(Map<dynamic, dynamic> json) {
     return UserForm(json['name'], json['status'], json['form_id']);
   }
 }
@@ -35,7 +36,7 @@ class UserData {
 
   UserData(this.firstName, this.lastName, this.forms);
   factory UserData.fromMap(Map<String, dynamic> json) {
-    List<dynamic> formData = json['forms'];
+    List<dynamic> formData = List.from(json['forms']);
     List<UserForm> forms = formData.map((form) {
       return UserForm.fromMap(form);
     }).toList();

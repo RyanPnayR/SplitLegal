@@ -2,15 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:splitlegal/app.dart';
 import 'package:splitlegal/app_state_container.dart';
-import 'package:splitlegal/models/app_state.dart' as appState;
+import 'package:splitlegal/models/app_state.dart';
 
 class DivorceFormOptions extends StatelessWidget {
-  List<appState.Form> forms;
+  List<SplitLegalForm> forms;
   Function selectForm;
-  appState.Form selectedFrom;
+  SplitLegalForm selectedFrom;
 
   DivorceFormOptions(
-      List<appState.Form> forms, selectForm, appState.Form selectedFrom) {
+      List<SplitLegalForm> forms, selectForm, SplitLegalForm selectedFrom) {
     this.forms = forms;
     this.selectForm = selectForm;
     this.selectedFrom = selectedFrom;
@@ -62,7 +62,7 @@ class DivorceFormOptions extends StatelessWidget {
                               'Description',
                               style: Theme.of(context).textTheme.title,
                             ),
-                            Text(form.displayName)
+                            Text(form.form_info)
                           ],
                           [
                             FlatButton(
@@ -92,7 +92,7 @@ class DivorceFormSelect extends StatefulWidget {
 }
 
 class DivorceFormSelectState extends State<DivorceFormSelect> {
-  appState.Form selectedFrom;
+  SplitLegalForm selectedFrom;
   @override
   Widget build(BuildContext context) {
     var container = AppStateContainer.of(context);
@@ -119,8 +119,8 @@ class DivorceFormSelectState extends State<DivorceFormSelect> {
                 if (snapshot.hasData) {
                   List<DocumentSnapshot> documents = snapshot.data.documents;
 
-                  List<appState.Form> items = documents.map((document) {
-                    return appState.Form.fromMap(
+                  List<SplitLegalForm> items = documents.map((document) {
+                    return SplitLegalForm.fromMap(
                         document.documentID, document.data);
                   }).toList();
 
@@ -149,6 +149,7 @@ class DivorceFormSelectState extends State<DivorceFormSelect> {
                           textColor: theme.textTheme.display1.color,
                           child: new Text('Continue'),
                           onPressed: () {
+                            container.startForm(this.selectedFrom);
                             Navigator.of(context).pushNamed('/survey',
                                 arguments:
                                     FormRouteArguments(this.selectedFrom));

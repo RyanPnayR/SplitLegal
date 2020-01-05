@@ -6,7 +6,7 @@ import 'package:splitlegal/screens/survey_monkey.dart';
 import 'package:splitlegal/sign-in.dart';
 import 'package:splitlegal/sign-up_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:splitlegal/models/app_state.dart' as appState;
+import 'package:splitlegal/models/app_state.dart';
 
 class AppRootWidget extends StatefulWidget {
   @override
@@ -14,7 +14,7 @@ class AppRootWidget extends StatefulWidget {
 }
 
 class FormRouteArguments {
-  final appState.Form form;
+  final SplitLegalForm form;
 
   FormRouteArguments(this.form);
 }
@@ -43,7 +43,6 @@ class AppRootWidgetState extends State<AppRootWidget> {
         '/survey': (BuildContext context) {
           final FormRouteArguments args =
               ModalRoute.of(context).settings.arguments;
-          print(args.form.displayName);
           return new WillPopScope(
             onWillPop: () async => false,
             child: new WebviewScaffold(
