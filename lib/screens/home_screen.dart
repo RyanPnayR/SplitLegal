@@ -31,7 +31,7 @@ class HomeScreenState extends State<HomeScreen> {
 
   Widget get _homeView {
     if (appState.userData.forms.length == 0) {
-      return DivorceFormSelect();
+      return new DivorceFormSelect();
     } else {
       return new Dashboard();
     }

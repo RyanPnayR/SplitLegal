@@ -192,7 +192,7 @@ class _AppStateContainerState extends State<AppStateContainer> {
   }
 
   Future<void> showErrorDialog(BuildContext context,
-      [List<Widget> displayText, List<Widget> actions]) {
+      [List<Widget> displayText, List<Widget> actions, bool barrierDismissable = false]) {
     displayText =
         displayText != null ? displayText : [Text('An error has occurred.')];
     actions = actions != null
@@ -207,7 +207,7 @@ class _AppStateContainerState extends State<AppStateContainer> {
           ];
     return showDialog<void>(
         context: context,
-        barrierDismissible: false,
+        barrierDismissible: barrierDismissable,
         builder: (BuildContext context) {
           return AlertDialog(
               content: SingleChildScrollView(

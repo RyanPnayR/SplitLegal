@@ -2,15 +2,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class Form {
+  String id;
   String displayName;
   bool enabled;
   String formUrl;
   String formstackId;
-  Form(this.displayName, this.enabled, this.formUrl, this.formstackId);
+  int order;
+  Form(this.id, this.displayName, this.enabled, this.formUrl, this.formstackId,
+      this.order);
 
-  factory Form.fromMap(Map<String, dynamic> json) {
-    return Form(json['display_name'], json['enabled'], json['form_url'],
-        json['formstack_id']);
+  factory Form.fromMap(id, Map<String, dynamic> json) {
+    return Form(id, json['display_name'], json['enabled'], json['form_url'],
+        json['formstack_id'], json['order']);
   }
 }
 
