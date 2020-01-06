@@ -86,10 +86,12 @@ class _AppStateContainerState extends State<AppStateContainer> {
   }
 
   setUpUserData() async {
-    DocumentSnapshot userDoc =
-        await store.collection('users').document(state.user.uid).get();
+    DocumentReference userRef =
+        store.collection('users').document(state.user.uid);
+    DocumentSnapshot userDoc = await userRef.get();
+    QuerySnapshot forms = await userRef.collection('forms').getDocuments();
     setState(() {
-      state.userData = UserData.fromMap(userDoc.data);
+      state.userData = UserData.fromMap(userDoc.data, forms);
     });
   }
 
@@ -171,17 +173,29 @@ class _AppStateContainerState extends State<AppStateContainer> {
     });
   }
 
-  Future<void> startForm(SplitLegalForm form) async {
-    store.collection('users').document(state.user.uid).updateData({
-      'forms': FieldValue.arrayUnion([{
-        'id': uuid.v4(),
-        'form_id': form.id,
-        'created_at': new DateTime.now(),
-        'name': form.displayName,
-        'status': 'pending',
-        'updated_at': new DateTime.now(),
-      }]),
+  Future<String> startForm(SplitLegalForm form) async {
+    DocumentReference userRef =
+        store.collection('users').document(state.user.uid);
+
+    DocumentReference docRef = await userRef.collection('forms').add({
+      'user_id': state.user.uid,
+      'form_id': form.id,
+      'created_at': new DateTime.now(),
+      'name': form.displayName,
+      'status': 'pending',
+      'updated_at': new DateTime.now(),
     });
+
+    return docRef.documentID;
+  }
+
+  Future<void> completeForm(String formId) async {
+    DocumentReference userRef =
+        store.collection('users').document(state.user.uid);
+    await userRef
+        .collection('forms')
+        .document(formId)
+        .updateData({'status': 'completed', 'updated_at': new DateTime.now()});
   }
 
   Widget get _loadingView {

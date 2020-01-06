@@ -30,7 +30,10 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   Widget get _homeView {
-    if (appState.userData.forms.length == 0) {
+    var completedForms = appState.userData.forms.firstWhere((form) {
+      return form.status.compareTo('completed') == 0;
+    }, orElse: () => null);
+    if (appState.userData.forms.length == 0 || completedForms == null) {
       return new DivorceFormSelect();
     } else {
       return new Dashboard();

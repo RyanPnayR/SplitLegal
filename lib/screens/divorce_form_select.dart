@@ -148,11 +148,12 @@ class DivorceFormSelectState extends State<DivorceFormSelect> {
                         child: RaisedButton(
                           textColor: theme.textTheme.display1.color,
                           child: new Text('Continue'),
-                          onPressed: () {
-                            container.startForm(this.selectedFrom);
+                          onPressed: () async {
+                            String userFormId =
+                                await container.startForm(this.selectedFrom);
                             Navigator.of(context).pushNamed('/survey',
-                                arguments:
-                                    FormRouteArguments(this.selectedFrom));
+                                arguments: FormRouteArguments(
+                                    this.selectedFrom, userFormId));
                           },
                         ),
                       )),

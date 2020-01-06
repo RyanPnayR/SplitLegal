@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:splitlegal/app_state_container.dart';
 import 'package:splitlegal/dashboard.dart';
 import 'package:splitlegal/screens/home_screen.dart';
 import 'package:splitlegal/screens/survey_monkey.dart';
@@ -15,8 +16,8 @@ class AppRootWidget extends StatefulWidget {
 
 class FormRouteArguments {
   final SplitLegalForm form;
-
-  FormRouteArguments(this.form);
+  final String userFormId;
+  FormRouteArguments(this.form, this.userFormId);
 }
 
 class AppRootWidgetState extends State<AppRootWidget> {
@@ -46,11 +47,14 @@ class AppRootWidgetState extends State<AppRootWidget> {
           return new WillPopScope(
             onWillPop: () async => false,
             child: new WebviewScaffold(
-              url: args.form.formUrl,
+              url: args.form.formUrl + '?form_id=' + args.userFormId,
               javascriptChannels: [
                 new JavascriptChannel(
                     name: 'SplitLegal',
-                    onMessageReceived: (res) {
+                    onMessageReceived: (res) async {
+                      var container = AppStateContainer.of(context);
+                      await container.completeForm(args.userFormId);
+                      await container.setUpUserData();
                       Navigator.of(context).pop();
                     })
               ].toSet(),
