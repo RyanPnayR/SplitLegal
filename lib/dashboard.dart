@@ -4,10 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:splitlegal/app_state_container.dart';
+import 'package:intl/intl.dart';
 
 import 'models/app_state.dart';
 
 class SplitLegalDashboardForm extends StatelessWidget {
+  UserForm form;
+
+  SplitLegalDashboardForm(this.form);
+
   getThumbnail(IconData icon, Color color) {
     return new Container(
         margin: new EdgeInsets.symmetric(vertical: 16.0),
@@ -19,24 +24,68 @@ class SplitLegalDashboardForm extends StatelessWidget {
         ));
   }
 
-  getCard() {
+  getCard(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+
     return new Container(
-      height: 124.0,
-      width: 250,
-      margin: new EdgeInsets.only(left: 46.0),
-      decoration: new BoxDecoration(
-        color: Colors.white,
-        shape: BoxShape.rectangle,
-        borderRadius: new BorderRadius.circular(8.0),
-        boxShadow: <BoxShadow>[
-          new BoxShadow(
-            color: Colors.black12,
-            blurRadius: 10.0,
-            offset: new Offset(0.0, 10.0),
-          ),
-        ],
-      ),
-    );
+        width: 250,
+        margin: new EdgeInsets.only(left: 46.0),
+        decoration: new BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.rectangle,
+          borderRadius: new BorderRadius.circular(8.0),
+          boxShadow: <BoxShadow>[
+            new BoxShadow(
+              color: Colors.black12,
+              blurRadius: 10.0,
+              offset: new Offset(0.0, 10.0),
+            ),
+          ],
+        ),
+        child: new Container(
+          margin: new EdgeInsets.only(left: 50, top: 10),
+          child: new Column(children: <Widget>[
+            Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    form.name,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        letterSpacing: 1),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Last Updated: ' +
+                        DateFormat.yMd().add_jm().format(form.updatedAt),
+                    style: TextStyle(fontSize: 12),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Status: ' + form.status,
+                    style: TextStyle(fontSize: 12),
+                  ),
+                ]),
+            MaterialButton(
+              child: Text('Review'),
+              onPressed: () {},
+              shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(18.0),
+              ),
+              color: form.status == 'completed'
+                  ? theme.secondaryHeaderColor
+                  : theme.hoverColor,
+              textColor: Colors.white,
+              height: 30,
+            )
+          ]),
+        ));
   }
 
   @override
@@ -45,14 +94,13 @@ class SplitLegalDashboardForm extends StatelessWidget {
     ThemeData theme = Theme.of(context);
 
     return new Container(
-        height: 120.0,
         margin: const EdgeInsets.symmetric(
           vertical: 24.0,
           horizontal: 24.0,
         ),
         child: new Stack(
           children: <Widget>[
-            getCard(),
+            getCard(context),
             getThumbnail(Icons.insert_drive_file, theme.secondaryHeaderColor),
           ],
         ));
@@ -71,6 +119,16 @@ class _DashboardState extends State<Dashboard> {
     ThemeData theme = Theme.of(context);
 
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Center(
+            child: Text(
+          'Documents',
+          style: TextStyle(fontSize: 16),
+        )),
+        elevation: 0.0,
+        backgroundColor: theme.primaryColor,
+      ),
       backgroundColor: theme.primaryColor,
       body: Column(
         children: <Widget>[
@@ -86,9 +144,9 @@ class _DashboardState extends State<Dashboard> {
                   }).toList();
 
                   List<SplitLegalDashboardForm> formsWidgets = forms
-                      .where((form) => form.status == 'completed')
+                      .where((form) => form.status != 'pending')
                       .map((form) {
-                    return new SplitLegalDashboardForm();
+                    return new SplitLegalDashboardForm(form);
                   }).toList();
 
                   return Column(

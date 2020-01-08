@@ -62,7 +62,11 @@ class HomeScreenState extends State<HomeScreen> {
             child: new Drawer(),
           )),
       appBar: new AppBar(
-        title: Text(""),
+        title: Text(
+          "SPLIT LEGAL",
+          style:
+              TextStyle(fontFamily: 'Roboto', fontSize: 14, letterSpacing: 4),
+        ),
         elevation: 0,
         leading: new Container(
             child: ConstrainedBox(

@@ -201,7 +201,7 @@ class _AppStateContainerState extends State<AppStateContainer> {
     await userRef
         .collection('forms')
         .document(formId)
-        .updateData({'status': 'completed', 'updated_at': new DateTime.now()});
+        .updateData({'status': 'processing', 'updated_at': new DateTime.now()});
   }
 
   Widget get _loadingView {
