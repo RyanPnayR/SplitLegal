@@ -99,6 +99,12 @@ class _AppStateContainerState extends State<AppStateContainer> {
     return store.collection('forms').snapshots();
   }
 
+  Stream<QuerySnapshot> getUserForms() {
+        DocumentReference userRef =
+        store.collection('users').document(state.user.uid);
+    return userRef.collection('forms').snapshots();
+  }
+
   setAppLoading([bool isLoading = true]) {
     setState(() {
       state.isLoading = isLoading;

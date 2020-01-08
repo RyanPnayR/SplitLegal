@@ -5,6 +5,8 @@ import 'package:splitlegal/sign-in.dart';
 import '../app_state_container.dart';
 import '../models/app_state.dart';
 
+final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
 class HomeScreen extends StatefulWidget {
   @override
   HomeScreenState createState() => new HomeScreenState();
@@ -45,8 +47,33 @@ class HomeScreenState extends State<HomeScreen> {
     var container = AppStateContainer.of(context);
     appState = container.state;
     Widget body = _pageToDisplay;
+    Size size = MediaQuery.of(context).size;
 
     return new Scaffold(
+      key: _scaffoldKey,
+      drawer: SizedBox(
+          width: size.width,
+          child: Theme(
+            data: Theme.of(context).copyWith(
+              // Set the transparency here
+              canvasColor: Colors
+                  .transparent, //or any other color you want. e.g Colors.blue.withOpacity(0.5)
+            ),
+            child: new Drawer(),
+          )),
+      appBar: new AppBar(
+        title: Text(""),
+        elevation: 0,
+        leading: new Container(
+            child: ConstrainedBox(
+                constraints: BoxConstraints.expand(),
+                child: FlatButton(
+                    onPressed: () {
+                      _scaffoldKey.currentState.openDrawer();
+                    },
+                    padding: EdgeInsets.only(left: 10.0),
+                    child: Image.asset('images/split_legal_logo.png')))),
+      ),
       body: body,
     );
   }
