@@ -47,10 +47,11 @@ class _AppStateContainerState extends State<AppStateContainer> {
     ],
   );
 
-  void signOutGoogle() {
-    _googleSignIn.signOut();
-    googleUser = null;
+  Future<void> signOutGoogle() async {
+    await _googleSignIn.signOut();
+    await _auth.signOut();
     setState(() {
+      googleUser = null;
       state.user = null;
     });
   }
@@ -101,8 +102,7 @@ class _AppStateContainerState extends State<AppStateContainer> {
   }
 
   Stream<QuerySnapshot> getUserForms(user) {
-    DocumentReference userRef =
-        store.collection('users').document(user.uid);
+    DocumentReference userRef = store.collection('users').document(user.uid);
     return userRef.collection('forms').snapshots();
   }
 
@@ -117,12 +117,6 @@ class _AppStateContainerState extends State<AppStateContainer> {
       googleUser = await googleSignIn.signIn();
     }
 
-    FirebaseUser firebaseUser;
-    FirebaseAuth _auth = FirebaseAuth.instance;
-    GoogleSignIn _googleSignIn = GoogleSignIn(scopes: [
-      'email',
-      'https://www.googleapis.com/auth/contacts.readonly',
-    ]);
     try {
       GoogleSignInAccount account = await _googleSignIn.signIn();
       FirebaseUser user = await signIntoFirebase(account);

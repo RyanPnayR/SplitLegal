@@ -89,6 +89,34 @@ class HomeScreenState extends State<HomeScreen> {
                 ))));
   }
 
+  Widget getLogout(BuildContext context) {
+    var container = AppStateContainer.of(context);
+    return Container(
+        decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(width: 2.0, color: Colors.white)),
+        ),
+        width: 250,
+        margin: EdgeInsets.only(left: 20.0, bottom: 20),
+        child: FlatButton(
+            onPressed: () async {
+              Navigator.pop(context);
+              container.setAppLoading();
+              await container.signOutGoogle();
+              Navigator.pushReplacementNamed(context, '/auth');
+            },
+            child: SizedBox(
+                width: double.infinity,
+                child: Text(
+                  'Logout',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    letterSpacing: 2,
+                  ),
+                  textAlign: TextAlign.start,
+                ))));
+  }
+
   @override
   Widget build(BuildContext context) {
     var container = AppStateContainer.of(context);
@@ -149,38 +177,7 @@ class HomeScreenState extends State<HomeScreen> {
                             children: <Widget>[
                               getSidebarLink(context, 'Documents', '/'),
                               getSidebarLink(context, 'Settings', '/settings'),
-                              Container(
-                                  decoration: BoxDecoration(
-                                    border: Border(
-                                        bottom: BorderSide(
-                                            width: 2.0, color: Colors.white)),
-                                  ),
-                                  width: 250,
-                                  margin:
-                                      EdgeInsets.only(left: 20.0, bottom: 20),
-                                  child: FlatButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                        Navigator.pushReplacementNamed(
-                                                context, '/auth')
-                                            .then((res) {
-                                          setState(() {
-                                            container.state.user = null;
-                                            container.googleUser = null;
-                                          });
-                                        });
-                                      },
-                                      child: SizedBox(
-                                          width: double.infinity,
-                                          child: Text(
-                                            'Logout',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 16,
-                                              letterSpacing: 2,
-                                            ),
-                                            textAlign: TextAlign.start,
-                                          ))))
+                              getLogout(context)
                             ],
                           ))
                     ],
