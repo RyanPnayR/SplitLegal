@@ -63,6 +63,7 @@ class _AppStateContainerState extends State<AppStateContainer> {
     setState(() {
       state.user = user;
     });
+    await setUpUserData();
   }
 
   @override
@@ -100,7 +101,7 @@ class _AppStateContainerState extends State<AppStateContainer> {
   }
 
   Stream<QuerySnapshot> getUserForms() {
-        DocumentReference userRef =
+    DocumentReference userRef =
         store.collection('users').document(state.user.uid);
     return userRef.collection('forms').snapshots();
   }

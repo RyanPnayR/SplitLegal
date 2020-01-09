@@ -42,6 +42,11 @@ class AppRootWidgetState extends State<AppRootWidget> {
         '/': (BuildContext context) => new HomeScreen(),
         '/auth': (BuildContext context) => new SignInPage(),
         '/signUp': (BuildContext context) => new SignUpPage(),
+        '/settings': (BuildContext context) {
+          return Scaffold(body: Column(children: <Widget>[
+            Text('Settings')
+          ],),);
+        },
         '/survey': (BuildContext context) {
           final FormRouteArguments args =
               ModalRoute.of(context).settings.arguments;

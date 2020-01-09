@@ -20,7 +20,9 @@ class SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     final container = AppStateContainer.of(context);
-
+    setState(() {
+      container.state.user = null;
+    });
     return Scaffold(
         body: ListView(
       children: <Widget>[
@@ -96,8 +98,9 @@ class SignInPageState extends State<SignInPage> {
                                   .value,
                               _fbKey.currentState.fields['password']
                                   .currentState.value)
-                          .then((res) {
+                          .then((res) async {
                         container.hideDialog(context);
+                        Navigator.pushReplacementNamed(context, '/');
                       }).catchError((e) {
                         container.hideDialog(context);
                         container.showErrorDialog(context, [

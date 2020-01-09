@@ -18,8 +18,6 @@ class HomeScreenState extends State<HomeScreen> {
   Widget get _pageToDisplay {
     if (appState.isLoading) {
       return _loadingView;
-    } else if (!appState.isLoading && appState.user == null) {
-      return new SignInPage();
     } else {
       return _homeView;
     }
@@ -42,6 +40,55 @@ class HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  Widget get _appbar {
+    return new AppBar(
+      title: Text(
+        "SPLIT LEGAL",
+        style: TextStyle(fontFamily: 'Roboto', fontSize: 14, letterSpacing: 4),
+      ),
+      elevation: 0,
+      leading: new Container(
+          child: ConstrainedBox(
+              constraints: BoxConstraints.expand(),
+              child: FlatButton(
+                  onPressed: () {
+                    _scaffoldKey.currentState.openDrawer();
+                  },
+                  padding: EdgeInsets.only(left: 10.0),
+                  child: Image.asset('images/split_legal_logo.png')))),
+    );
+  }
+
+  Widget getSidebarLink(BuildContext context, String title, String route) {
+    return Container(
+        decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(width: 2.0, color: Colors.white)),
+        ),
+        width: 250,
+        margin: EdgeInsets.only(left: 20.0, bottom: 20),
+        child: FlatButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              Navigator.popUntil(context, (currentRoute) {
+                if (currentRoute.settings.name != route) {
+                  Navigator.of(context).pushNamed(route);
+                }
+                return true;
+              });
+            },
+            child: SizedBox(
+                width: double.infinity,
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    letterSpacing: 2,
+                  ),
+                  textAlign: TextAlign.start,
+                ))));
+  }
+
   @override
   Widget build(BuildContext context) {
     var container = AppStateContainer.of(context);
@@ -59,25 +106,84 @@ class HomeScreenState extends State<HomeScreen> {
               canvasColor: Colors
                   .transparent, //or any other color you want. e.g Colors.blue.withOpacity(0.5)
             ),
-            child: new Drawer(),
+            child: new Drawer(
+              child: ListView(
+                children: <Widget>[
+                  AppBar(
+                    backgroundColor: Colors.transparent,
+                    title: Text(
+                      "SPLIT LEGAL",
+                      style: TextStyle(
+                          fontFamily: 'Roboto', fontSize: 14, letterSpacing: 4),
+                    ),
+                    elevation: 0,
+                    leading: new Container(
+                        child: ConstrainedBox(
+                            constraints: BoxConstraints.expand(),
+                            child: FlatButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                padding: EdgeInsets.only(left: 10.0),
+                                child: Image.asset(
+                                    'images/split_legal_logo.png')))),
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Container(
+                            height: 500,
+                            width: 2,
+                            color: Colors.white,
+                            margin: const EdgeInsets.only(left: 55.0, top: 40),
+                          )
+                        ],
+                      ),
+                      Container(
+                          margin: EdgeInsets.only(bottom: 250),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              getSidebarLink(context, 'Documents', '/'),
+                              getSidebarLink(context, 'Settings', '/settings'),
+                              Container(
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                        bottom: BorderSide(
+                                            width: 2.0, color: Colors.white)),
+                                  ),
+                                  width: 250,
+                                  margin:
+                                      EdgeInsets.only(left: 20.0, bottom: 20),
+                                  child: FlatButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                        Navigator.pushReplacementNamed(
+                                            context, '/auth');
+                                      },
+                                      child: SizedBox(
+                                          width: double.infinity,
+                                          child: Text(
+                                            'Logout',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16,
+                                              letterSpacing: 2,
+                                            ),
+                                            textAlign: TextAlign.start,
+                                          ))))
+                            ],
+                          ))
+                    ],
+                  )
+                ],
+              ),
+            ),
           )),
-      appBar: new AppBar(
-        title: Text(
-          "SPLIT LEGAL",
-          style:
-              TextStyle(fontFamily: 'Roboto', fontSize: 14, letterSpacing: 4),
-        ),
-        elevation: 0,
-        leading: new Container(
-            child: ConstrainedBox(
-                constraints: BoxConstraints.expand(),
-                child: FlatButton(
-                    onPressed: () {
-                      _scaffoldKey.currentState.openDrawer();
-                    },
-                    padding: EdgeInsets.only(left: 10.0),
-                    child: Image.asset('images/split_legal_logo.png')))),
-      ),
+      appBar: _appbar,
       body: body,
     );
   }
