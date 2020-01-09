@@ -151,7 +151,7 @@ class DivorceFormSelectState extends State<DivorceFormSelect> {
                           onPressed: () async {
                             String userFormId =
                                 await container.startForm(this.selectedFrom);
-                            Navigator.of(context).pushNamed('/survey',
+                            Navigator.of(context).pushReplacementNamed('/survey',
                                 arguments: FormRouteArguments(
                                     this.selectedFrom, userFormId));
                           },

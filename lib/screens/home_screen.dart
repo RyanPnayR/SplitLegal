@@ -71,7 +71,7 @@ class HomeScreenState extends State<HomeScreen> {
               Navigator.of(context).pop();
               Navigator.popUntil(context, (currentRoute) {
                 if (currentRoute.settings.name != route) {
-                  Navigator.of(context).pushNamed(route);
+                  Navigator.of(context).pushReplacementNamed(route);
                 }
                 return true;
               });
@@ -102,7 +102,9 @@ class HomeScreenState extends State<HomeScreen> {
               Navigator.pop(context);
               container.setAppLoading();
               await container.signOutGoogle();
-              Navigator.pushReplacementNamed(context, '/auth');
+              Navigator.pushReplacementNamed(context, '/').then((res) {
+                container.setAppLoading(false);
+              });
             },
             child: SizedBox(
                 width: double.infinity,
@@ -175,7 +177,7 @@ class HomeScreenState extends State<HomeScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
-                              getSidebarLink(context, 'Documents', '/'),
+                              getSidebarLink(context, 'Documents', '/home'),
                               getSidebarLink(context, 'Settings', '/settings'),
                               getLogout(context)
                             ],

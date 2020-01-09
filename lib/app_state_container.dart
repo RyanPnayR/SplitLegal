@@ -38,6 +38,9 @@ class _AppStateContainerState extends State<AppStateContainer> {
   final googleSignIn = new GoogleSignIn();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final Firestore store = Firestore.instance;
+  String initialRoute = '/';
+  bool appInitialized = false;
+
   var uuid = Uuid();
 
   final GoogleSignIn _googleSignIn = GoogleSignIn(
@@ -76,6 +79,8 @@ class _AppStateContainerState extends State<AppStateContainer> {
       state = new AppState.loading();
       initUser();
     }
+
+    appInitialized = true;
   }
 
   Future initUser() async {
@@ -83,6 +88,9 @@ class _AppStateContainerState extends State<AppStateContainer> {
     if (googleUser == null) {
       setAppLoading(false);
     } else {
+      setState(() {
+        initialRoute = '/home';
+      });
       var firebaseUser = await logIntoFirebase();
     }
   }

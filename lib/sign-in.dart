@@ -77,7 +77,7 @@ class SignInPageState extends State<SignInPage> {
                   ),
                   onPressed: () {
                     var SignUp = new SignUpPage();
-                    Navigator.pushNamed(context, '/signUp');
+                    Navigator.pushReplacementNamed(context, '/signUp');
                   },
                 ),
                 MaterialButton(
@@ -98,7 +98,7 @@ class SignInPageState extends State<SignInPage> {
                                   .currentState.value)
                           .then((res) async {
                         container.hideDialog(context);
-                        Navigator.pushReplacementNamed(context, '/');
+                        Navigator.pushReplacementNamed(context, '/home');
                       }).catchError((e) {
                         container.hideDialog(context);
                         container.showErrorDialog(context, [
@@ -124,7 +124,7 @@ class SignInPageState extends State<SignInPage> {
             GoogleSignInButton(
               onPressed: () {
                 container.logIntoFirebase().then((res) {
-                  Navigator.pushNamed(context, '/');
+                  Navigator.pushReplacementNamed(context, '/home');
                 });
               },
               darkMode: false, // default: false

@@ -17,10 +17,13 @@ class AppRootWidget extends StatefulWidget {
 class FormRouteArguments {
   final SplitLegalForm form;
   final String userFormId;
+
   FormRouteArguments(this.form, this.userFormId);
 }
 
 class AppRootWidgetState extends State<AppRootWidget> {
+  String initialRoute;
+
   ThemeData get _themeData => new ThemeData(
       fontFamily: 'Roboto',
       primaryColor: Color.fromRGBO(64, 64, 64, 1),
@@ -30,44 +33,55 @@ class AppRootWidgetState extends State<AppRootWidget> {
       inputDecorationTheme: InputDecorationTheme(
         labelStyle: TextStyle(color: Color.fromRGBO(255, 255, 255, .5)),
       ),
-      textTheme:
-          TextTheme(display1: TextStyle(color: Colors.white, fontSize: 16, letterSpacing: 1)));
+      textTheme: TextTheme(
+          display1:
+              TextStyle(color: Colors.white, fontSize: 16, letterSpacing: 1)));
 
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: 'Inherited',
-      theme: _themeData,
-      routes: {
-        '/': (BuildContext context) => new HomeScreen(),
-        '/auth': (BuildContext context) => new SignInPage(),
-        '/signUp': (BuildContext context) => new SignUpPage(),
-        '/settings': (BuildContext context) {
-          return Scaffold(body: Column(children: <Widget>[
-            Text('Settings')
-          ],),);
-        },
-        '/survey': (BuildContext context) {
-          final FormRouteArguments args =
-              ModalRoute.of(context).settings.arguments;
-          return new WillPopScope(
-            onWillPop: () async => false,
-            child: new WebviewScaffold(
-              url: args.form.formUrl + '?form_id=' + args.userFormId,
-              javascriptChannels: [
-                new JavascriptChannel(
-                    name: 'SplitLegal',
-                    onMessageReceived: (res) async {
-                      var container = AppStateContainer.of(context);
-                      await container.completeForm(args.userFormId);
-                      await container.setUpUserData();
-                      Navigator.of(context).pop();
-                    })
-              ].toSet(),
+    var container = AppStateContainer.of(context);
+    return !container.appInitialized
+        ? new Center(
+            child: new CircularProgressIndicator(
+              backgroundColor: Color.fromRGBO(255, 255, 255, 0),
             ),
+          )
+        : new MaterialApp(
+            title: 'Inherited',
+            theme: _themeData,
+            initialRoute: container.initialRoute,
+            routes: {
+              '/': (BuildContext context) => new SignInPage(),
+              '/home': (BuildContext context) => new HomeScreen(),
+              '/signUp': (BuildContext context) => new SignUpPage(),
+              '/settings': (BuildContext context) {
+                return Scaffold(
+                  body: Column(
+                    children: <Widget>[Text('Settings')],
+                  ),
+                );
+              },
+              '/survey': (BuildContext context) {
+                final FormRouteArguments args =
+                    ModalRoute.of(context).settings.arguments;
+                return new WillPopScope(
+                  onWillPop: () async => false,
+                  child: new WebviewScaffold(
+                    url: args.form.formUrl + '?form_id=' + args.userFormId,
+                    javascriptChannels: [
+                      new JavascriptChannel(
+                          name: 'SplitLegal',
+                          onMessageReceived: (res) async {
+                            var container = AppStateContainer.of(context);
+                            await container.completeForm(args.userFormId);
+                            await container.setUpUserData();
+                            Navigator.of(context).pop();
+                          })
+                    ].toSet(),
+                  ),
+                );
+              },
+            },
           );
-        },
-      },
-    );
   }
 }
