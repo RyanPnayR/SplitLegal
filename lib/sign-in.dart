@@ -20,9 +20,7 @@ class SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     final container = AppStateContainer.of(context);
-    setState(() {
-      container.state.user = null;
-    });
+
     return Scaffold(
         body: ListView(
       children: <Widget>[
@@ -125,7 +123,9 @@ class SignInPageState extends State<SignInPage> {
             ),
             GoogleSignInButton(
               onPressed: () {
-                container.logIntoFirebase();
+                container.logIntoFirebase().then((res) {
+                  Navigator.pushNamed(context, '/');
+                });
               },
               darkMode: false, // default: false
             )

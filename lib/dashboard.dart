@@ -133,7 +133,7 @@ class _DashboardState extends State<Dashboard> {
       body: Column(
         children: <Widget>[
           StreamBuilder<QuerySnapshot>(
-              stream: container.getUserForms(),
+              stream: container.getUserForms(container.state.user),
               builder: (context, snapshot) {
                 if (snapshot.hasError) print(snapshot.error);
                 if (snapshot.hasData) {

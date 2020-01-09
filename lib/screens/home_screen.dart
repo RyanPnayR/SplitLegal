@@ -162,7 +162,13 @@ class HomeScreenState extends State<HomeScreen> {
                                       onPressed: () {
                                         Navigator.pop(context);
                                         Navigator.pushReplacementNamed(
-                                            context, '/auth');
+                                                context, '/auth')
+                                            .then((res) {
+                                          setState(() {
+                                            container.state.user = null;
+                                            container.googleUser = null;
+                                          });
+                                        });
                                       },
                                       child: SizedBox(
                                           width: double.infinity,

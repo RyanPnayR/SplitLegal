@@ -100,9 +100,9 @@ class _AppStateContainerState extends State<AppStateContainer> {
     return store.collection('forms').snapshots();
   }
 
-  Stream<QuerySnapshot> getUserForms() {
+  Stream<QuerySnapshot> getUserForms(user) {
     DocumentReference userRef =
-        store.collection('users').document(state.user.uid);
+        store.collection('users').document(user.uid);
     return userRef.collection('forms').snapshots();
   }
 
@@ -112,7 +112,7 @@ class _AppStateContainerState extends State<AppStateContainer> {
     });
   }
 
-  logIntoFirebase() async {
+  Future<void> logIntoFirebase() async {
     if (googleUser == null) {
       googleUser = await googleSignIn.signIn();
     }
