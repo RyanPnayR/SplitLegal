@@ -207,6 +207,11 @@ class _AppStateContainerState extends State<AppStateContainer> {
         .updateData({'status': 'processing', 'updated_at': new DateTime.now()});
   }
 
+  @override
+  Future<void> resetPassword(String email) async {
+    await _auth.sendPasswordResetEmail(email: email);
+  }
+
   Widget get _loadingView {
     return new Center(
       child: new CircularProgressIndicator(

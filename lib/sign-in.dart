@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:google_sign_in/google_sign_in.dart' as prefix0;
 import 'package:splitlegal/app_state_container.dart';
 import 'package:splitlegal/password_form_field.dart';
 import 'package:splitlegal/sign-up_screen.dart';
@@ -123,8 +121,11 @@ class SignInPageState extends State<SignInPage> {
             ),
             GoogleSignInButton(
               onPressed: () {
+                container.showLoadingDialog(context);
                 container.logIntoFirebase().then((res) {
-                  Navigator.pushReplacementNamed(context, '/home');
+                  Navigator.pushReplacementNamed(context, '/home').then((res) {
+                    container.hideDialog(context);
+                  });
                 });
               },
               darkMode: false, // default: false

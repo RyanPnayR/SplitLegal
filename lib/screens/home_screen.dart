@@ -1,19 +1,24 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:splitlegal/dashboard.dart';
 import 'package:splitlegal/screens/divorce_form_select.dart';
+import 'package:splitlegal/screens/settings_screen.dart';
 import 'package:splitlegal/sign-in.dart';
 import '../app_state_container.dart';
 import '../models/app_state.dart';
-
-final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
 class HomeScreen extends StatefulWidget {
   @override
   HomeScreenState createState() => new HomeScreenState();
 }
 
+enum homeScreenPages { documents, settings }
+
 class HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   AppState appState;
+  homeScreenPages currentPage = homeScreenPages.documents;
 
   Widget get _pageToDisplay {
     if (appState.isLoading) {
@@ -36,7 +41,13 @@ class HomeScreenState extends State<HomeScreen> {
     if (appState.userData.forms.length == 0 || completedForms == null) {
       return new DivorceFormSelect();
     } else {
-      return new Dashboard();
+      switch (currentPage) {
+        case homeScreenPages.settings:
+          return new Settings();
+          break;
+        default:
+          return new Dashboard();
+      }
     }
   }
 
@@ -59,7 +70,8 @@ class HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget getSidebarLink(BuildContext context, String title, String route) {
+  Widget getSidebarLink(
+      BuildContext context, String title, homeScreenPages page) {
     return Container(
         decoration: BoxDecoration(
           border: Border(bottom: BorderSide(width: 2.0, color: Colors.white)),
@@ -68,13 +80,10 @@ class HomeScreenState extends State<HomeScreen> {
         margin: EdgeInsets.only(left: 20.0, bottom: 20),
         child: FlatButton(
             onPressed: () {
-              Navigator.of(context).pop();
-              Navigator.popUntil(context, (currentRoute) {
-                if (currentRoute.settings.name != route) {
-                  Navigator.of(context).pushReplacementNamed(route);
-                }
-                return true;
+              setState(() {
+                currentPage = page;
               });
+              Navigator.of(context).pop();
             },
             child: SizedBox(
                 width: double.infinity,
@@ -99,11 +108,12 @@ class HomeScreenState extends State<HomeScreen> {
         margin: EdgeInsets.only(left: 20.0, bottom: 20),
         child: FlatButton(
             onPressed: () async {
-              Navigator.pop(context);
-              container.setAppLoading();
-              await container.signOutGoogle();
+              await Navigator.pop(context);
+              container.showLoadingDialog(context);
               Navigator.pushReplacementNamed(context, '/').then((res) {
-                container.setAppLoading(false);
+                container.signOutGoogle().then((res) {
+                  container.hideDialog(context);
+                });
               });
             },
             child: SizedBox(
@@ -177,8 +187,10 @@ class HomeScreenState extends State<HomeScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
-                              getSidebarLink(context, 'Documents', '/home'),
-                              getSidebarLink(context, 'Settings', '/settings'),
+                              getSidebarLink(context, 'Documents',
+                                  homeScreenPages.documents),
+                              getSidebarLink(context, 'Settings',
+                                  homeScreenPages.settings),
                               getLogout(context)
                             ],
                           ))

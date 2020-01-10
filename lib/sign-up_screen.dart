@@ -1,9 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:splitlegal/app.dart';
 import 'package:splitlegal/password_form_field.dart';
 import 'package:splitlegal/screens/home_screen.dart';
 
