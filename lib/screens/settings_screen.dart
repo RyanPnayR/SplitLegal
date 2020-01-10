@@ -29,6 +29,7 @@ class _SettingsState extends State<Settings> {
 
     return new Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           elevation: 0,
           title: Text(
             "My Info",
