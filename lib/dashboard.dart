@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:splitlegal/app_state_container.dart';
 import 'package:intl/intl.dart';
 import 'package:splitlegal/pdf_viewer.dart';
+import 'package:splitlegal/screens/divorce_form_select.dart';
 
 import 'models/app_state.dart';
 
@@ -78,7 +79,8 @@ class SplitLegalDashboardForm extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => PdfViewPage(path: path, title: form.name)));
+                          builder: (context) =>
+                              PdfViewPage(path: path, title: form.name)));
                 });
               },
               shape: RoundedRectangleBorder(
@@ -98,7 +100,6 @@ class SplitLegalDashboardForm extends StatelessWidget {
   Widget build(BuildContext context) {
     var container = AppStateContainer.of(context);
     ThemeData theme = Theme.of(context);
-
     return new Container(
         margin: const EdgeInsets.symmetric(
           vertical: 24.0,
@@ -136,33 +137,40 @@ class _DashboardState extends State<Dashboard> {
         backgroundColor: theme.primaryColor,
       ),
       backgroundColor: theme.primaryColor,
-      body: Column(
-        children: <Widget>[
-          StreamBuilder<QuerySnapshot>(
-              stream: container.getUserForms(container.state.user),
-              builder: (context, snapshot) {
-                if (snapshot.hasError) print(snapshot.error);
-                if (snapshot.hasData) {
-                  List<DocumentSnapshot> documents = snapshot.data.documents;
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: theme.secondaryHeaderColor,
+        onPressed: () async {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => new DivorceFormSelect()));
+        },
+        child: Icon(Icons.add),
+      ),
+      body: Center(
+        child: StreamBuilder<QuerySnapshot>(
+            stream: container.getUserForms(container.state.user),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) print(snapshot.error);
+              if (snapshot.hasData) {
+                List<DocumentSnapshot> documents = snapshot.data.documents;
 
-                  List<UserForm> forms = documents.map((document) {
-                    return UserForm.fromMap(document.documentID, document.data);
-                  }).toList();
+                List<UserForm> forms = documents.map((document) {
+                  return UserForm.fromMap(document.documentID, document.data);
+                }).toList();
 
-                  List<SplitLegalDashboardForm> formsWidgets = forms
-                      .where((form) => form.status != 'pending')
-                      .map((form) {
-                    return new SplitLegalDashboardForm(form);
-                  }).toList();
+                List<SplitLegalDashboardForm> formsWidgets =
+                    forms.where((form) => form.status != 'pending').map((form) {
+                  return new SplitLegalDashboardForm(form);
+                }).toList();
 
-                  return Column(
-                    children: formsWidgets,
-                  );
-                } else {
-                  return Row();
-                }
-              }),
-        ],
+                return Center(
+                    child: ListView(
+                  padding: const EdgeInsets.all(20.0),
+                  children: formsWidgets,
+                ));
+              } else {
+                return Row();
+              }
+            }),
       ),
       // This trailing comma makes auto-formatting nicer for build methods.
     );

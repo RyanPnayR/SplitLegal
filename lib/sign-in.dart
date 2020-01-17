@@ -74,8 +74,7 @@ class SignInPageState extends State<SignInPage> {
                     borderRadius: new BorderRadius.circular(18.0),
                   ),
                   onPressed: () {
-                    var SignUp = new SignUpPage();
-                    Navigator.pushReplacementNamed(context, '/signUp');
+                    Navigator.pushNamed(context, '/signUp');
                   },
                 ),
                 MaterialButton(

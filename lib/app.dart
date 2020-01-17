@@ -37,6 +37,27 @@ class AppRootWidgetState extends State<AppRootWidget> {
           display1:
               TextStyle(color: Colors.white, fontSize: 16, letterSpacing: 1)));
 
+  Future<bool> _onWillPop(BuildContext context) {
+    return showDialog(
+          context: context,
+          builder: (context) => new AlertDialog(
+            title: new Text('Are you sure?'),
+            content: new Text('Do you want to exit an App'),
+            actions: <Widget>[
+              new FlatButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: new Text('No'),
+              ),
+              new FlatButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: new Text('Yes'),
+              ),
+            ],
+          ),
+        ) ??
+        false;
+  }
+
   @override
   Widget build(BuildContext context) {
     var container = AppStateContainer.of(context);
@@ -65,7 +86,9 @@ class AppRootWidgetState extends State<AppRootWidget> {
                 final FormRouteArguments args =
                     ModalRoute.of(context).settings.arguments;
                 return new WillPopScope(
-                  onWillPop: () async => false,
+                  onWillPop: () {
+                    return _onWillPop(context);
+                  },
                   child: new WebviewScaffold(
                     url: args.form.formUrl + '?form_id=' + args.userFormId,
                     javascriptChannels: [
