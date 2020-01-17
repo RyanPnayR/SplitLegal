@@ -35,12 +35,12 @@ class UserForm {
 
   UserForm(this.formId, this.name, this.status, this.id, this.createdAt,
       this.updatedAt);
-  factory UserForm.fromMap(Map<dynamic, dynamic> json) {
+  factory UserForm.fromMap(String id, Map<dynamic, dynamic> json) {
     return UserForm(
         json['form_id'],
         json['name'],
         json['status'],
-        json['id'],
+        id,
         new DateTime.fromMicrosecondsSinceEpoch(
             json['created_at'].microsecondsSinceEpoch),
         new DateTime.fromMicrosecondsSinceEpoch(
@@ -56,7 +56,7 @@ class UserData {
   UserData(this.firstName, this.lastName, this.forms);
   factory UserData.fromMap(Map<String, dynamic> json, QuerySnapshot formData) {
     List<UserForm> forms = formData.documents.map((form) {
-      return UserForm.fromMap(form.data);
+      return UserForm.fromMap(form.documentID, form.data);
     }).toList();
     return UserData(json['first_name'], json['last_name'], forms);
   }

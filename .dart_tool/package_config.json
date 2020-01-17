@@ -104,6 +104,12 @@
       "languageVersion": "2.0"
     },
     {
+      "name": "firebase_storage",
+      "rootUri": "file:///home/ryanpnayr/Documents/splitlegal/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_storage-3.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
       "name": "flutter",
       "rootUri": "file:///home/ryanpnayr/Documents/splitlegal/flutter/packages/flutter",
       "packageUri": "lib/",
@@ -132,6 +138,18 @@
       "rootUri": "file:///home/ryanpnayr/Documents/splitlegal/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_keyboard_visibility-0.7.0",
       "packageUri": "lib/",
       "languageVersion": "2.2"
+    },
+    {
+      "name": "flutter_mailer",
+      "rootUri": "file:///home/ryanpnayr/Documents/splitlegal/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_mailer-0.4.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
+      "name": "flutter_pdfview",
+      "rootUri": "file:///home/ryanpnayr/Documents/splitlegal/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_pdfview-1.0.0+10",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
     },
     {
       "name": "flutter_spinkit",
@@ -236,6 +254,12 @@
       "languageVersion": "2.0"
     },
     {
+      "name": "path_provider",
+      "rootUri": "file:///home/ryanpnayr/Documents/splitlegal/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-1.5.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
       "name": "pedantic",
       "rootUri": "file:///home/ryanpnayr/Documents/splitlegal/flutter/.pub-cache/hosted/pub.dartlang.org/pedantic-1.8.0+1",
       "packageUri": "lib/",
@@ -246,6 +270,12 @@
       "rootUri": "file:///home/ryanpnayr/Documents/splitlegal/flutter/.pub-cache/hosted/pub.dartlang.org/petitparser-2.4.0",
       "packageUri": "lib/",
       "languageVersion": "2.4"
+    },
+    {
+      "name": "platform",
+      "rootUri": "file:///home/ryanpnayr/Documents/splitlegal/flutter/.pub-cache/hosted/pub.dartlang.org/platform-2.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "1.24"
     },
     {
       "name": "quiver",
@@ -350,7 +380,7 @@
       "languageVersion": "2.1"
     }
   ],
-  "generated": "2020-01-09T02:44:06.001386Z",
+  "generated": "2020-01-17T02:02:43.097247Z",
   "generator": "pub",
   "generatorVersion": "2.7.0"
 }

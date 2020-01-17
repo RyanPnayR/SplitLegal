@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:splitlegal/app_state_container.dart';
 import 'package:intl/intl.dart';
+import 'package:splitlegal/pdf_viewer.dart';
 
 import 'models/app_state.dart';
 
@@ -22,6 +23,7 @@ class SplitLegalDashboardForm extends StatelessWidget {
   }
 
   getCard(BuildContext context) {
+    var container = AppStateContainer.of(context);
     ThemeData theme = Theme.of(context);
 
     return new Container(
@@ -71,7 +73,14 @@ class SplitLegalDashboardForm extends StatelessWidget {
                 ]),
             MaterialButton(
               child: Text('Review'),
-              onPressed: () {},
+              onPressed: () {
+                container.getUsersForm(form.id).then((path) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PdfViewPage(path: path, title: form.name)));
+                });
+              },
               shape: RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(18.0),
               ),
@@ -137,7 +146,7 @@ class _DashboardState extends State<Dashboard> {
                   List<DocumentSnapshot> documents = snapshot.data.documents;
 
                   List<UserForm> forms = documents.map((document) {
-                    return UserForm.fromMap(document.data);
+                    return UserForm.fromMap(document.documentID, document.data);
                   }).toList();
 
                   List<SplitLegalDashboardForm> formsWidgets = forms

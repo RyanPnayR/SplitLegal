@@ -1,14 +1,18 @@
 import 'dart:async';
-import 'package:flutter/services.dart';
+import 'dart:io';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 
 import 'models/app_state.dart';
+import 'package:http/http.dart' as http;
 
 class AppStateContainer extends StatefulWidget {
   final AppState state;
@@ -40,7 +44,8 @@ class _AppStateContainerState extends State<AppStateContainer> {
   final Firestore store = Firestore.instance;
   String initialRoute = '/';
   bool appInitialized = false;
-
+  final FirebaseStorage storage = FirebaseStorage(
+      app: FirebaseApp.instance, storageBucket: 'gs://splitlegal.appspot.com');
   var uuid = Uuid();
 
   final GoogleSignIn _googleSignIn = GoogleSignIn(
@@ -218,6 +223,38 @@ class _AppStateContainerState extends State<AppStateContainer> {
         backgroundColor: Color.fromRGBO(255, 255, 255, 0),
       ),
     );
+  }
+
+  Future<File> getFileFromUrl(String url) async {
+    var dir = await getApplicationDocumentsDirectory();
+    String filePath = '${dir.path}/${url}.pdf';
+
+    if (await File(filePath).exists()) {
+      return  File(filePath);
+    } else {
+    try {
+      var downloadUrl = await storage
+          .ref()
+          .child('users')
+          .child(state.user.uid)
+          .child('forms')
+          .child(url + '.pdf')
+          .getDownloadURL();
+      var data = await http.get(downloadUrl);
+      var bytes = data.bodyBytes;
+      File file = File("$filePath");
+
+      File urlFile = await file.writeAsBytes(bytes);
+      return urlFile;
+    } catch (e) {
+      throw Exception("Error opening url file");
+    }
+    }
+  }
+
+  Future<String> getUsersForm(String formId) async {
+    File file = await getFileFromUrl(formId);
+    return file.path;
   }
 
   Future<void> showLoadingDialog(BuildContext context) {
