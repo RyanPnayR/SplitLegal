@@ -1,0 +1,60 @@
+Flutter crash report.
+Please report a bug at https://github.com/flutter/flutter/issues.
+
+## command
+
+flutter run
+
+## exception
+
+StateError: Bad state: The client closed with pending request "streamListen".
+
+```
+#0      new Client.withoutJson.<anonymous closure> (package:json_rpc_2/src/client.dart:70:24)
+#1      _rootRun (dart:async/zone.dart:1182:47)
+#2      _CustomZone.run (dart:async/zone.dart:1093:19)
+#3      _FutureListener.handleWhenComplete (dart:async/future_impl.dart:167:18)
+#4      Future._propagateToListeners.handleWhenCompleteCallback (dart:async/future_impl.dart:666:39)
+#5      Future._propagateToListeners (dart:async/future_impl.dart:722:37)
+#6      Future._propagateToListeners (dart:async/future_impl.dart:621:9)
+#7      Future._completeWithValue (dart:async/future_impl.dart:529:5)
+#8      Future._asyncCompleteWithValue.<anonymous closure> (dart:async/future_impl.dart:567:7)
+#9      _rootRun (dart:async/zone.dart:1190:13)
+#10     _CustomZone.run (dart:async/zone.dart:1093:19)
+#11     _CustomZone.runGuarded (dart:async/zone.dart:997:7)
+#12     _CustomZone.bindCallbackGuarded.<anonymous closure> (dart:async/zone.dart:1037:23)
+#13     _microtaskLoop (dart:async/schedule_microtask.dart:41:21)
+#14     _startMicrotaskLoop (dart:async/schedule_microtask.dart:50:5)
+#15     _runPendingImmediateCallback (dart:isolate-patch/isolate_patch.dart:118:13)
+#16     _RawReceivePortImpl._handleMessage (dart:isolate-patch/isolate_patch.dart:169:5)
+```
+
+## flutter doctor
+
+```
+[✓] Flutter (Channel master, 1.22.0-10.0.pre.311, on Linux, locale C.UTF-8)
+    • Flutter version 1.22.0-10.0.pre.311 at /home/ryanpnayr/flutter
+    • Framework revision 214dac9263 (2 days ago), 2020-09-22 21:37:02 -0400
+    • Engine revision 3395283428
+    • Dart version 2.10.0 (build 2.10.0-156.0.dev)
+
+[✓] Android toolchain - develop for Android devices (Android SDK version 29.0.3)
+    • Android SDK at /home/ryanpnayr/Programs/Android
+    • Platform android-29, build-tools 29.0.3
+    • ANDROID_HOME = /home/ryanpnayr/Android
+    • ANDROID_SDK_ROOT = /home/ryanpnayr/Programs/Android
+    • Java binary at: /home/ryanpnayr/Documents/android-studio/jre/bin/java
+    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b3-6222593)
+    • All Android licenses accepted.
+
+[✓] Android Studio (version 4.0)
+    • Android Studio at /home/ryanpnayr/Documents/android-studio
+    • Flutter plugin version 49.0.2
+    • Dart plugin version 193.7547
+    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b3-6222593)
+
+[✓] Connected device (1 available)
+    • Android SDK built for x86 (mobile) • emulator-5554 • android-x86 • Android 10 (API 29) (emulator)
+
+• No issues found!
+```
