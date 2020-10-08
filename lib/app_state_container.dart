@@ -104,9 +104,9 @@ class _AppStateContainerState extends State<AppStateContainer> {
     DocumentReference userRef =
         store.collection('users').document(state.user.uid);
     DocumentSnapshot userDoc = await userRef.get();
-    QuerySnapshot forms = await userRef.collection('forms').getDocuments();
+    // QuerySnapshot forms = await userRef.collection('forms').getDocuments();
     setState(() {
-      state.userData = UserData.fromMap(userDoc.data, forms);
+      state.userData = UserData.fromMap(userDoc.data);
     });
   }
 
@@ -127,7 +127,12 @@ class _AppStateContainerState extends State<AppStateContainer> {
 
   Future<void> logIntoFirebase() async {
     if (googleUser == null) {
-      googleUser = await googleSignIn.signIn();
+      try {
+        googleUser = await googleSignIn.signIn();
+      } catch (error) {
+        print(error);
+        return null;
+      }
     }
 
     try {
@@ -183,25 +188,26 @@ class _AppStateContainerState extends State<AppStateContainer> {
       store.collection('users').document(res.uid).setData({
         'first_name': signUpFormState.fields['first_name'].currentState.value,
         'last_name': signUpFormState.fields['last_name'].currentState.value,
+        'foroms': signUpFormState.fields['last_name'].currentState.value,
       });
     });
   }
 
-  Future<String> startForm(SplitLegalForm form) async {
-    DocumentReference userRef =
-        store.collection('users').document(state.user.uid);
+  // Future<String> startForm(SplitLegalForm form) async {
+  //   DocumentReference userRef =
+  //       store.collection('users').document(state.user.uid);
 
-    DocumentReference docRef = await userRef.collection('forms').add({
-      'user_id': state.user.uid,
-      'form_id': form.id,
-      'created_at': new DateTime.now(),
-      'name': form.displayName,
-      'status': 'pending',
-      'updated_at': new DateTime.now(),
-    });
+  //   DocumentReference docRef = await userRef.collection('forms').add({
+  //     'user_id': state.user.uid,
+  //     'form_id': form.id,
+  //     'created_at': new DateTime.now(),
+  //     'name': form.displayName,
+  //     'status': 'pending',
+  //     'updated_at': new DateTime.now(),
+  //   });
 
-    return docRef.documentID;
-  }
+  //   return docRef.documentID;
+  // }
 
   Future<void> completeForm(String formId) async {
     DocumentReference userRef =
@@ -230,25 +236,25 @@ class _AppStateContainerState extends State<AppStateContainer> {
     String filePath = '${dir.path}/${url}.pdf';
 
     if (await File(filePath).exists()) {
-      return  File(filePath);
+      return File(filePath);
     } else {
-    try {
-      var downloadUrl = await storage
-          .ref()
-          .child('users')
-          .child(state.user.uid)
-          .child('forms')
-          .child(url + '.pdf')
-          .getDownloadURL();
-      var data = await http.get(downloadUrl);
-      var bytes = data.bodyBytes;
-      File file = File("$filePath");
+      try {
+        var downloadUrl = await storage
+            .ref()
+            .child('users')
+            .child(state.user.uid)
+            .child('forms')
+            .child(url + '.pdf')
+            .getDownloadURL();
+        var data = await http.get(downloadUrl);
+        var bytes = data.bodyBytes;
+        File file = File("$filePath");
 
-      File urlFile = await file.writeAsBytes(bytes);
-      return urlFile;
-    } catch (e) {
-      throw Exception("Error opening url file");
-    }
+        File urlFile = await file.writeAsBytes(bytes);
+        return urlFile;
+      } catch (e) {
+        throw Exception("Error opening url file");
+      }
     }
   }
 

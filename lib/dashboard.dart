@@ -8,9 +8,9 @@ import 'package:splitlegal/screens/divorce_form_select.dart';
 import 'models/app_state.dart';
 
 class SplitLegalDashboardForm extends StatelessWidget {
-  UserForm form;
+  // UserForm form;
 
-  SplitLegalDashboardForm(this.form);
+  SplitLegalDashboardForm();
 
   getThumbnail(IconData icon, Color color) {
     return new Container(
@@ -45,53 +45,51 @@ class SplitLegalDashboardForm extends StatelessWidget {
         child: new Container(
           margin: new EdgeInsets.only(left: 50, top: 10),
           child: new Column(children: <Widget>[
-            Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    form.name,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        letterSpacing: 1),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    'Last Updated: ' +
-                        DateFormat.yMd().add_jm().format(form.updatedAt),
-                    style: TextStyle(fontSize: 12),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    'Status: ' + form.status,
-                    style: TextStyle(fontSize: 12),
-                  ),
-                ]),
-            MaterialButton(
-              child: Text('Review'),
-              onPressed: () {
-                container.getUsersForm(form.id).then((path) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              PdfViewPage(path: path, title: form.name)));
-                });
-              },
-              shape: RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(18.0),
-              ),
-              color: form.status == 'completed'
-                  ? theme.secondaryHeaderColor
-                  : theme.hoverColor,
-              textColor: Colors.white,
-              height: 30,
-            )
+            //   Column(
+            //       mainAxisAlignment: MainAxisAlignment.start,
+            //       crossAxisAlignment: CrossAxisAlignment.start,
+            //       children: <Widget>[
+            //         Text(
+            //           form.name,
+            //           style: TextStyle(
+            //               fontWeight: FontWeight.bold,
+            //               fontSize: 16,
+            //               letterSpacing: 1),
+            //         ),
+            //         SizedBox(
+            //           height: 10,
+            //         ),
+            //         Text(
+            //           'Last Updated: ' +
+            //               DateFormat.yMd().add_jm().format(form.updatedAt),
+            //           style: TextStyle(fontSize: 12),
+            //         ),
+            //         SizedBox(
+            //           height: 10,
+            //         ),
+            //         Text(
+            //           'Status: ' + form.status,
+            //           style: TextStyle(fontSize: 12),
+            //         ),
+            //       ]),
+            //   MaterialButton(
+            //     child: Text('Review'),
+            //     onPressed: () {
+            //       container.getUsersForm(form.id).then((path) {
+            //         Navigator.push(
+            //             context,
+            //             MaterialPageRoute(
+            //                 builder: (context) =>
+            //                     PdfViewPage(path: path, title: form.name)));
+            //       });
+            //     },
+            //     shape: RoundedRectangleBorder(
+            //       borderRadius: new BorderRadius.circular(18.0),
+            //     ),
+            //     color: theme.secondaryHeaderColor,
+            //     textColor: Colors.white,
+            //     height: 30,
+            //   )
           ]),
         ));
   }
@@ -151,21 +149,21 @@ class _DashboardState extends State<Dashboard> {
             builder: (context, snapshot) {
               if (snapshot.hasError) print(snapshot.error);
               if (snapshot.hasData) {
-                List<DocumentSnapshot> documents = snapshot.data.documents;
+                // List<DocumentSnapshot> documents = snapshot.data.documents;
 
-                List<UserForm> forms = documents.map((document) {
-                  return UserForm.fromMap(document.documentID, document.data);
-                }).toList();
+                // List<UserForm> forms = documents.map((document) {
+                //   return UserForm.fromMap(document.documentID, document.data);
+                // }).toList();
 
-                List<SplitLegalDashboardForm> formsWidgets =
-                    forms.where((form) => form.status != 'pending').map((form) {
-                  return new SplitLegalDashboardForm(form);
-                }).toList();
+                // List<SplitLegalDashboardForm> formsWidgets =
+                //     forms.where((form) => form.status != 'pending').map((form) {
+                //   return new SplitLegalDashboardForm(form);
+                // }).toList();
 
                 return Center(
                     child: ListView(
                   padding: const EdgeInsets.all(20.0),
-                  children: formsWidgets,
+                  children: [Row()],
                 ));
               } else {
                 return Row();

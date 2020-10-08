@@ -46,6 +46,13 @@
             {
               "client_id": "756635435903-vc84m22av7nlt6q2f8u3gn537ltrbkga.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "756635435903-qkks7f6vqe3ecnfv8l1m41q3oagnuv9o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.splitlegal"
+              }
             }
           ]
         }

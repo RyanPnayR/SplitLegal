@@ -1,11 +1,10 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:splitlegal/dashboard.dart';
+import 'package:splitlegal/models/app_state.dart';
 import 'package:splitlegal/screens/divorce_form_select.dart';
 import 'package:splitlegal/screens/settings_screen.dart';
-import 'package:splitlegal/sign-in.dart';
+
 import '../app_state_container.dart';
-import '../models/app_state.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -35,10 +34,8 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   Widget get _homeView {
-    var completedForms = appState.userData.forms.firstWhere((form) {
-      return form.status.compareTo('completed') == 0;
-    }, orElse: () => null);
-    if (appState.userData.forms.length == 0 || completedForms == null) {
+    var completedForms = null;
+    if (completedForms == null) {
       return new DivorceFormSelect();
     } else {
       switch (currentPage) {
@@ -135,22 +132,24 @@ class HomeScreenState extends State<HomeScreen> {
     appState = container.state;
     Widget body = _pageToDisplay;
     Size size = MediaQuery.of(context).size;
+    ThemeData theme = Theme.of(context);
 
     return new Scaffold(
       key: _scaffoldKey,
       drawer: SizedBox(
-          width: size.width,
+          width: size.width * 0.75,
           child: Theme(
-            data: Theme.of(context).copyWith(
-              // Set the transparency here
-              canvasColor: Colors
-                  .transparent, //or any other color you want. e.g Colors.blue.withOpacity(0.5)
-            ),
+            data: theme.copyWith(
+                // Set the transparency here
+                canvasColor: theme
+                    .secondaryHeaderColor //or any other color you want. e.g Colors.blue.withOpacity(0.5)
+                ),
             child: new Drawer(
               child: ListView(
                 children: <Widget>[
                   AppBar(
-                    backgroundColor: Colors.transparent,
+                    backgroundColor:
+                        theme.secondaryHeaderColor.withOpacity(0.5),
                     title: Text(
                       "SPLIT LEGAL",
                       style: TextStyle(

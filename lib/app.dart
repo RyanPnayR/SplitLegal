@@ -15,10 +15,10 @@ class AppRootWidget extends StatefulWidget {
 }
 
 class FormRouteArguments {
-  final SplitLegalForm form;
+  // final SplitLegalForm form;
   final String userFormId;
 
-  FormRouteArguments(this.form, this.userFormId);
+  FormRouteArguments(this.userFormId);
 }
 
 class AppRootWidgetState extends State<AppRootWidget> {
@@ -90,7 +90,7 @@ class AppRootWidgetState extends State<AppRootWidget> {
                     return _onWillPop(context);
                   },
                   child: new WebviewScaffold(
-                    url: args.form.formUrl + '?form_id=' + args.userFormId,
+                    url: '?form_id=' + args.userFormId,
                     javascriptChannels: [
                       new JavascriptChannel(
                           name: 'SplitLegal',

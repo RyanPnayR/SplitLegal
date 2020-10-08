@@ -51,14 +51,10 @@ class UserForm {
 class UserData {
   String firstName;
   String lastName;
-  List<UserForm> forms;
 
-  UserData(this.firstName, this.lastName, this.forms);
-  factory UserData.fromMap(Map<String, dynamic> json, QuerySnapshot formData) {
-    List<UserForm> forms = formData.documents.map((form) {
-      return UserForm.fromMap(form.documentID, form.data);
-    }).toList();
-    return UserData(json['first_name'], json['last_name'], forms);
+  UserData(this.firstName, this.lastName);
+  factory UserData.fromMap(Map<String, dynamic> json) {
+    return UserData(json['first_name'], json['last_name']);
   }
 }
 
