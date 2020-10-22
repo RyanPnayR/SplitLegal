@@ -11,7 +11,7 @@ class HomeScreen extends StatefulWidget {
   HomeScreenState createState() => new HomeScreenState();
 }
 
-enum homeScreenPages { documents, settings }
+enum homeScreenPages { documents, settings, overview, tasks, team }
 
 class HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -34,10 +34,7 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   Widget get _homeView {
-    var completedForms = null;
-    if (completedForms == null) {
-      return new DivorceFormSelect();
-    } else {
+    if (appState.user != null) {
       switch (currentPage) {
         case homeScreenPages.settings:
           return new Settings();
@@ -71,9 +68,9 @@ class HomeScreenState extends State<HomeScreen> {
       BuildContext context, String title, homeScreenPages page) {
     return Container(
         decoration: BoxDecoration(
-          border: Border(bottom: BorderSide(width: 2.0, color: Colors.white)),
+          border: Border(bottom: BorderSide(width: 1.0, color: Colors.white)),
         ),
-        width: 250,
+        width: 200,
         margin: EdgeInsets.only(left: 20.0, bottom: 20),
         child: FlatButton(
             onPressed: () {
@@ -99,18 +96,16 @@ class HomeScreenState extends State<HomeScreen> {
     var container = AppStateContainer.of(context);
     return Container(
         decoration: BoxDecoration(
-          border: Border(bottom: BorderSide(width: 2.0, color: Colors.white)),
+          border: Border(bottom: BorderSide(width: 1.0, color: Colors.white)),
         ),
-        width: 250,
+        width: 200,
         margin: EdgeInsets.only(left: 20.0, bottom: 20),
         child: FlatButton(
             onPressed: () async {
               await Navigator.pop(context);
               container.showLoadingDialog(context);
-              Navigator.pushReplacementNamed(context, '/').then((res) {
-                container.signOutGoogle().then((res) {
-                  container.hideDialog(context);
-                });
+              container.signOutGoogle().then((res) {
+                Navigator.pushReplacementNamed(context, '/').then((res) {});
               });
             },
             child: SizedBox(
@@ -137,12 +132,12 @@ class HomeScreenState extends State<HomeScreen> {
     return new Scaffold(
       key: _scaffoldKey,
       drawer: SizedBox(
-          width: size.width * 0.75,
+          width: size.width * 0.8,
           child: Theme(
             data: theme.copyWith(
                 // Set the transparency here
-                canvasColor: theme
-                    .secondaryHeaderColor //or any other color you want. e.g Colors.blue.withOpacity(0.5)
+                canvasColor: theme.secondaryHeaderColor.withOpacity(
+                    0.75) //or any other color you want. e.g Colors.blue.withOpacity(0.5)
                 ),
             child: new Drawer(
               child: ListView(
@@ -174,9 +169,10 @@ class HomeScreenState extends State<HomeScreen> {
                         children: <Widget>[
                           Container(
                             height: 500,
-                            width: 2,
+                            width: 1,
                             color: Colors.white,
-                            margin: const EdgeInsets.only(left: 55.0, top: 40),
+                            margin: const EdgeInsets.only(
+                                left: 35.0, bottom: 150.0),
                           )
                         ],
                       ),
@@ -186,8 +182,14 @@ class HomeScreenState extends State<HomeScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
+                              getSidebarLink(context, 'Overview',
+                                  homeScreenPages.documents),
+                              getSidebarLink(
+                                  context, 'Tasks', homeScreenPages.documents),
                               getSidebarLink(context, 'Documents',
                                   homeScreenPages.documents),
+                              getSidebarLink(
+                                  context, 'My Team', homeScreenPages.settings),
                               getSidebarLink(context, 'Settings',
                                   homeScreenPages.settings),
                               getLogout(context)

@@ -1,6 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 
 class SplitLegalForm {
   String id;
@@ -48,20 +46,98 @@ class UserForm {
   }
 }
 
+class Activity {
+  String name;
+  String category;
+  String status;
+  String title;
+  String type;
+  String skippable;
+  String rejectionReason;
+  String activtyDataId;
+  MilestoneTransition milestone;
+  bool deleted;
+  String deletedReason;
+  DateTime deletedAt;
+
+  Activity({
+    this.name,
+    this.category,
+    this.status,
+    this.title,
+    this.type,
+    this.skippable,
+    this.rejectionReason,
+    this.activtyDataId,
+    this.milestone,
+    this.deleted,
+    this.deletedReason,
+    this.deletedAt,
+  });
+}
+
+class MilestoneTransition {
+  String fromMilestone;
+  String toMilestone;
+  String requestId;
+
+  MilestoneTransition({
+    this.fromMilestone,
+    this.toMilestone,
+    this.requestId,
+  });
+}
+
+class UserFilingRequest {
+  String location;
+  String requestType;
+  String comments;
+  List<MilestoneTransition> milestones;
+
+  UserFilingRequest({
+    this.location,
+    this.requestType,
+    this.comments,
+    this.milestones,
+  });
+}
+
+class SplitLegalTeamMember {
+  String firstName;
+  String lastName;
+  String email;
+
+  SplitLegalTeamMember({
+    this.firstName,
+    this.lastName,
+    this.email,
+  });
+}
+
 class UserData {
   String firstName;
   String lastName;
+  String phoneNumber;
+  // List<SplitLegalTeamMember> team;
+  // List<Request> requests;
 
-  UserData(this.firstName, this.lastName);
+  UserData(
+    this.firstName,
+    this.lastName,
+    this.phoneNumber,
+    // this.team,
+    // this.requests,
+  );
   factory UserData.fromMap(Map<String, dynamic> json) {
-    return UserData(json['first_name'], json['last_name']);
+    return UserData(
+        json['first_name'], json['last_name'], json['phone_number']);
   }
 }
 
 class AppState {
   // Your app will use this to know when to display loading spinners.
   bool isLoading;
-  FirebaseUser user;
+  auth.User user;
   UserData userData;
 
   // Constructor

@@ -10,7 +10,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
-
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'models/app_state.dart';
 import 'package:http/http.dart' as http;
 
@@ -41,11 +41,11 @@ class _AppStateContainerState extends State<AppStateContainer> {
   GoogleSignInAccount googleUser;
   final googleSignIn = new GoogleSignIn();
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final Firestore store = Firestore.instance;
+  final FirebaseFirestore store = FirebaseFirestore.instance;
   String initialRoute = '/';
   bool appInitialized = false;
   final FirebaseStorage storage = FirebaseStorage(
-      app: FirebaseApp.instance, storageBucket: 'gs://splitlegal.appspot.com');
+      app: Firebase.app(), storageBucket: 'gs://splitlegal.appspot.com');
   var uuid = Uuid();
 
   final GoogleSignIn _googleSignIn = GoogleSignIn(
@@ -65,12 +65,12 @@ class _AppStateContainerState extends State<AppStateContainer> {
   }
 
   Future<void> signIn(email, password) async {
-    FirebaseUser user = await _auth.signInWithEmailAndPassword(
+    UserCredential creds = await _auth.signInWithEmailAndPassword(
       password: password,
       email: email.trim(),
     );
     setState(() {
-      state.user = user;
+      state.user = creds.user;
     });
     await setUpUserData();
   }
@@ -101,12 +101,10 @@ class _AppStateContainerState extends State<AppStateContainer> {
   }
 
   setUpUserData() async {
-    DocumentReference userRef =
-        store.collection('users').document(state.user.uid);
+    DocumentReference userRef = store.collection('users').doc(state.user.uid);
     DocumentSnapshot userDoc = await userRef.get();
-    // QuerySnapshot forms = await userRef.collection('forms').getDocuments();
     setState(() {
-      state.userData = UserData.fromMap(userDoc.data);
+      state.userData = UserData.fromMap(userDoc.data());
     });
   }
 
@@ -115,7 +113,7 @@ class _AppStateContainerState extends State<AppStateContainer> {
   }
 
   Stream<QuerySnapshot> getUserForms(user) {
-    DocumentReference userRef = store.collection('users').document(user.uid);
+    DocumentReference userRef = store.collection('users').doc(user.uid);
     return userRef.collection('forms').snapshots();
   }
 
@@ -137,7 +135,7 @@ class _AppStateContainerState extends State<AppStateContainer> {
 
     try {
       GoogleSignInAccount account = await _googleSignIn.signIn();
-      FirebaseUser user = await signIntoFirebase(account);
+      auth.User user = await signIntoFirebase(account);
       setState(() {
         state.user = user;
       });
@@ -152,7 +150,7 @@ class _AppStateContainerState extends State<AppStateContainer> {
   Future<dynamic> _ensureLoggedInOnStartUp() async {
     GoogleSignInAccount user = googleSignIn.currentUser;
     try {
-      if (user == null) {
+      if (user == null && googleUser != null) {
         user = await googleSignIn.signInSilently(suppressErrors: true);
       }
     } catch (e) {
@@ -163,17 +161,18 @@ class _AppStateContainerState extends State<AppStateContainer> {
     return user;
   }
 
-  Future<FirebaseUser> signIntoFirebase(
+  Future<auth.User> signIntoFirebase(
       GoogleSignInAccount googleSignInAccount) async {
     FirebaseAuth _auth = FirebaseAuth.instance;
     GoogleSignInAuthentication googleAuth =
         await googleSignInAccount.authentication;
     print(googleAuth.accessToken);
-    final AuthCredential credential = GoogleAuthProvider.getCredential(
+    final AuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
-    return await _auth.signInWithCredential(credential);
+    UserCredential creds = await _auth.signInWithCredential(credential);
+    return creds.user;
   }
 
   Future<void> signUp(FormBuilderState signUpFormState) async {
@@ -183,9 +182,9 @@ class _AppStateContainerState extends State<AppStateContainer> {
             password: signUpFormState.fields['password'].currentState.value)
         .then((res) async {
       setState(() {
-        state.user = res;
+        state.user = res.user;
       });
-      store.collection('users').document(res.uid).setData({
+      store.collection('users').doc(res.user.uid).set({
         'first_name': signUpFormState.fields['first_name'].currentState.value,
         'last_name': signUpFormState.fields['last_name'].currentState.value,
         'foroms': signUpFormState.fields['last_name'].currentState.value,
@@ -210,12 +209,11 @@ class _AppStateContainerState extends State<AppStateContainer> {
   // }
 
   Future<void> completeForm(String formId) async {
-    DocumentReference userRef =
-        store.collection('users').document(state.user.uid);
+    DocumentReference userRef = store.collection('users').doc(state.user.uid);
     await userRef
         .collection('forms')
-        .document(formId)
-        .updateData({'status': 'processing', 'updated_at': new DateTime.now()});
+        .doc(formId)
+        .update({'status': 'processing', 'updated_at': new DateTime.now()});
   }
 
   @override
