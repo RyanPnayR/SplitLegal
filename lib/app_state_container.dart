@@ -150,7 +150,7 @@ class _AppStateContainerState extends State<AppStateContainer> {
   Future<dynamic> _ensureLoggedInOnStartUp() async {
     GoogleSignInAccount user = googleSignIn.currentUser;
     try {
-      if (user == null && googleUser != null) {
+      if (user == null) {
         user = await googleSignIn.signInSilently(suppressErrors: true);
       }
     } catch (e) {
