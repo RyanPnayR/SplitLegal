@@ -38,6 +38,12 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
       style: widget.style != null ? widget.style : theme.textTheme.display1,
       obscureText: _showPassword,
       decoration: InputDecoration(
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white),
+          ),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white),
+          ),
           suffixIcon: GestureDetector(
             onTap: () {
               setState(() {

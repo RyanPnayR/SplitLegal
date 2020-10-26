@@ -31,7 +31,7 @@ class AppRootWidgetState extends State<AppRootWidget> {
       hoverColor: Color.fromRGBO(100, 108, 110, 1),
       buttonColor: Color.fromRGBO(72, 101, 115, 1),
       inputDecorationTheme: InputDecorationTheme(
-        labelStyle: TextStyle(color: Color.fromRGBO(255, 255, 255, .5)),
+        labelStyle: TextStyle(color: Color.fromRGBO(255, 255, 255, .75)),
       ),
       textTheme: TextTheme(
           display1:
@@ -72,7 +72,7 @@ class AppRootWidgetState extends State<AppRootWidget> {
             theme: _themeData,
             initialRoute: container.initialRoute,
             routes: {
-              '/': (BuildContext context) => new SignInPage(),
+              '/': (BuildContext context) => new SignUpPage(),
               '/home': (BuildContext context) => new HomeScreen(),
               '/signUp': (BuildContext context) => new SignUpPage(),
               '/settings': (BuildContext context) {
