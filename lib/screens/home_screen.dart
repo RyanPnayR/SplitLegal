@@ -3,6 +3,7 @@ import 'package:splitlegal/dashboard.dart';
 import 'package:splitlegal/models/app_state.dart';
 import 'package:splitlegal/screens/divorce_form_select.dart';
 import 'package:splitlegal/screens/settings_screen.dart';
+import 'package:splitlegal/screens/start_form.dart';
 
 import '../app_state_container.dart';
 
@@ -18,7 +19,7 @@ class HomeScreenState extends State<HomeScreen> {
 
   AppState appState;
   homeScreenPages currentPage = homeScreenPages.documents;
-
+ 
   Widget get _pageToDisplay {
     if (appState.isLoading) {
       return _loadingView;
@@ -34,13 +35,17 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   Widget get _homeView {
-    if (appState.user != null) {
-      switch (currentPage) {
-        case homeScreenPages.settings:
-          return new Settings();
-          break;
-        default:
-          return new Dashboard();
+    if (appState.user != null && appState.userData != null) {
+      if (appState.userData.requests.isEmpty) {
+        return new StartScreen();
+      } else {
+        switch (currentPage) {
+          case homeScreenPages.settings:
+            return new Settings();
+            break;
+          default:
+            return new Dashboard();
+        }
       }
     }
   }

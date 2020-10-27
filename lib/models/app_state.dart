@@ -78,18 +78,23 @@ class Activity {
   });
 }
 
+@JsonSerializable()
 class MilestoneTransition {
   String fromMilestone;
   String toMilestone;
-  String requestId;
 
   MilestoneTransition({
     this.fromMilestone,
     this.toMilestone,
-    this.requestId,
   });
+
+  factory MilestoneTransition.fromJson(Map<String, dynamic> json) =>
+      _$MilestoneTransitionFromJson(json);
+
+  Map<String, dynamic> toJson() => _$MilestoneTransitionToJson(this);
 }
 
+@JsonSerializable()
 class UserFilingRequest {
   String location;
   String requestType;
@@ -102,6 +107,11 @@ class UserFilingRequest {
     this.comments,
     this.milestones,
   });
+
+  factory UserFilingRequest.fromJson(Map<String, dynamic> json) =>
+      _$UserFilingRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserFilingRequestToJson(this);
 }
 
 class SplitLegalTeamMember {
@@ -118,25 +128,25 @@ class SplitLegalTeamMember {
 
 @JsonSerializable()
 class UserData {
+  String id;
   String first_name;
   String last_name;
   String phoneNumber;
+  List<UserFilingRequest> requests;
   // List<SplitLegalTeamMember> team;
-  // List<Request> requests;
 
   UserData(
+    this.id,
     this.first_name,
     this.last_name,
     this.phoneNumber,
+    this.requests,
     // this.team,
-    // this.requests,
   );
+
   factory UserData.fromJson(Map<String, dynamic> json) =>
       _$UserDataFromJson(json);
 
-  /// `toJson` is the convention for a class to declare support for serialization
-  /// to JSON. The implementation simply calls the private, generated
-  /// helper method `_$UserToJson`.
   Map<String, dynamic> toJson() => _$UserDataToJson(this);
 }
 

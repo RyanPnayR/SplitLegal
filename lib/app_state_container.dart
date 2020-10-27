@@ -107,6 +107,11 @@ class _AppStateContainerState extends State<AppStateContainer> {
     setState(() {
       state.userData = UserData.fromJson(userDoc.data());
     });
+
+    List<UserFilingRequest> requests = await getUserFilingRequests();
+    setState(() {
+      state.userData.requests = requests;
+    });
   }
 
   Stream<QuerySnapshot> getForms() {
@@ -193,22 +198,6 @@ class _AppStateContainerState extends State<AppStateContainer> {
     });
   }
 
-  // Future<String> startForm(SplitLegalForm form) async {
-  //   DocumentReference userRef =
-  //       store.collection('users').document(state.user.uid);
-
-  //   DocumentReference docRef = await userRef.collection('forms').add({
-  //     'user_id': state.user.uid,
-  //     'form_id': form.id,
-  //     'created_at': new DateTime.now(),
-  //     'name': form.displayName,
-  //     'status': 'pending',
-  //     'updated_at': new DateTime.now(),
-  //   });
-
-  //   return docRef.documentID;
-  // }
-
   Future<void> completeForm(String formId) async {
     DocumentReference userRef = store.collection('users').doc(state.user.uid);
     await userRef
@@ -228,6 +217,21 @@ class _AppStateContainerState extends State<AppStateContainer> {
         backgroundColor: Color.fromRGBO(255, 255, 255, 0),
       ),
     );
+  }
+
+  Future<List<UserFilingRequest>> getUserFilingRequests() async {
+    QuerySnapshot requests = await store
+        .collection('requests')
+        .where("author", isEqualTo: state.user.uid)
+        .get();
+
+    return requests.docs
+        .map((req) => UserFilingRequest.fromJson(req.data()))
+        .toList();
+  }
+
+  Future<void> createUserFilingRequest(UserFilingRequest request) async {
+    await store.collection('requests').add(request.toJson());
   }
 
   Future<File> getFileFromUrl(String url) async {
