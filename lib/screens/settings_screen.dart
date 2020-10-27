@@ -43,7 +43,7 @@ class _SettingsState extends State<Settings> {
                 width: 300,
                 child: new ListView(children: <Widget>[
                   getListTextField(
-                      'Name', userData.firstName + ' ' + userData.lastName),
+                      'Name', userData.first_name + ' ' + userData.last_name),
                   getListTextField('Email', container.state.user.email),
                   SizedBox(
                     height: 30,

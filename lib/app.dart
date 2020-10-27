@@ -72,7 +72,7 @@ class AppRootWidgetState extends State<AppRootWidget> {
             theme: _themeData,
             initialRoute: container.initialRoute,
             routes: {
-              '/': (BuildContext context) => new SignUpPage(),
+              '/': (BuildContext context) => new SignInPage(),
               '/home': (BuildContext context) => new HomeScreen(),
               '/signUp': (BuildContext context) => new SignUpPage(),
               '/settings': (BuildContext context) {

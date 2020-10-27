@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -104,7 +105,7 @@ class _AppStateContainerState extends State<AppStateContainer> {
     DocumentReference userRef = store.collection('users').doc(state.user.uid);
     DocumentSnapshot userDoc = await userRef.get();
     setState(() {
-      state.userData = UserData.fromMap(userDoc.data());
+      state.userData = UserData.fromJson(userDoc.data());
     });
   }
 
