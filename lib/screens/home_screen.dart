@@ -19,7 +19,7 @@ class HomeScreenState extends State<HomeScreen> {
 
   AppState appState;
   homeScreenPages currentPage = homeScreenPages.documents;
- 
+
   Widget get _pageToDisplay {
     if (appState.isLoading) {
       return _loadingView;
@@ -126,6 +126,23 @@ class HomeScreenState extends State<HomeScreen> {
                 ))));
   }
 
+  List<Widget> getSidebarItems() {
+    List<Widget> items = [
+      getSidebarLink(context, 'My Team', homeScreenPages.settings),
+      getSidebarLink(context, 'Settings', homeScreenPages.settings),
+      getLogout(context)
+    ];
+    if (appState.userData.requests.isNotEmpty) {
+      items.addAll([
+        getSidebarLink(context, 'Overview', homeScreenPages.documents),
+        getSidebarLink(context, 'Tasks', homeScreenPages.documents),
+        getSidebarLink(context, 'Documents', homeScreenPages.documents)
+      ]);
+    }
+
+    return items;
+  }
+
   @override
   Widget build(BuildContext context) {
     var container = AppStateContainer.of(context);
@@ -186,19 +203,7 @@ class HomeScreenState extends State<HomeScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              getSidebarLink(context, 'Overview',
-                                  homeScreenPages.documents),
-                              getSidebarLink(
-                                  context, 'Tasks', homeScreenPages.documents),
-                              getSidebarLink(context, 'Documents',
-                                  homeScreenPages.documents),
-                              getSidebarLink(
-                                  context, 'My Team', homeScreenPages.settings),
-                              getSidebarLink(context, 'Settings',
-                                  homeScreenPages.settings),
-                              getLogout(context)
-                            ],
+                            children: getSidebarItems(),
                           ))
                     ],
                   )
