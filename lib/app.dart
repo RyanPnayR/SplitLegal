@@ -30,6 +30,7 @@ class AppRootWidgetState extends State<AppRootWidget> {
       secondaryHeaderColor: Color.fromRGBO(15, 39, 96, 1),
       hoverColor: Color.fromRGBO(100, 108, 110, 1),
       buttonColor: Color.fromRGBO(72, 101, 115, 1),
+      hintColor: Colors.white.withOpacity(0.5),
       inputDecorationTheme: InputDecorationTheme(
         labelStyle: TextStyle(color: Color.fromRGBO(255, 255, 255, .75)),
       ),

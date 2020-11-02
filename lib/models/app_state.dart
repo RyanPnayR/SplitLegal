@@ -99,6 +99,7 @@ class UserFilingRequest {
   String location;
   String requestType;
   String comments;
+  String userId;
   List<MilestoneTransition> milestones;
 
   UserFilingRequest({
@@ -106,6 +107,7 @@ class UserFilingRequest {
     this.requestType,
     this.comments,
     this.milestones,
+    this.userId,
   });
 
   factory UserFilingRequest.fromJson(Map<String, dynamic> json) =>

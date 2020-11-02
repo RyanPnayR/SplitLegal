@@ -30,6 +30,7 @@ UserFilingRequest _$UserFilingRequestFromJson(Map<String, dynamic> json) {
             ? null
             : MilestoneTransition.fromJson(e as Map<String, dynamic>))
         ?.toList(),
+    userId: json['userId'] as String,
   );
 }
 
@@ -38,6 +39,7 @@ Map<String, dynamic> _$UserFilingRequestToJson(UserFilingRequest instance) =>
       'location': instance.location,
       'requestType': instance.requestType,
       'comments': instance.comments,
+      'userId': instance.userId,
       'milestones': instance.milestones,
     };
 

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -222,12 +223,16 @@ class _AppStateContainerState extends State<AppStateContainer> {
   Future<List<UserFilingRequest>> getUserFilingRequests() async {
     QuerySnapshot requests = await store
         .collection('requests')
-        .where("author", isEqualTo: state.user.uid)
+        .where("userId", isEqualTo: state.user.uid)
         .get();
 
     return requests.docs
         .map((req) => UserFilingRequest.fromJson(req.data()))
         .toList();
+  }
+
+  Future<void> addUserFilingRequests(UserFilingRequest request) async {
+    await store.collection('requests').add(request.toJson());
   }
 
   Future<void> createUserFilingRequest(UserFilingRequest request) async {

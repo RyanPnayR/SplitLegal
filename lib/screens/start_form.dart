@@ -14,7 +14,8 @@ class StartScreenState extends State<StartScreen> {
   AppState appState;
   ThemeData theme;
   String countyValue = 'Orange';
-  String requestValue = 'Simplified Divorce';
+  String requestValue = 'Prenup';
+  String commentsValue = '';
 
   Widget get _pageToDisplay {
     if (!appState.isLoading && appState.user == null) {
@@ -31,39 +32,49 @@ class StartScreenState extends State<StartScreen> {
   }
 
   Widget get _homeView {
+    List<Widget> questions = [countyQuestion, requestType, comments];
+    var container = AppStateContainer.of(context);
     return Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
-        body: Column(children: [
-          new ListView(
-            shrinkWrap: true,
-            padding: EdgeInsets.all(15.0),
-            children: [
-              countyQuestion,
-              requestType,
-              comments,
-            ],
+        resizeToAvoidBottomInset: false,
+        persistentFooterButtons: [
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: 40,
+            child: ButtonTheme(
+              minWidth: double.infinity,
+              height: 50,
+              buttonColor: Colors.green,
+              child: RaisedButton(
+                textColor: theme.textTheme.display1.color,
+                child: new Text('Continue'),
+                onPressed: () async {
+                  UserFilingRequest request = new UserFilingRequest(
+                      comments: commentsValue,
+                      location: countyValue,
+                      requestType: commentsValue,
+                      userId: appState.user.uid);
+                  container.addUserFilingRequests(request);
+                },
+              ),
+            ),
           ),
-          new Expanded(
-            child: new Align(
-                alignment: Alignment.bottomCenter,
-                child: ButtonTheme(
-                  minWidth: double.infinity,
-                  height: 50,
-                  buttonColor: Colors.green,
-                  child: RaisedButton(
-                    textColor: theme.textTheme.display1.color,
-                    child: new Text('Continue'),
-                    onPressed: () async {
-                      // String userFormId =
-                      //     await container.startForm(this.selectedFrom);
-                      // Navigator.of(context).pushReplacementNamed('/survey',
-                      //     arguments: FormRouteArguments(
-                      //         this.selectedFrom, userFormId));
-                    },
-                  ),
-                )),
+        ],
+        body: SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(),
+            child: ListView.separated(
+              separatorBuilder: (BuildContext context, int index) =>
+                  const Divider(),
+              itemCount: questions.length,
+              shrinkWrap: true,
+              padding: EdgeInsets.all(15.0),
+              itemBuilder: (BuildContext context, int index) {
+                return questions[index];
+              },
+            ),
           ),
-        ]) // This trailing comma makes auto-formatting nicer for build methods.
+        ) // This trailing comma makes auto-formatting nicer for build methods.
         );
   }
 
@@ -83,9 +94,6 @@ class StartScreenState extends State<StartScreen> {
     List<String> options = ['Seminole', 'Orange'];
     return new Column(
       children: [
-        SizedBox(
-          height: 40,
-        ),
         Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -126,7 +134,6 @@ class StartScreenState extends State<StartScreen> {
           width: 250,
           alignment: Alignment.center,
           color: theme.primaryColor,
-          padding: EdgeInsets.only(top: 20),
           child: DropdownButton<String>(
             isExpanded: true,
             value: countyValue,
@@ -138,9 +145,12 @@ class StartScreenState extends State<StartScreen> {
             style: TextStyle(color: Colors.blue),
             selectedItemBuilder: (BuildContext context) {
               return options.map((String value) {
-                return Text(
-                  countyValue,
-                  style: TextStyle(color: Colors.white),
+                return Container(
+                  margin: EdgeInsets.only(top: 15),
+                  child: Text(
+                    countyValue,
+                    style: TextStyle(color: Colors.white),
+                  ),
                 );
               }).toList();
             },
@@ -157,16 +167,9 @@ class StartScreenState extends State<StartScreen> {
   }
 
   Widget get requestType {
-    List<String> requestOptions = <String>[
-      'Simplified Divorce',
-      'Divorce (with children)',
-      'Divorce (without children)',
-    ];
+    List<String> requestOptions = <String>['Prenup'];
     return new Column(
       children: [
-        SizedBox(
-          height: 40,
-        ),
         Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -207,7 +210,6 @@ class StartScreenState extends State<StartScreen> {
           width: 250,
           alignment: Alignment.center,
           color: theme.primaryColor,
-          padding: EdgeInsets.only(top: 20),
           child: DropdownButton<String>(
             isExpanded: true,
             value: requestValue,
@@ -219,9 +221,12 @@ class StartScreenState extends State<StartScreen> {
             style: TextStyle(color: Colors.blue),
             selectedItemBuilder: (BuildContext context) {
               return requestOptions.map((String value) {
-                return Text(
-                  requestValue,
-                  style: TextStyle(color: Colors.white),
+                return Container(
+                  margin: EdgeInsets.only(top: 15),
+                  child: Text(
+                    requestValue,
+                    style: TextStyle(color: Colors.white),
+                  ),
                 );
               }).toList();
             },
@@ -240,9 +245,6 @@ class StartScreenState extends State<StartScreen> {
   Widget get comments {
     return new Column(
       children: [
-        SizedBox(
-          height: 40,
-        ),
         Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -253,7 +255,6 @@ class StartScreenState extends State<StartScreen> {
                   width: 300,
                   color: Colors.transparent,
                   child: new Container(
-                      padding: EdgeInsets.only(left: 20),
                       decoration: new BoxDecoration(
                           color: theme.secondaryHeaderColor,
                           borderRadius: new BorderRadius.all(
@@ -265,14 +266,8 @@ class StartScreenState extends State<StartScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           new Text(
-                            "Any comments or notes?",
+                            "What else do we need to know?",
                             style: TextStyle(color: Colors.white),
-                          ),
-                          IconButton(
-                            padding: EdgeInsets.all(0),
-                            icon: Icon(Icons.help),
-                            color: theme.hoverColor,
-                            onPressed: () {},
                           ),
                         ],
                       ))),
@@ -283,15 +278,20 @@ class StartScreenState extends State<StartScreen> {
           width: 250,
           alignment: Alignment.center,
           color: theme.primaryColor,
-          padding: EdgeInsets.only(top: 20),
-          child: TextField(
-            decoration: const InputDecoration(
-              hintText: 'Reply',
-              labelText: 'Reply:',
+          child: Container(
+            margin: EdgeInsets.only(top: 0),
+            child: TextField(
+              onChanged: (text) {
+                commentsValue = text;
+              },
+              decoration: const InputDecoration(
+                  labelText: 'Notes/Comments',
+                  labelStyle: TextStyle(color: Colors.white54)),
+              style: TextStyle(color: Colors.white),
+              autofocus: false,
+              maxLines: null,
+              keyboardType: TextInputType.multiline,
             ),
-            autofocus: false,
-            maxLines: null,
-            keyboardType: TextInputType.multiline,
           ),
         ),
       ],

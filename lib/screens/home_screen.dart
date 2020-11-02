@@ -36,7 +36,8 @@ class HomeScreenState extends State<HomeScreen> {
 
   Widget get _homeView {
     if (appState.user != null && appState.userData != null) {
-      if (appState.userData.requests.isEmpty) {
+      if (appState.userData.requests != null &&
+          appState.userData.requests.isEmpty) {
         return new StartScreen();
       } else {
         switch (currentPage) {
@@ -132,8 +133,9 @@ class HomeScreenState extends State<HomeScreen> {
       getSidebarLink(context, 'Settings', homeScreenPages.settings),
       getLogout(context)
     ];
-    if (appState.userData.requests.isNotEmpty) {
-      items.addAll([
+    if (appState.userData.requests != null &&
+        appState.userData.requests.isNotEmpty) {
+      items.insertAll(0, [
         getSidebarLink(context, 'Overview', homeScreenPages.documents),
         getSidebarLink(context, 'Tasks', homeScreenPages.documents),
         getSidebarLink(context, 'Documents', homeScreenPages.documents)
