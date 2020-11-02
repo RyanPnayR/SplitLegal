@@ -4,6 +4,7 @@ import 'package:splitlegal/sign-in.dart';
 import '../app_state_container.dart';
 import '../models/app_state.dart';
 import 'divorce_form_select.dart';
+import 'home_screen.dart';
 
 class StartScreen extends StatefulWidget {
   @override
@@ -52,9 +53,25 @@ class StartScreenState extends State<StartScreen> {
                   UserFilingRequest request = new UserFilingRequest(
                       comments: commentsValue,
                       location: countyValue,
-                      requestType: commentsValue,
+                      requestType: requestValue,
                       userId: appState.user.uid);
-                  container.addUserFilingRequests(request);
+                  container.addUserFilingRequests(request).then((res) {
+                    container.setUpUserData().then((res) {
+                      Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                        (Route<dynamic> route) => false,
+                      );
+                    }).catchError((e) {
+                      container.hideDialog(context);
+                      container.showErrorDialog(context, [
+                        Text(
+                          'Uh, oh!',
+                          style: Theme.of(context).textTheme.title,
+                        ),
+                        Text(e.message)
+                      ]);
+                    });
+                  });
                 },
               ),
             ),
