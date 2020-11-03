@@ -27,7 +27,7 @@ class AppRootWidgetState extends State<AppRootWidget> {
   ThemeData get _themeData => new ThemeData(
       fontFamily: 'Roboto',
       primaryColor: Color.fromRGBO(64, 64, 64, 1),
-      secondaryHeaderColor: Color.fromRGBO(15, 39, 96, 1),
+      secondaryHeaderColor: Color.fromRGBO(15, 39, 96, 1.0),
       hoverColor: Color.fromRGBO(100, 108, 110, 1),
       buttonColor: Color.fromRGBO(72, 101, 115, 1),
       hintColor: Colors.white.withOpacity(0.5),
