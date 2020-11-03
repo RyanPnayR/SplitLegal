@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:splitlegal/dashboard.dart';
 import 'package:splitlegal/models/app_state.dart';
 import 'package:splitlegal/screens/divorce_form_select.dart';
+import 'package:splitlegal/screens/overview.dart';
 import 'package:splitlegal/screens/settings_screen.dart';
 import 'package:splitlegal/screens/start_form.dart';
 
@@ -18,7 +19,7 @@ class HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   AppState appState;
-  homeScreenPages currentPage = homeScreenPages.documents;
+  homeScreenPages currentPage = homeScreenPages.overview;
 
   Widget get _pageToDisplay {
     if (appState.isLoading) {
@@ -41,6 +42,18 @@ class HomeScreenState extends State<HomeScreen> {
         return new StartScreen();
       } else {
         switch (currentPage) {
+          case homeScreenPages.overview:
+            return new Overview();
+            break;
+          case homeScreenPages.tasks:
+            return new Dashboard();
+            break;
+          case homeScreenPages.documents:
+            return new Dashboard();
+            break;
+          case homeScreenPages.team:
+            return new Dashboard();
+            break;
           case homeScreenPages.settings:
             return new Settings();
             break;
@@ -53,6 +66,9 @@ class HomeScreenState extends State<HomeScreen> {
 
   Widget get _appbar {
     return new AppBar(
+      backgroundColor: currentPage == homeScreenPages.overview
+          ? Theme.of(context).secondaryHeaderColor
+          : Theme.of(context).primaryColor,
       title: Text(
         "SPLIT LEGAL",
         style: TextStyle(fontFamily: 'Roboto', fontSize: 14, letterSpacing: 4),
@@ -129,15 +145,15 @@ class HomeScreenState extends State<HomeScreen> {
 
   List<Widget> getSidebarItems() {
     List<Widget> items = [
-      getSidebarLink(context, 'My Team', homeScreenPages.settings),
+      getSidebarLink(context, 'My Team', homeScreenPages.team),
       getSidebarLink(context, 'Settings', homeScreenPages.settings),
       getLogout(context)
     ];
     if (appState.userData.requests != null &&
         appState.userData.requests.isNotEmpty) {
       items.insertAll(0, [
-        getSidebarLink(context, 'Overview', homeScreenPages.documents),
-        getSidebarLink(context, 'Tasks', homeScreenPages.documents),
+        getSidebarLink(context, 'Overview', homeScreenPages.overview),
+        getSidebarLink(context, 'Tasks', homeScreenPages.tasks),
         getSidebarLink(context, 'Documents', homeScreenPages.documents)
       ]);
     }
