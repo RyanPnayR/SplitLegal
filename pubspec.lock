@@ -370,6 +370,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.4"
+  flutter_dash:
+    dependency: "direct main"
+    description:
+      name: flutter_dash
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1"
   flutter_form_builder:
     dependency: "direct main"
     description:

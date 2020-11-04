@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:json_annotation/json_annotation.dart';
+
 part 'app_state.g.dart';
 
 class SplitLegalForm {
@@ -80,12 +81,18 @@ class Activity {
 
 @JsonSerializable()
 class MilestoneTransition {
+  String fromMilestoneId;
   String fromMilestone;
+  String toMilestoneId;
   String toMilestone;
+  bool completed;
 
   MilestoneTransition({
+    this.fromMilestoneId,
     this.fromMilestone,
+    this.toMilestoneId,
     this.toMilestone,
+    this.completed = false,
   });
 
   factory MilestoneTransition.fromJson(Map<String, dynamic> json) =>

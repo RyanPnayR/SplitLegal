@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:splitlegal/components/milestone_timeline.dart';
 import 'package:splitlegal/models/app_state.dart';
 
 class Overview extends StatefulWidget {
@@ -10,6 +11,17 @@ class Overview extends StatefulWidget {
 class _OverviewState extends State<Overview> {
   AppState appState;
   ThemeData theme;
+  List<MilestoneTransition> milestones = [
+    MilestoneTransition(
+        fromMilestone: '', toMilestone: 'First Meeting', completed: true),
+    MilestoneTransition(
+        fromMilestone: 'First Meeting', toMilestone: 'Filled out documents'),
+    MilestoneTransition(
+        fromMilestone: 'Filled out documents', toMilestone: 'Final Meeting'),
+    MilestoneTransition(
+        fromMilestone: 'Final Meeting',
+        toMilestone: 'Final documents delivered'),
+  ];
   @override
   Widget build(BuildContext context) {
     theme = Theme.of(context);
@@ -57,8 +69,8 @@ class _OverviewState extends State<Overview> {
           ),
           body: Column(
             children: [
-              Container(
-                height: 100,
+              Flexible(
+                fit: FlexFit.loose,
                 child: TabBarView(
                   children: [
                     userMilestones,
@@ -66,12 +78,10 @@ class _OverviewState extends State<Overview> {
                   ],
                 ),
               ),
-              Expanded(
-                child: Container(
-                  width: double.infinity,
-                  color: theme.primaryColor,
-                  child: Text("Hello"),
-                ),
+              Container(
+                width: double.infinity,
+                color: theme.primaryColor,
+                child: Text("Hello"),
               ),
             ],
           )),
@@ -85,8 +95,9 @@ class _OverviewState extends State<Overview> {
   }
 
   Widget get userMilestones {
-    return Column(
-      children: [Text("Hello")],
+    return Container(
+      margin: EdgeInsets.only(top: 20, left: 50),
+      child: MilestoneTimeline(milestones: milestones),
     );
   }
 

@@ -44,7 +44,8 @@ dependencies:
   cached_network_image: ^2.2.0+1
   material_design_icons_flutter: ^4.0.5345
   json_annotation:
-  
+  flutter_dash:
+
 dev_dependencies:
   json_serializable:
   build_runner:
