@@ -22,8 +22,11 @@ class _OverviewState extends State<Overview>
     MilestoneTransition(
         fromMilestone: 'Filled out documents', toMilestone: 'Final Meeting'),
     MilestoneTransition(
-        fromMilestone: 'Final Meeting',
-        toMilestone: 'Final documents delivered'),
+        fromMilestone: '', toMilestone: 'First Meeting', completed: true),
+    MilestoneTransition(
+        fromMilestone: 'First Meeting', toMilestone: 'Filled out documents'),
+    MilestoneTransition(
+        fromMilestone: 'Filled out documents', toMilestone: 'Final Meeting'),
   ];
 
   @override
@@ -96,11 +99,12 @@ class _OverviewState extends State<Overview>
   }
 
   Widget wrapOverviewTab(Widget mainView) {
-    return Column(
+    return ListView(
       children: [
         mainView,
         Expanded(
           child: Container(
+            height: 200,
             margin: EdgeInsets.only(top: 20),
             width: double.infinity,
             color: theme.primaryColor,
@@ -118,10 +122,7 @@ class _OverviewState extends State<Overview>
   }
 
   Widget get userMilestones {
-    return Container(
-      margin: EdgeInsets.only(top: 20, left: 50),
-      child: MilestoneTimeline(milestones: milestones),
-    );
+    return MilestoneTimeline(milestones: milestones);
   }
 
   Widget get splitLegalCurrentMilestoneTitle {
