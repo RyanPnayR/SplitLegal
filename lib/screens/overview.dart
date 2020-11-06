@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:splitlegal/components/milestone_timeline.dart';
 import 'package:splitlegal/models/app_state.dart';
+import 'package:splitlegal/screens/home_screen.dart';
+
+import '../app_state_container.dart';
 
 class Overview extends StatefulWidget {
   @override
@@ -28,6 +31,8 @@ class _OverviewState extends State<Overview>
     MilestoneTransition(
         fromMilestone: 'Filled out documents', toMilestone: 'Final Meeting'),
   ];
+
+  List<Activity> tasks = [Activity(name: "Test task")];
 
   @override
   void initState() {
@@ -99,19 +104,61 @@ class _OverviewState extends State<Overview>
   }
 
   Widget wrapOverviewTab(Widget mainView) {
-    return ListView(
-      children: [
-        mainView,
-        Expanded(
-          child: Container(
-            height: 200,
-            margin: EdgeInsets.only(top: 20),
-            width: double.infinity,
-            color: theme.primaryColor,
-            child: Text("Hello"),
+    return Container(
+      width: double.infinity,
+      color: theme.primaryColor,
+      child: ListView(
+        children: [
+          Container(
+            color: theme.secondaryHeaderColor,
+            padding: EdgeInsets.all(25),
+            child: mainView,
           ),
-        ),
-      ],
+          Container(
+              width: double.infinity,
+              color: theme.primaryColor,
+              margin: EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Next Steps",
+                    style: TextStyle(fontSize: 20.0, color: Colors.white),
+                  ),
+                  NextStepsButton(
+                    taskCount: tasks.length,
+                  ),
+                  OverviewTaskBox(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                "Have any questions?",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                    letterSpacing: 1),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            "Send us an email",
+                            style: TextStyle(
+                                fontSize: 14,
+                                color: theme.bottomAppBarColor,
+                                letterSpacing: 1),
+                          ),
+                        ],
+                      )
+                    ],
+                  )
+                ],
+              )),
+        ],
+      ),
     );
   }
 
@@ -134,6 +181,123 @@ class _OverviewState extends State<Overview>
   Widget get splitLegalCurrentMilestones {
     return Column(
       children: [Text("Bonjor")],
+    );
+  }
+}
+
+class NextStepsButton extends StatelessWidget {
+  int taskCount;
+  NextStepsButton({
+    this.taskCount = 0,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    var container = AppStateContainer.of(context);
+
+    return taskCount == 0
+        ? OverviewTaskBox(
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    children: [
+                      Text(
+                        "Take a break - you've earned it",
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                            letterSpacing: 1),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 10),
+                    child: Text(
+                      "You’ve taken care of all your tasks and now we’re reviewing. So kick back and relax — we’ll email you when you have more tasks. Or you can just check back here.",
+                      style: TextStyle(
+                          fontSize: 12, color: Colors.white, letterSpacing: 1),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          )
+        : OverviewTaskBox(
+            children: [
+              Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Help get to your filling",
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                              letterSpacing: 1),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 10),
+                      child: Text(
+                        "Right now you have $taskCount task(s) that we need your help on.",
+                        style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.white,
+                            letterSpacing: 1),
+                      ),
+                    ),
+                  ]),
+              MaterialButton(
+                child: Text('Go to tasks'),
+                onPressed: () {
+                  container.state.currentPage = homeScreenPages.tasks;
+                  Navigator.of(context).pushNamed('/home');
+                },
+                color: Theme.of(context).secondaryHeaderColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(18.0),
+                ),
+                textColor: Colors.white,
+                height: 30,
+              ),
+            ],
+          );
+  }
+}
+
+class OverviewTaskBox extends StatelessWidget {
+  List<Widget> children;
+  OverviewTaskBox({this.children});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(top: 20),
+      decoration: new BoxDecoration(
+        color: Theme.of(context).primaryColor,
+        shape: BoxShape.rectangle,
+        boxShadow: <BoxShadow>[
+          new BoxShadow(
+            color: Colors.black12,
+            blurRadius: 3,
+            spreadRadius: 5,
+            offset: new Offset(0, 1.0),
+          ),
+        ],
+      ),
+      child: new Container(
+        margin: new EdgeInsets.all(10),
+        child: new Column(
+          children: children,
+        ),
+      ),
     );
   }
 }

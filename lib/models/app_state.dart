@@ -159,11 +159,14 @@ class UserData {
   Map<String, dynamic> toJson() => _$UserDataToJson(this);
 }
 
+enum homeScreenPages { documents, settings, overview, tasks, team }
+
 class AppState {
   // Your app will use this to know when to display loading spinners.
   bool isLoading;
   auth.User user;
   UserData userData;
+  homeScreenPages currentPage = homeScreenPages.overview;
 
   // Constructor
   AppState({

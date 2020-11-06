@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:splitlegal/app_state_container.dart';
 import 'package:splitlegal/dashboard.dart';
 import 'package:splitlegal/screens/home_screen.dart';
@@ -25,7 +26,7 @@ class AppRootWidgetState extends State<AppRootWidget> {
   String initialRoute;
 
   ThemeData get _themeData => new ThemeData(
-      fontFamily: 'Roboto',
+      fontFamily: GoogleFonts.lato().fontFamily,
       primaryColor: Color.fromRGBO(64, 64, 64, 1),
       secondaryHeaderColor: Color.fromRGBO(15, 39, 96, 1.0),
       hoverColor: Color.fromRGBO(100, 108, 110, 1),

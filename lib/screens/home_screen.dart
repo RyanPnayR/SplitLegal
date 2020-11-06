@@ -5,6 +5,7 @@ import 'package:splitlegal/screens/divorce_form_select.dart';
 import 'package:splitlegal/screens/overview.dart';
 import 'package:splitlegal/screens/settings_screen.dart';
 import 'package:splitlegal/screens/start_form.dart';
+import 'package:splitlegal/screens/tasks.dart';
 
 import '../app_state_container.dart';
 
@@ -13,13 +14,10 @@ class HomeScreen extends StatefulWidget {
   HomeScreenState createState() => new HomeScreenState();
 }
 
-enum homeScreenPages { documents, settings, overview, tasks, team }
-
 class HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   AppState appState;
-  homeScreenPages currentPage = homeScreenPages.overview;
 
   Widget get _pageToDisplay {
     if (appState.isLoading) {
@@ -41,12 +39,12 @@ class HomeScreenState extends State<HomeScreen> {
           appState.userData.requests.isEmpty) {
         return new StartScreen();
       } else {
-        switch (currentPage) {
+        switch (appState.currentPage) {
           case homeScreenPages.overview:
             return new Overview();
             break;
           case homeScreenPages.tasks:
-            return new Dashboard();
+            return new Tasks();
             break;
           case homeScreenPages.documents:
             return new Dashboard();
@@ -66,7 +64,8 @@ class HomeScreenState extends State<HomeScreen> {
 
   Widget get _appbar {
     return new AppBar(
-      backgroundColor: currentPage == homeScreenPages.overview
+      backgroundColor: appState.userData.requests != null &&
+              appState.currentPage == homeScreenPages.overview
           ? Theme.of(context).secondaryHeaderColor
           : Theme.of(context).primaryColor,
       title: Text(
@@ -97,7 +96,7 @@ class HomeScreenState extends State<HomeScreen> {
         child: FlatButton(
             onPressed: () {
               setState(() {
-                currentPage = page;
+                appState.currentPage = page;
               });
               Navigator.of(context).pop();
             },

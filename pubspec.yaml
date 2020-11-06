@@ -45,6 +45,7 @@ dependencies:
   material_design_icons_flutter: ^4.0.5345
   json_annotation:
   flutter_dash:
+  google_fonts:
 
 dev_dependencies:
   json_serializable:

@@ -404,6 +404,12 @@
       "languageVersion": "2.1"
     },
     {
+      "name": "google_fonts",
+      "rootUri": "file:///C:/Android/flutter/.pub-cache/hosted/pub.dartlang.org/google_fonts-1.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.3"
+    },
+    {
       "name": "google_sign_in",
       "rootUri": "file:///C:/Android/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in-4.5.5",
       "packageUri": "lib/",
@@ -860,7 +866,7 @@
       "languageVersion": "2.1"
     }
   ],
-  "generated": "2020-11-04T01:41:10.031652Z",
+  "generated": "2020-11-06T01:22:25.512030Z",
   "generator": "pub",
   "generatorVersion": "2.11.0-213.1.beta"
 }

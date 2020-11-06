@@ -84,11 +84,11 @@ class MilestoneTimeline extends StatelessWidget {
                   last == i
                       ? SizedBox.shrink()
                       : new SizedBox(
-                          height: 50.0,
+                          height: 40.0,
                           width: 30.0,
                           child: Dash(
                             direction: Axis.vertical,
-                            length: 50,
+                            length: 40,
                             dashLength: 3,
                             dashColor: Colors.white,
                           ),
