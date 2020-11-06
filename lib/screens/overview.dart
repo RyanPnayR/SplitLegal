@@ -164,8 +164,50 @@ class _OverviewState extends State<Overview>
   }
 
   Widget get splitLegalCurrentMilestones {
-    return Column(
-      children: [Text("Bonjor")],
+    return ListView(
+      shrinkWrap: true,
+      children: [
+        Container(
+          margin: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(3.0),
+          decoration: BoxDecoration(
+            color: theme.secondaryHeaderColor,
+            boxShadow: <BoxShadow>[
+              new BoxShadow(
+                color: Colors.black12,
+                blurRadius: 3,
+                spreadRadius: 5,
+                offset: new Offset(0, 1.0),
+              ),
+            ],
+          ),
+          child: Theme(
+            data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+            child: ExpansionTile(
+              backgroundColor: theme.secondaryHeaderColor,
+              childrenPadding: EdgeInsets.all(20),
+              tilePadding: EdgeInsets.only(top: 10, left: 20),
+              title: Text(
+                "Reviewing request",
+                style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              ),
+              children: [
+                Text(
+                  "Currently going over the info you have submitted in your request. We will be reaching out soon to go over the documents.",
+                  softWrap: true,
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
