@@ -108,14 +108,14 @@ class UserFilingRequest {
   String comments;
   String userId;
   List<MilestoneTransition> milestones;
-
-  UserFilingRequest({
-    this.location,
-    this.requestType,
-    this.comments,
-    this.milestones,
-    this.userId,
-  });
+  List<Activity> tasks;
+  UserFilingRequest(
+      {this.location,
+      this.requestType,
+      this.comments,
+      this.milestones,
+      this.userId,
+      this.tasks});
 
   factory UserFilingRequest.fromJson(Map<String, dynamic> json) =>
       _$UserFilingRequestFromJson(json);
@@ -166,13 +166,16 @@ class AppState {
   bool isLoading;
   auth.User user;
   UserData userData;
-  homeScreenPages currentPage = homeScreenPages.overview;
+  homeScreenPages currentPage;
+  UserFilingRequest currentRequest;
 
   // Constructor
   AppState({
     this.isLoading = false,
     this.user,
     this.userData,
+    this.currentPage = homeScreenPages.overview,
+    currentRequest,
   });
 
   // A constructor for when the app is loading.

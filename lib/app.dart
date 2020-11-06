@@ -26,19 +26,26 @@ class AppRootWidgetState extends State<AppRootWidget> {
   String initialRoute;
 
   ThemeData get _themeData => new ThemeData(
-      fontFamily: GoogleFonts.lato().fontFamily,
-      primaryColor: Color.fromRGBO(64, 64, 64, 1),
-      secondaryHeaderColor: Color.fromRGBO(15, 39, 96, 1.0),
-      hoverColor: Color.fromRGBO(100, 108, 110, 1),
-      buttonColor: Color.fromRGBO(72, 101, 115, 1),
-      hintColor: Colors.white.withOpacity(0.5),
-      bottomAppBarColor: Color.fromRGBO(24, 253, 225, 1),
-      inputDecorationTheme: InputDecorationTheme(
-        labelStyle: TextStyle(color: Color.fromRGBO(255, 255, 255, .75)),
-      ),
-      textTheme: TextTheme(
-          display1:
-              TextStyle(color: Colors.white, fontSize: 16, letterSpacing: 1)));
+        fontFamily: GoogleFonts.lato().fontFamily,
+        primaryColor: Color.fromRGBO(64, 64, 64, 1),
+        secondaryHeaderColor: Color.fromRGBO(15, 39, 96, 1.0),
+        hoverColor: Color.fromRGBO(100, 108, 110, 1),
+        buttonColor: Color.fromRGBO(72, 101, 115, 1),
+        hintColor: Colors.white.withOpacity(0.5),
+        bottomAppBarColor: Color.fromRGBO(24, 253, 225, 1),
+        accentColor: Color.fromRGBO(24, 253, 225, 1),
+        unselectedWidgetColor: Colors.white,
+        inputDecorationTheme: InputDecorationTheme(
+          labelStyle: TextStyle(color: Color.fromRGBO(255, 255, 255, .75)),
+        ),
+        textTheme: TextTheme(
+          display1: TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+            letterSpacing: 1,
+          ),
+        ),
+      );
 
   Future<bool> _onWillPop(BuildContext context) {
     return showDialog(

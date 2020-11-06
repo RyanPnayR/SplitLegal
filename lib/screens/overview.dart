@@ -17,23 +17,6 @@ class _OverviewState extends State<Overview>
   ThemeData theme;
   TabController controller;
 
-  List<MilestoneTransition> milestones = [
-    MilestoneTransition(
-        fromMilestone: '', toMilestone: 'First Meeting', completed: true),
-    MilestoneTransition(
-        fromMilestone: 'First Meeting', toMilestone: 'Filled out documents'),
-    MilestoneTransition(
-        fromMilestone: 'Filled out documents', toMilestone: 'Final Meeting'),
-    MilestoneTransition(
-        fromMilestone: '', toMilestone: 'First Meeting', completed: true),
-    MilestoneTransition(
-        fromMilestone: 'First Meeting', toMilestone: 'Filled out documents'),
-    MilestoneTransition(
-        fromMilestone: 'Filled out documents', toMilestone: 'Final Meeting'),
-  ];
-
-  List<Activity> tasks = [Activity(name: "Test task")];
-
   @override
   void initState() {
     super.initState();
@@ -42,6 +25,8 @@ class _OverviewState extends State<Overview>
 
   @override
   Widget build(BuildContext context) {
+    var container = AppStateContainer.of(context);
+    appState = container.state;
     theme = Theme.of(context);
     return Scaffold(
       backgroundColor: theme.secondaryHeaderColor,
@@ -126,7 +111,7 @@ class _OverviewState extends State<Overview>
                     style: TextStyle(fontSize: 20.0, color: Colors.white),
                   ),
                   NextStepsButton(
-                    taskCount: tasks.length,
+                    taskCount: appState.currentRequest.tasks.length,
                   ),
                   OverviewTaskBox(
                     children: [
@@ -169,7 +154,7 @@ class _OverviewState extends State<Overview>
   }
 
   Widget get userMilestones {
-    return MilestoneTimeline(milestones: milestones);
+    return MilestoneTimeline(milestones: appState.currentRequest.milestones);
   }
 
   Widget get splitLegalCurrentMilestoneTitle {

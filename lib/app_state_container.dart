@@ -112,6 +112,28 @@ class _AppStateContainerState extends State<AppStateContainer> {
     List<UserFilingRequest> requests = await getUserFilingRequests();
     setState(() {
       state.userData.requests = requests;
+      state.currentRequest = requests[0];
+      state.currentRequest.tasks = [
+        Activity(
+          name: "Fill in your information",
+          title:
+              "This document is asking for some information about you and your spouse. Please look over the document and take the time to fill it out.",
+        ),
+        Activity(
+          name: "Upload your assests",
+          title: "Please disclose all of your assests.",
+        ),
+      ];
+      state.currentRequest.milestones = [
+        MilestoneTransition(
+            fromMilestone: '', toMilestone: 'First Meeting', completed: true),
+        MilestoneTransition(
+            fromMilestone: 'First Meeting',
+            toMilestone: 'Filled out documents'),
+        MilestoneTransition(
+            fromMilestone: 'Filled out documents',
+            toMilestone: 'Final Meeting'),
+      ];
     });
   }
 
