@@ -159,7 +159,7 @@ class UserData {
   Map<String, dynamic> toJson() => _$UserDataToJson(this);
 }
 
-enum homeScreenPages { documents, settings, overview, tasks, team }
+enum homeScreenPages { documents, settings, overview, tasks, team, docusign }
 
 class AppState {
   // Your app will use this to know when to display loading spinners.
@@ -168,6 +168,7 @@ class AppState {
   UserData userData;
   homeScreenPages currentPage;
   UserFilingRequest currentRequest;
+  String docusignUrl = "";
 
   // Constructor
   AppState({

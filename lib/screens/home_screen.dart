@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:splitlegal/dashboard.dart';
 import 'package:splitlegal/models/app_state.dart';
 import 'package:splitlegal/screens/divorce_form_select.dart';
@@ -54,6 +55,14 @@ class HomeScreenState extends State<HomeScreen> {
             break;
           case homeScreenPages.settings:
             return new Settings();
+            break;
+          case homeScreenPages.docusign:
+            return new WebviewScaffold(
+              url: appState.docusignUrl,
+              appBar: new AppBar(
+                title: new Text("Widget webview"),
+              ),
+            );
             break;
           default:
             return new Dashboard();

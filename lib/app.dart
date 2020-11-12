@@ -2,13 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:splitlegal/app_state_container.dart';
-import 'package:splitlegal/dashboard.dart';
 import 'package:splitlegal/screens/home_screen.dart';
-import 'package:splitlegal/screens/survey_monkey.dart';
 import 'package:splitlegal/sign-in.dart';
 import 'package:splitlegal/sign-up_screen.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:splitlegal/models/app_state.dart';
 
 class AppRootWidget extends StatefulWidget {
   @override
@@ -17,9 +13,8 @@ class AppRootWidget extends StatefulWidget {
 
 class FormRouteArguments {
   // final SplitLegalForm form;
-  final String userFormId;
-
-  FormRouteArguments(this.userFormId);
+  final String uri;
+  FormRouteArguments(this.uri);
 }
 
 class AppRootWidgetState extends State<AppRootWidget> {
@@ -91,29 +86,7 @@ class AppRootWidgetState extends State<AppRootWidget> {
                     children: <Widget>[Text('Settings')],
                   ),
                 );
-              },
-              '/survey': (BuildContext context) {
-                final FormRouteArguments args =
-                    ModalRoute.of(context).settings.arguments;
-                return new WillPopScope(
-                  onWillPop: () {
-                    return _onWillPop(context);
-                  },
-                  child: new WebviewScaffold(
-                    url: '?form_id=' + args.userFormId,
-                    javascriptChannels: [
-                      new JavascriptChannel(
-                          name: 'SplitLegal',
-                          onMessageReceived: (res) async {
-                            var container = AppStateContainer.of(context);
-                            await container.completeForm(args.userFormId);
-                            await container.setUpUserData();
-                            Navigator.of(context).pop();
-                          })
-                    ].toSet(),
-                  ),
-                );
-              },
+              }
             },
           );
   }

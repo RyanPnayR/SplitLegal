@@ -31,9 +31,9 @@ dependencies:
   flutter_auth_buttons: ^0.6.0
   google_sign_in: ^4.4.6
   flutter_spinkit: ^4.1.1
-  webview_flutter: ^0.3.18+1
+  webview_flutter: ^1.0.6
   url_launcher: ^4.0.2
-  flutter_webview_plugin: 0.3.10+1
+  flutter_webview_plugin: ^0.3.11
   uuid: 2.0.4
   intl: ^0.16.1
   flutter_pdfview:
@@ -46,6 +46,8 @@ dependencies:
   json_annotation:
   flutter_dash:
   google_fonts:
+  dio: ^3.0.10
+  get_it: ^5.0.1
 
 dev_dependencies:
   json_serializable:

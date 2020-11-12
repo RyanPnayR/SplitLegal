@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:splitlegal/app.dart';
+import 'package:splitlegal/app_state_container.dart';
+import 'package:splitlegal/main.dart';
 import 'package:splitlegal/models/app_state.dart';
+import 'package:splitlegal/services/docusign.service.dart';
 
 class Task extends StatelessWidget {
   Activity task;
@@ -8,6 +12,8 @@ class Task extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
+    var container = AppStateContainer.of(context);
+
     return Container(
       color: theme.primaryColor,
       child: new Container(
@@ -48,6 +54,24 @@ class Task extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
+              MaterialButton(
+                child: Text('Sign Document'),
+                onPressed: () {
+                  Future<String> url =
+                      getIt<DocusignService>().getUserInfoUri();
+                  container.state.currentPage = homeScreenPages.docusign;
+                  url.then((value) {
+                    container.state.docusignUrl = value;
+                    Navigator.of(context).pushNamed('/home');
+                  });
+                },
+                shape: RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(18.0),
+                ),
+                color: theme.secondaryHeaderColor,
+                textColor: Colors.white,
+                height: 30,
+              )
             ],
           ),
         ),
