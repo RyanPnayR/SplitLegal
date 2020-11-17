@@ -69,6 +69,8 @@ class _TasksState extends State<Tasks> {
       shrinkWrap: true,
       physics: ClampingScrollPhysics(),
       children: appState.currentRequest.tasks
+          .where((element) => element.status == "current")
+          .toList()
           .asMap()
           .map(
             (i, task) => MapEntry(
@@ -94,6 +96,8 @@ class _TasksState extends State<Tasks> {
         ),
         children: [
           ...appState.currentRequest.tasks
+              .where((element) => element.status == "pending")
+              .toList()
               .asMap()
               .map(
                 (i, task) => MapEntry(
@@ -122,6 +126,8 @@ class _TasksState extends State<Tasks> {
           textAlign: TextAlign.center,
         ),
         children: appState.currentRequest.tasks
+            .where((element) => element.status == "completed")
+            .toList()
             .asMap()
             .map(
               (i, task) => MapEntry(

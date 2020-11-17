@@ -49,19 +49,21 @@ class UserForm {
   }
 }
 
+@JsonSerializable()
 class Activity {
   String name;
   String category;
   String status;
   String title;
   String type;
-  String skippable;
+  bool skippable;
   String rejectionReason;
-  String activtyDataId;
+  String id;
   MilestoneTransition milestone;
   bool deleted;
   String deletedReason;
   DateTime deletedAt;
+  String templateId;
 
   Activity({
     this.name,
@@ -71,12 +73,17 @@ class Activity {
     this.type,
     this.skippable,
     this.rejectionReason,
-    this.activtyDataId,
+    this.id,
     this.milestone,
     this.deleted,
     this.deletedReason,
     this.deletedAt,
+    this.templateId,
   });
+  factory Activity.fromJson(Map<String, dynamic> json) =>
+      _$ActivityFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ActivityToJson(this);
 }
 
 @JsonSerializable()
@@ -171,15 +178,16 @@ class AppState {
   homeScreenPages currentPage;
   UserFilingRequest currentRequest;
   String docusignUrl = "";
+  Activity selectedTask;
 
   // Constructor
-  AppState({
-    this.isLoading = false,
-    this.user,
-    this.userData,
-    this.currentPage = homeScreenPages.overview,
-    currentRequest,
-  });
+  AppState(
+      {this.isLoading = false,
+      this.user,
+      this.userData,
+      this.currentPage = homeScreenPages.overview,
+      this.currentRequest,
+      this.selectedTask});
 
   // A constructor for when the app is loading.
   factory AppState.loading() => new AppState(isLoading: true);

@@ -23,11 +23,26 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     flutterWebviewPlugin.onStateChanged.listen((event) {
+      var container = AppStateContainer.of(context);
+
       if (event.url.contains("google.com")) {
+        Uri finishedUri = Uri.parse(event.url.toString());
+        if (finishedUri.queryParameters["event"] == "signing_complete") {
+          appState.selectedTask.status = "pending";
+        }
         flutterWebviewPlugin.close();
         setState(() {
+          appState.isLoading = true;
           appState.currentPage = homeScreenPages.tasks;
         });
+
+        container.updateActivity(appState.selectedTask).then((value) => {
+              container.setUpUserData().then((value) => {
+                    setState(() {
+                      appState.isLoading = false;
+                    })
+                  })
+            });
       }
     });
   }

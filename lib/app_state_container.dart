@@ -110,20 +110,11 @@ class _AppStateContainerState extends State<AppStateContainer> {
     });
 
     List<UserFilingRequest> requests = await getUserFilingRequests();
+    List<Activity> activities = await getUserActivities();
     setState(() {
       state.userData.requests = requests;
       state.currentRequest = requests[0];
-      state.currentRequest.tasks = [
-        Activity(
-          name: "Fill in your information",
-          title:
-              "This document is asking for some information about you and your spouse. Please look over the document and take the time to fill it out.",
-        ),
-        Activity(
-          name: "Upload your assests",
-          title: "Please disclose all of your assests.",
-        ),
-      ];
+      state.currentRequest.tasks = activities;
       state.currentRequest.milestones = [
         MilestoneTransition(
             fromMilestone: '', toMilestone: 'First Meeting', completed: true),
@@ -251,6 +242,27 @@ class _AppStateContainerState extends State<AppStateContainer> {
     return requests.docs
         .map((req) => UserFilingRequest.fromJson(req.data()))
         .toList();
+  }
+
+  Future<List<Activity>> getUserActivities() async {
+    QuerySnapshot activities = await store
+        .collection('activities')
+        .where("userId", isEqualTo: state.user.uid)
+        .get();
+
+    return activities.docs.map((act) {
+      Map<String, dynamic> actData = act.data();
+      actData.addAll({"id": act.id});
+      return Activity.fromJson(actData);
+    }).toList();
+  }
+
+  Future<void> updateActivity(Activity task) async {
+    try {
+      await store.collection('activities').doc(task.id).update(task.toJson());
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future<void> addUserFilingRequests(UserFilingRequest request) async {
