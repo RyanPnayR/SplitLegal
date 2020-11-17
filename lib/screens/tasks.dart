@@ -89,6 +89,7 @@ class _TasksState extends State<Tasks> {
     return Theme(
       data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
       child: ExpansionTile(
+        initiallyExpanded: true,
         title: Text(
           "Pending",
           style: TextStyle(fontSize: 16.0, color: Colors.white),
