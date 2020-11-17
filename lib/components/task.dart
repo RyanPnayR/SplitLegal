@@ -57,8 +57,8 @@ class Task extends StatelessWidget {
               MaterialButton(
                 child: Text('Sign Document'),
                 onPressed: () {
-                  Future<String> url =
-                      getIt<DocusignService>().getUserInfoUri();
+                  Future<String> url = getIt<DocusignService>()
+                      .getUserInfoUri(container.state.user);
                   container.state.currentPage = homeScreenPages.docusign;
                   url.then((value) {
                     container.state.docusignUrl = value;

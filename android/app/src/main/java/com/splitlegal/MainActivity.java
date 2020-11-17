@@ -20,21 +20,6 @@ public class MainActivity extends FlutterActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     GeneratedPluginRegistrant.registerWith(this);
-
-    new MethodChannel(getFlutterView(), CHANNEL).setMethodCallHandler(
-            new MethodChannel.MethodCallHandler() {
-              @Override
-              public void onMethodCall(MethodCall call, MethodChannel.Result result) {
-                startSurveyMonkeyActivity((String) call.arguments, result);
-              }
-            });
-  }
-
-  private void startSurveyMonkeyActivity(String sdkData, MethodChannel.Result result) {
-    Intent intent = new Intent(this, SMActivity.class);
-    intent.putExtra("hash", sdkData);
-    this.result = result;
-    startActivityForResult(intent, REQUESTCODE);
   }
 
   @Override

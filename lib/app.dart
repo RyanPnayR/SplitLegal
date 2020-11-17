@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:splitlegal/app_state_container.dart';
 import 'package:splitlegal/screens/home_screen.dart';

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:splitlegal/dashboard.dart';
 import 'package:splitlegal/models/app_state.dart';
-import 'package:splitlegal/screens/divorce_form_select.dart';
 import 'package:splitlegal/screens/overview.dart';
 import 'package:splitlegal/screens/settings_screen.dart';
 import 'package:splitlegal/screens/start_form.dart';
@@ -17,8 +16,21 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final flutterWebviewPlugin = new FlutterWebviewPlugin();
 
   AppState appState;
+
+  @override
+  void initState() {
+    flutterWebviewPlugin.onStateChanged.listen((event) {
+      if (event.url.contains("google.com")) {
+        flutterWebviewPlugin.close();
+        setState(() {
+          appState.currentPage = homeScreenPages.tasks;
+        });
+      }
+    });
+  }
 
   Widget get _pageToDisplay {
     if (appState.isLoading) {
@@ -72,26 +84,29 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   Widget get _appbar {
-    return new AppBar(
-      backgroundColor: appState.userData.requests != null &&
-              appState.currentPage == homeScreenPages.overview
-          ? Theme.of(context).secondaryHeaderColor
-          : Theme.of(context).primaryColor,
-      title: Text(
-        "SPLIT LEGAL",
-        style: TextStyle(fontFamily: 'Roboto', fontSize: 14, letterSpacing: 4),
-      ),
-      elevation: 0,
-      leading: new Container(
-          child: ConstrainedBox(
-              constraints: BoxConstraints.expand(),
-              child: FlatButton(
-                  onPressed: () {
-                    _scaffoldKey.currentState.openDrawer();
-                  },
-                  padding: EdgeInsets.only(left: 10.0),
-                  child: Image.asset('images/split_legal_logo.png')))),
-    );
+    return appState.currentPage != homeScreenPages.docusign
+        ? new AppBar(
+            backgroundColor: appState.userData.requests != null &&
+                    appState.currentPage == homeScreenPages.overview
+                ? Theme.of(context).secondaryHeaderColor
+                : Theme.of(context).primaryColor,
+            title: Text(
+              "SPLIT LEGAL",
+              style: TextStyle(
+                  fontFamily: 'Roboto', fontSize: 14, letterSpacing: 4),
+            ),
+            elevation: 0,
+            leading: new Container(
+                child: ConstrainedBox(
+                    constraints: BoxConstraints.expand(),
+                    child: FlatButton(
+                        onPressed: () {
+                          _scaffoldKey.currentState.openDrawer();
+                        },
+                        padding: EdgeInsets.only(left: 10.0),
+                        child: Image.asset('images/split_legal_logo.png')))),
+          )
+        : null;
   }
 
   Widget getSidebarLink(

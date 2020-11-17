@@ -141,6 +141,7 @@ class UserData {
   String first_name;
   String last_name;
   String phoneNumber;
+  String email;
   List<UserFilingRequest> requests;
   // List<SplitLegalTeamMember> team;
 
@@ -150,6 +151,7 @@ class UserData {
     this.last_name,
     this.phoneNumber,
     this.requests,
+    this.email,
     // this.team,
   );
 

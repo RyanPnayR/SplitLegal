@@ -4,7 +4,7 @@ import io.flutter.plugin.common.PluginRegistry;
 import io.flutter.plugins.firebase.firestore.FlutterFirebaseFirestorePlugin;
 import io.flutter.plugins.firebase.auth.FlutterFirebaseAuthPlugin;
 import io.flutter.plugins.firebase.core.FlutterFirebaseCorePlugin;
-import io.flutter.plugins.firebase.storage.FirebaseStoragePlugin;
+import io.flutter.plugins.firebase.storage.FlutterFirebaseStoragePlugin;
 import com.jrai.flutter_keyboard_visibility.FlutterKeyboardVisibilityPlugin;
 import com.dataxad.fluttermailer.FlutterMailerPlugin;
 import io.endigo.plugins.pdfviewflutter.PDFViewFlutterPlugin;
@@ -30,7 +30,7 @@ public final class GeneratedPluginRegistrant {
     FlutterFirebaseFirestorePlugin.registerWith(registry.registrarFor("io.flutter.plugins.firebase.firestore.FlutterFirebaseFirestorePlugin"));
     FlutterFirebaseAuthPlugin.registerWith(registry.registrarFor("io.flutter.plugins.firebase.auth.FlutterFirebaseAuthPlugin"));
     FlutterFirebaseCorePlugin.registerWith(registry.registrarFor("io.flutter.plugins.firebase.core.FlutterFirebaseCorePlugin"));
-    FirebaseStoragePlugin.registerWith(registry.registrarFor("io.flutter.plugins.firebase.storage.FirebaseStoragePlugin"));
+    FlutterFirebaseStoragePlugin.registerWith(registry.registrarFor("io.flutter.plugins.firebase.storage.FlutterFirebaseStoragePlugin"));
     FlutterKeyboardVisibilityPlugin.registerWith(registry.registrarFor("com.jrai.flutter_keyboard_visibility.FlutterKeyboardVisibilityPlugin"));
     FlutterMailerPlugin.registerWith(registry.registrarFor("com.dataxad.fluttermailer.FlutterMailerPlugin"));
     PDFViewFlutterPlugin.registerWith(registry.registrarFor("io.endigo.plugins.pdfviewflutter.PDFViewFlutterPlugin"));

@@ -54,6 +54,7 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) {
             ? null
             : UserFilingRequest.fromJson(e as Map<String, dynamic>))
         ?.toList(),
+    json['email'],
   );
 }
 
@@ -63,4 +64,5 @@ Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
       'last_name': instance.last_name,
       'phoneNumber': instance.phoneNumber,
       'requests': instance.requests,
+      'email': instance.email
     };
