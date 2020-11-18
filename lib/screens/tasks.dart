@@ -75,7 +75,7 @@ class _TasksState extends State<Tasks> {
           .map(
             (i, task) => MapEntry(
               i,
-              Task(
+              TaskFactory(
                 task: task,
               ),
             ),
@@ -103,7 +103,7 @@ class _TasksState extends State<Tasks> {
               .map(
                 (i, task) => MapEntry(
                   i,
-                  Task(
+                  TaskFactory(
                     task: task,
                   ),
                 ),
@@ -133,7 +133,7 @@ class _TasksState extends State<Tasks> {
             .map(
               (i, task) => MapEntry(
                 i,
-                Task(
+                TaskFactory(
                   task: task,
                 ),
               ),

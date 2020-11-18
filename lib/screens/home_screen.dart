@@ -85,11 +85,7 @@ class HomeScreenState extends State<HomeScreen> {
             break;
           case homeScreenPages.docusign:
             return new WebviewScaffold(
-              url: appState.docusignUrl,
-              appBar: new AppBar(
-                title: new Text("Widget webview"),
-              ),
-            );
+                url: appState.docusignUrl, appBar: _appbar);
             break;
           default:
             return new Dashboard();
@@ -99,29 +95,26 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   Widget get _appbar {
-    return appState.currentPage != homeScreenPages.docusign
-        ? new AppBar(
-            backgroundColor: appState.userData.requests != null &&
-                    appState.currentPage == homeScreenPages.overview
-                ? Theme.of(context).secondaryHeaderColor
-                : Theme.of(context).primaryColor,
-            title: Text(
-              "SPLIT LEGAL",
-              style: TextStyle(
-                  fontFamily: 'Roboto', fontSize: 14, letterSpacing: 4),
-            ),
-            elevation: 0,
-            leading: new Container(
-                child: ConstrainedBox(
-                    constraints: BoxConstraints.expand(),
-                    child: FlatButton(
-                        onPressed: () {
-                          _scaffoldKey.currentState.openDrawer();
-                        },
-                        padding: EdgeInsets.only(left: 10.0),
-                        child: Image.asset('images/split_legal_logo.png')))),
-          )
-        : null;
+    return new AppBar(
+      backgroundColor: appState.userData.requests != null &&
+              appState.currentPage == homeScreenPages.overview
+          ? Theme.of(context).secondaryHeaderColor
+          : Theme.of(context).primaryColor,
+      title: Text(
+        "SPLIT LEGAL",
+        style: TextStyle(fontFamily: 'Roboto', fontSize: 14, letterSpacing: 4),
+      ),
+      elevation: 0,
+      leading: new Container(
+          child: ConstrainedBox(
+              constraints: BoxConstraints.expand(),
+              child: FlatButton(
+                  onPressed: () {
+                    _scaffoldKey.currentState.openDrawer();
+                  },
+                  padding: EdgeInsets.only(left: 10.0),
+                  child: Image.asset('images/split_legal_logo.png')))),
+    );
   }
 
   Widget getSidebarLink(
@@ -267,7 +260,7 @@ class HomeScreenState extends State<HomeScreen> {
               ),
             ),
           )),
-      appBar: _appbar,
+      appBar: appState.currentPage == homeScreenPages.docusign ? null : _appbar,
       body: body,
     );
   }
