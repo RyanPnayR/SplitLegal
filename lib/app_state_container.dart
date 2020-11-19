@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:ffi';
 import 'dart:io';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,6 +16,7 @@ import 'package:uuid/uuid.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'models/app_state.dart';
 import 'package:http/http.dart' as http;
+import 'package:path/path.dart';
 
 class AppStateContainer extends StatefulWidget {
   final AppState state;
@@ -298,6 +300,27 @@ class _AppStateContainerState extends State<AppStateContainer> {
         throw Exception("Error opening url file");
       }
     }
+  }
+
+  Future<String> uploadDocument(File file, String folderName) async {
+    Reference firebaseStorageRef = FirebaseStorage.instance
+        .ref()
+        .child('users')
+        .child(state.user.uid)
+        .child(folderName)
+        .child(basename(file.path));
+    TaskSnapshot uploadTask = await firebaseStorageRef.putFile(file);
+    return uploadTask.ref.getDownloadURL();
+  }
+
+  Future<void> uploadDocuments(
+      List<PlatformFile> docs, String folderName) async {
+    List<String> fileUrls = [];
+    for (PlatformFile doc in docs) {
+      String downloadUrl = await uploadDocument(File(doc.path), folderName);
+      fileUrls.add(downloadUrl);
+    }
+    print(fileUrls);
   }
 
   Future<String> getUsersForm(String formId) async {

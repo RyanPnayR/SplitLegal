@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:splitlegal/components/task.dart';
+import 'package:splitlegal/components/task_factory.dart';
 import 'package:splitlegal/models/app_state.dart';
 
 import '../app_state_container.dart';
