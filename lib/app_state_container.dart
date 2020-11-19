@@ -313,14 +313,14 @@ class _AppStateContainerState extends State<AppStateContainer> {
     return uploadTask.ref.getDownloadURL();
   }
 
-  Future<void> uploadDocuments(
+  Future<List<String>> uploadDocuments(
       List<PlatformFile> docs, String folderName) async {
     List<String> fileUrls = [];
     for (PlatformFile doc in docs) {
       String downloadUrl = await uploadDocument(File(doc.path), folderName);
       fileUrls.add(downloadUrl);
     }
-    print(fileUrls);
+    return fileUrls;
   }
 
   Future<String> getUsersForm(String formId) async {

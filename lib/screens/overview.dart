@@ -111,7 +111,9 @@ class _OverviewState extends State<Overview>
                     style: TextStyle(fontSize: 20.0, color: Colors.white),
                   ),
                   NextStepsButton(
-                    taskCount: appState.currentRequest.tasks.length,
+                    taskCount: appState.currentRequest.tasks
+                        .where((element) => element.status == 'current')
+                        .length,
                   ),
                   OverviewTaskBox(
                     children: [

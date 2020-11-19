@@ -26,6 +26,7 @@ Activity _$ActivityFromJson(Map<String, dynamic> json) {
         ? null
         : DateTime.parse(json['deletedAt'] as String),
     templateId: json['templateId'] as String,
+    activityData: json['activityData'] as Map<String, dynamic>,
   );
 }
 
@@ -43,6 +44,7 @@ Map<String, dynamic> _$ActivityToJson(Activity instance) => <String, dynamic>{
       'deletedReason': instance.deletedReason,
       'deletedAt': instance.deletedAt?.toIso8601String(),
       'templateId': instance.templateId,
+      'activityData': instance.activityData,
     };
 
 MilestoneTransition _$MilestoneTransitionFromJson(Map<String, dynamic> json) {

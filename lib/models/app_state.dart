@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:json_annotation/json_annotation.dart';
 
@@ -64,6 +66,7 @@ class Activity {
   String deletedReason;
   DateTime deletedAt;
   String templateId;
+  Map<String, dynamic> activityData;
 
   Activity({
     this.name,
@@ -79,7 +82,12 @@ class Activity {
     this.deletedReason,
     this.deletedAt,
     this.templateId,
-  });
+    this.activityData,
+  }) {
+    if (this.activityData == null) {
+      this.activityData = new Map<String, dynamic>();
+    }
+  }
   factory Activity.fromJson(Map<String, dynamic> json) =>
       _$ActivityFromJson(json);
 

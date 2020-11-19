@@ -17,6 +17,13 @@ class FileUploadTask extends StatefulWidget {
 
 class _FileUploadTaskState extends State<FileUploadTask> {
   List<PlatformFile> files = [];
+
+  void removeFile(PlatformFile file) {
+    setState(() {
+      files.remove(file);
+    });
+  }
+
   List<Widget> getChildren(context) {
     ThemeData theme = Theme.of(context);
     Activity task = widget.task;
@@ -40,12 +47,23 @@ class _FileUploadTaskState extends State<FileUploadTask> {
           children: files.length > 0
               ? files
                   .map(
-                    (file) => Text(
-                      file.name,
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        color: Colors.white54,
-                      ),
+                    (file) => Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.highlight_remove),
+                          onPressed: () {
+                            removeFile(file);
+                          },
+                        ),
+                        Text(
+                          file.name,
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            color: Colors.white54,
+                          ),
+                        ),
+                      ],
                     ),
                   )
                   .toList()
@@ -67,8 +85,6 @@ class _FileUploadTaskState extends State<FileUploadTask> {
                 setState(() {
                   files.addAll(result.files);
                 });
-              } else {
-                // User canceled the picker
               }
             },
             shape: RoundedRectangleBorder(
@@ -84,7 +100,26 @@ class _FileUploadTaskState extends State<FileUploadTask> {
             disabledTextColor: Colors.black45,
             onPressed: files.length > 0
                 ? () async {
-                    await container.uploadDocuments(files, task.id);
+                    List<String> fileUrls =
+                        await container.uploadDocuments(files, task.id);
+                    task.activityData.addAll({"files": fileUrls});
+                    task.status = 'pending';
+                    setState(() {
+                      container.state.isLoading = true;
+                      container.state.currentPage = homeScreenPages.tasks;
+                    });
+
+                    container.updateActivity(task).then((value) => {
+                          container.setUpUserData().then(
+                                (value) => {
+                                  setState(
+                                    () {
+                                      container.state.isLoading = false;
+                                    },
+                                  ),
+                                },
+                              ),
+                        });
                   }
                 : null,
             shape: RoundedRectangleBorder(
