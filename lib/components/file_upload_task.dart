@@ -99,27 +99,27 @@ class _FileUploadTaskState extends State<FileUploadTask> {
             disabledColor: Colors.white24,
             disabledTextColor: Colors.black45,
             onPressed: files.length > 0
-                ? () async {
-                    List<String> fileUrls =
-                        await container.uploadDocuments(files, task.id);
-                    task.activityData.addAll({"files": fileUrls});
-                    task.status = 'pending';
+                ? () {
                     setState(() {
                       container.state.isLoading = true;
-                      container.state.currentPage = homeScreenPages.tasks;
                     });
 
-                    container.updateActivity(task).then((value) => {
-                          container.setUpUserData().then(
-                                (value) => {
-                                  setState(
-                                    () {
-                                      container.state.isLoading = false;
-                                    },
-                                  ),
-                                },
-                              ),
-                        });
+                    container.uploadDocuments(files, task.id).then((fileUrls) {
+                      task.activityData.addAll({"files": fileUrls});
+                      task.status = 'pending';
+
+                      container.updateActivity(task).then((value) {
+                        container.setUpUserData().then(
+                          (value) {
+                            setState(
+                              () {
+                                container.state.isLoading = false;
+                              },
+                            );
+                          },
+                        );
+                      });
+                    });
                   }
                 : null,
             shape: RoundedRectangleBorder(

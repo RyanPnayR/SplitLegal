@@ -21,6 +21,10 @@ class _OverviewState extends State<Overview>
   void initState() {
     super.initState();
     controller = TabController(length: 2, vsync: this);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      var container = AppStateContainer.of(context);
+      container.loadUserTasks().then(() {});
+    });
   }
 
   @override

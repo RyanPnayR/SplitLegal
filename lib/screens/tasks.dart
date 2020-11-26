@@ -20,6 +20,10 @@ class _TasksState extends State<Tasks> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      var container = AppStateContainer.of(context);
+      container.loadUserTasks().then(() {});
+    });
   }
 
   @override
@@ -64,28 +68,38 @@ class _TasksState extends State<Tasks> {
     );
   }
 
+  List<Widget> getTasks(String status) {
+    return appState.currentRequest.tasks
+        .where((element) => element.status == status)
+        .toList()
+        .asMap()
+        .map(
+          (i, task) => MapEntry(
+            i,
+            TaskFactory(
+              task: task,
+            ),
+          ),
+        )
+        .values
+        .toList();
+  }
+
   Widget get currentTasks {
+    List<Widget> tasks = getTasks('current');
     return ListView(
       shrinkWrap: true,
       physics: ClampingScrollPhysics(),
-      children: appState.currentRequest.tasks
-          .where((element) => element.status == "current")
-          .toList()
-          .asMap()
-          .map(
-            (i, task) => MapEntry(
-              i,
-              TaskFactory(
-                task: task,
-              ),
-            ),
-          )
-          .values
-          .toList(),
+      children: tasks.length > 0
+          ? tasks
+          : [
+              Text('No current tasks right now. Check back later.'),
+            ],
     );
   }
 
   Widget get pendingTasks {
+    List<Widget> tasks = getTasks('pending');
     return Theme(
       data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
       child: ExpansionTile(
@@ -95,27 +109,17 @@ class _TasksState extends State<Tasks> {
           style: TextStyle(fontSize: 16.0, color: Colors.white),
           textAlign: TextAlign.center,
         ),
-        children: [
-          ...appState.currentRequest.tasks
-              .where((element) => element.status == "pending")
-              .toList()
-              .asMap()
-              .map(
-                (i, task) => MapEntry(
-                  i,
-                  TaskFactory(
-                    task: task,
-                  ),
-                ),
-              )
-              .values
-              .toList(),
-        ],
+        children: tasks.length > 0
+            ? tasks
+            : [
+                Text('No pending tasks.'),
+              ],
       ),
     );
   }
 
   Widget get completedTasks {
+    List<Widget> tasks = getTasks('completed');
     return Theme(
       data: Theme.of(context).copyWith(
         dividerColor: Colors.transparent,
@@ -126,20 +130,11 @@ class _TasksState extends State<Tasks> {
           style: TextStyle(fontSize: 16.0, color: Colors.white),
           textAlign: TextAlign.center,
         ),
-        children: appState.currentRequest.tasks
-            .where((element) => element.status == "completed")
-            .toList()
-            .asMap()
-            .map(
-              (i, task) => MapEntry(
-                i,
-                TaskFactory(
-                  task: task,
-                ),
-              ),
-            )
-            .values
-            .toList(),
+        children: tasks.length > 0
+            ? tasks
+            : [
+                Text('You have no completed tasks.'),
+              ],
       ),
     );
   }

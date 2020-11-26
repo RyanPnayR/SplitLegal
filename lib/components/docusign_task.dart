@@ -26,30 +26,32 @@ class DocusignTask extends StatelessWidget {
           color: Colors.white,
         ),
       ),
-      MaterialButton(
-        child: Text('Sign Document'),
-        onPressed: () {
-          container.state.isLoading = true;
-          container.state.selectedTask = task;
-          Navigator.of(context).pushNamed('/home');
-          container.state.currentPage = homeScreenPages.docusign;
+      task.status == 'pending'
+          ? Row()
+          : MaterialButton(
+              child: Text('Sign Document'),
+              onPressed: () {
+                container.state.isLoading = true;
+                container.state.selectedTask = task;
+                Navigator.of(context).pushNamed('/home');
+                container.state.currentPage = homeScreenPages.docusign;
 
-          Future<String> url = getIt<DocusignService>()
-              .getUserInfoUri(container.state.user, this.task);
+                Future<String> url = getIt<DocusignService>()
+                    .getUserInfoUri(container.state.user, this.task);
 
-          url.then((value) {
-            container.state.isLoading = false;
-            container.state.docusignUrl = value;
-            Navigator.of(context).pushNamed('/home');
-          });
-        },
-        shape: RoundedRectangleBorder(
-          borderRadius: new BorderRadius.circular(18.0),
-        ),
-        color: theme.secondaryHeaderColor,
-        textColor: Colors.white,
-        height: 30,
-      )
+                url.then((value) {
+                  container.state.isLoading = false;
+                  container.state.docusignUrl = value;
+                  Navigator.of(context).pushNamed('/home');
+                });
+              },
+              shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(18.0),
+              ),
+              color: theme.secondaryHeaderColor,
+              textColor: Colors.white,
+              height: 30,
+            )
     ];
   }
 

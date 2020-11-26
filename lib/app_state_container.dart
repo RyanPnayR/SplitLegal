@@ -104,6 +104,15 @@ class _AppStateContainerState extends State<AppStateContainer> {
     }
   }
 
+  loadUserTasks() async {
+    List<Activity> activities = await getUserActivities();
+    setState(
+      () {
+        state.currentRequest.tasks = activities;
+      },
+    );
+  }
+
   setUpUserData() async {
     DocumentReference userRef = store.collection('users').doc(state.user.uid);
     DocumentSnapshot userDoc = await userRef.get();
@@ -112,11 +121,9 @@ class _AppStateContainerState extends State<AppStateContainer> {
     });
 
     List<UserFilingRequest> requests = await getUserFilingRequests();
-    List<Activity> activities = await getUserActivities();
     setState(() {
       state.userData.requests = requests;
       state.currentRequest = requests[0];
-      state.currentRequest.tasks = activities;
       state.currentRequest.milestones = [
         MilestoneTransition(
             fromMilestone: '', toMilestone: 'First Meeting', completed: true),
@@ -128,6 +135,7 @@ class _AppStateContainerState extends State<AppStateContainer> {
             toMilestone: 'Final Meeting'),
       ];
     });
+    await loadUserTasks();
   }
 
   Stream<QuerySnapshot> getForms() {
