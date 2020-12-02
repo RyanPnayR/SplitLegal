@@ -93,7 +93,18 @@ class _TasksState extends State<Tasks> {
       children: tasks.length > 0
           ? tasks
           : [
-              Text('No current tasks right now. Check back later.'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(top: 10),
+                    child: Text(
+                      'No current tasks right now. Check back later.',
+                      style: TextStyle(color: Colors.white54),
+                    ),
+                  ),
+                ],
+              ),
             ],
     );
   }
@@ -112,7 +123,10 @@ class _TasksState extends State<Tasks> {
         children: tasks.length > 0
             ? tasks
             : [
-                Text('No pending tasks.'),
+                Text(
+                  'No pending tasks.',
+                  style: TextStyle(color: Colors.white54),
+                ),
               ],
       ),
     );
@@ -133,7 +147,10 @@ class _TasksState extends State<Tasks> {
         children: tasks.length > 0
             ? tasks
             : [
-                Text('You have no completed tasks.'),
+                Text(
+                  'You have no completed tasks.',
+                  style: TextStyle(color: Colors.white54),
+                ),
               ],
       ),
     );

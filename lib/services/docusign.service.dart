@@ -19,14 +19,9 @@ class DocusignService {
             "clientUserId": user.uid,
             "templateId": activity.templateId
           });
-      print(response);
       return response.data["url"];
     } catch (e) {
       print(e);
     }
   }
-
-// Create envelope with captive recipient
-// Generate recipient view url
-// Handle post signing events with return url and http request params
 }

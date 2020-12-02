@@ -24,11 +24,8 @@ class _FileUploadTaskState extends State<FileUploadTask> {
     });
   }
 
-  List<Widget> getChildren(context) {
-    ThemeData theme = Theme.of(context);
+  List<Widget> getTaskDescription(context) {
     Activity task = widget.task;
-    var container = AppStateContainer.of(context);
-
     return [
       Text(
         task.title != null
@@ -39,7 +36,16 @@ class _FileUploadTaskState extends State<FileUploadTask> {
           fontSize: 18.0,
           color: Colors.white,
         ),
-      ),
+      )
+    ];
+  }
+
+  List<Widget> getCurrentView(context) {
+    ThemeData theme = Theme.of(context);
+    Activity task = widget.task;
+    var container = AppStateContainer.of(context);
+    return [
+      ...getTaskDescription(context),
       Container(
         height: 100,
         child: ListView(
@@ -132,6 +138,52 @@ class _FileUploadTaskState extends State<FileUploadTask> {
         ],
       ),
     ];
+  }
+
+  List<Widget> getPendingView(context) {
+    List<dynamic> activityFiles = widget.task.activityData['files'];
+    return [
+      ...getTaskDescription(context),
+      Container(
+        height: 100,
+        child: ListView(
+          padding: const EdgeInsets.all(20.0),
+          children: activityFiles.length > 0
+              ? activityFiles.map((file) {
+                  List<String> urlParts = file.split('/');
+                  List<String> fileParts =
+                      urlParts[urlParts.length - 1].split('%2F');
+                  String name = fileParts[fileParts.length - 1].split('?')[0];
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(right: 5, top: 4),
+                        child: Icon(Icons.circle, size: 8),
+                      ),
+                      Text(
+                        name,
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          color: Colors.white54,
+                        ),
+                      ),
+                    ],
+                  );
+                }).toList()
+              : [Row()],
+        ),
+      ),
+    ];
+  }
+
+  List<Widget> getChildren(context) {
+    Activity task = widget.task;
+
+    return task.status == 'current'
+        ? getCurrentView(context)
+        : getPendingView(context);
   }
 
   @override
