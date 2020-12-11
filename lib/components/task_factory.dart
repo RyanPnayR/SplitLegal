@@ -3,6 +3,7 @@ import 'package:splitlegal/app.dart';
 import 'package:splitlegal/app_state_container.dart';
 import 'package:splitlegal/components/docusign_task.dart';
 import 'package:splitlegal/components/file_upload_task.dart';
+import 'package:splitlegal/components/payment_task.dart';
 import 'package:splitlegal/main.dart';
 import 'package:splitlegal/models/app_state.dart';
 import 'package:splitlegal/services/docusign.service.dart';
@@ -15,6 +16,11 @@ class TaskFactory extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget taskWidget;
     switch (task.type) {
+      case "payment_request":
+        taskWidget = PaymentTask(
+          task: task,
+        );
+        break;
       case "docusign":
         taskWidget = DocusignTask(
           task: task,
@@ -25,6 +31,8 @@ class TaskFactory extends StatelessWidget {
           task: task,
         );
         break;
+      default:
+        taskWidget = Row();
     }
     return taskWidget;
   }

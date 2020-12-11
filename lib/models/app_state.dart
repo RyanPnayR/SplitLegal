@@ -62,7 +62,7 @@ class Activity {
   String rejectionReason;
   String id;
   MilestoneTransition milestone;
-  bool deleted;
+  String deleted;
   String deletedReason;
   DateTime deletedAt;
   String templateId;

@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.splitlegal">
+    package="com.splitlegal"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
          calls FlutterMain.startInitialization(this); in its onCreate method.
@@ -9,8 +10,10 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:label="splitlegal"
+        tools:replace="android:theme"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        >
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

@@ -20,7 +20,7 @@ Activity _$ActivityFromJson(Map<String, dynamic> json) {
         ? null
         : MilestoneTransition.fromJson(
             json['milestone'] as Map<String, dynamic>),
-    deleted: json['deleted'] as bool,
+    deleted: json['deleted'] as String,
     deletedReason: json['deletedReason'] as String,
     deletedAt: json['deletedAt'] == null
         ? null

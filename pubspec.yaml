@@ -49,6 +49,8 @@ dependencies:
   dio: ^3.0.10
   get_it: ^5.0.1
   file_picker: ^2.0.13
+  stripe_payment: ^1.0.9
+  modal_progress_hud: ^0.1.3
 
 dev_dependencies:
   json_serializable:

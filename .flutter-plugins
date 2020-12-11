@@ -23,5 +23,6 @@ path_provider_macos=C:\\Android\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\
 path_provider_windows=C:\\Android\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider_windows-0.0.4+1\\
 phone_number=C:\\Android\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\phone_number-0.6.2+4\\
 sqflite=C:\\Android\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\sqflite-1.3.1+1\\
+stripe_payment=C:\\Android\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\stripe_payment-1.0.9\\
 url_launcher=C:\\Android\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\url_launcher-4.2.0+3\\
 webview_flutter=C:\\Android\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\webview_flutter-1.0.6\\
