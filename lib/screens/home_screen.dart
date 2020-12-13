@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:splitlegal/dashboard.dart';
 import 'package:splitlegal/models/app_state.dart';
+import 'package:splitlegal/screens/my_team.dart';
 import 'package:splitlegal/screens/overview.dart';
 import 'package:splitlegal/screens/settings_screen.dart';
 import 'package:splitlegal/screens/start_form.dart';
@@ -78,7 +79,7 @@ class HomeScreenState extends State<HomeScreen> {
             return new Dashboard();
             break;
           case homeScreenPages.team:
-            return new Dashboard();
+            return new MyTeam();
             break;
           case homeScreenPages.settings:
             return new Settings();

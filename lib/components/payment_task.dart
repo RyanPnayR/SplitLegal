@@ -7,6 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import '../app_state_container.dart';
+
 class PaymentTask extends StatefulWidget {
   Activity task;
 
@@ -69,7 +71,18 @@ class _PaymentTaskState extends State<PaymentTask> {
     ];
   }
 
-  List<Widget> getPendingView(context) {}
+  List<Widget> getPendingView(context) {
+    return [
+      Text(
+        'Thank you for making your payment. We are reviewing it now.',
+        softWrap: true,
+        style: TextStyle(
+          fontSize: 14.0,
+          color: Colors.white,
+        ),
+      ),
+    ];
+  }
 
   List<Widget> getChildren(context) {
     return widget.task.status == 'current'
@@ -117,6 +130,8 @@ class _PaymentTaskState extends State<PaymentTask> {
   }
 
   Future<void> processPaymentAsDirectCharge(PaymentMethod paymentMethod) async {
+    var container = AppStateContainer.of(context);
+
     setState(() {
       showSpinner = true;
     });
@@ -133,9 +148,24 @@ class _PaymentTaskState extends State<PaymentTask> {
         //payment was confirmed by the server without need for futher authentification
         StripePayment.completeNativePayRequest();
         setState(() {
-          text =
-              'Payment completed. ${paymentIntentX['paymentIntent']['amount'].toString()}p succesfully charged';
-          showSpinner = false;
+          widget.task.activityData['stripe_payment_intent'] = paymentIntentX;
+          widget.task.status = 'pending';
+
+          container.updateActivity(widget.task).then((value) {
+            container.setUpUserData().then(
+              (value) {
+                setState(
+                  () {
+                    container.loadUserTasks().then(() {
+                      setState(() {
+                        showSpinner = false;
+                      });
+                    });
+                  },
+                );
+              },
+            );
+          });
         });
       } else {
         //step 4: there is a need to authenticate

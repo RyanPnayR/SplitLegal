@@ -118,6 +118,7 @@ class MilestoneTransition {
 
 @JsonSerializable()
 class UserFilingRequest {
+  String documentID;
   String location;
   String requestType;
   String comments;
@@ -125,7 +126,8 @@ class UserFilingRequest {
   List<MilestoneTransition> milestones;
   List<Activity> tasks;
   UserFilingRequest(
-      {this.location,
+      {this.documentID,
+      this.location,
       this.requestType,
       this.comments,
       this.milestones,

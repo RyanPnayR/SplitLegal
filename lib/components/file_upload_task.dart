@@ -106,24 +106,14 @@ class _FileUploadTaskState extends State<FileUploadTask> {
             disabledTextColor: Colors.black45,
             onPressed: files.length > 0
                 ? () {
-                    setState(() {
-                      container.state.isLoading = true;
-                    });
-
                     container.uploadDocuments(files, task.id).then((fileUrls) {
                       task.activityData.addAll({"files": fileUrls});
                       task.status = 'pending';
 
                       container.updateActivity(task).then((value) {
-                        container.setUpUserData().then(
-                          (value) {
-                            setState(
-                              () {
-                                container.state.isLoading = false;
-                              },
-                            );
-                          },
-                        );
+                        container.loadUserTasks().then(() {
+                          setState(() {});
+                        });
                       });
                     });
                   }

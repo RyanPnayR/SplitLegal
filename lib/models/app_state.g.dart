@@ -69,6 +69,7 @@ Map<String, dynamic> _$MilestoneTransitionToJson(
 
 UserFilingRequest _$UserFilingRequestFromJson(Map<String, dynamic> json) {
   return UserFilingRequest(
+    documentID: json['documentID'] as String,
     location: json['location'] as String,
     requestType: json['requestType'] as String,
     comments: json['comments'] as String,
@@ -87,6 +88,7 @@ UserFilingRequest _$UserFilingRequestFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$UserFilingRequestToJson(UserFilingRequest instance) =>
     <String, dynamic>{
+      'documentID': instance.documentID,
       'location': instance.location,
       'requestType': instance.requestType,
       'comments': instance.comments,

@@ -127,25 +127,30 @@ class _AppStateContainerState extends State<AppStateContainer> {
       state.currentRequest = requests[0];
       state.currentRequest.milestones = [
         MilestoneTransition(
-            fromMilestone: '', toMilestone: 'First Meeting', completed: true),
+            fromMilestone: '', toMilestone: 'Signed Up', completed: true),
         MilestoneTransition(
-            fromMilestone: 'First Meeting',
-            toMilestone: 'Filled out documents'),
+            fromMilestone: 'Signed Up', toMilestone: 'Completed Tasks'),
         MilestoneTransition(
-            fromMilestone: 'Filled out documents',
-            toMilestone: 'Final Meeting'),
+            fromMilestone: 'Completed Tasks', toMilestone: 'Notrized Documnet'),
+        MilestoneTransition(
+          fromMilestone: 'Notrized Documnet',
+          toMilestone: 'Recieved Final Document',
+        ),
       ];
     });
     await loadUserTasks();
   }
 
-  Stream<QuerySnapshot> getForms() {
-    return store.collection('forms').snapshots();
-  }
+  Future<List<Reference>> getUserDocuments(user) async {
+    var downloadUrl = await storage
+        .ref()
+        .child('users')
+        .child(state.user.uid)
+        .child('requests')
+        .child(state.currentRequest.documentID)
+        .listAll();
 
-  Stream<QuerySnapshot> getUserForms(user) {
-    DocumentReference userRef = store.collection('users').doc(user.uid);
-    return userRef.collection('forms').snapshots();
+    return downloadUrl.items;
   }
 
   setAppLoading([bool isLoading = true]) {
@@ -250,9 +255,11 @@ class _AppStateContainerState extends State<AppStateContainer> {
         .where("userId", isEqualTo: state.user.uid)
         .get();
 
-    return requests.docs
-        .map((req) => UserFilingRequest.fromJson(req.data()))
-        .toList();
+    return requests.docs.map((req) {
+      UserFilingRequest request = UserFilingRequest.fromJson(req.data());
+      request.documentID = req.id;
+      return request;
+    }).toList();
   }
 
   Future<List<Activity>> getUserActivities() async {
@@ -284,22 +291,15 @@ class _AppStateContainerState extends State<AppStateContainer> {
     await store.collection('requests').add(request.toJson());
   }
 
-  Future<File> getFileFromUrl(String url) async {
+  Future<File> getFileFromUrl(String url, String fileName) async {
     var dir = await getApplicationDocumentsDirectory();
-    String filePath = '${dir.path}/${url}.pdf';
+    String filePath = '${dir.path}/${fileName}.pdf';
 
     if (await File(filePath).exists()) {
       return File(filePath);
     } else {
       try {
-        var downloadUrl = await storage
-            .ref()
-            .child('users')
-            .child(state.user.uid)
-            .child('forms')
-            .child(url + '.pdf')
-            .getDownloadURL();
-        var data = await http.get(downloadUrl);
+        var data = await http.get(url);
         var bytes = data.bodyBytes;
         File file = File("$filePath");
 
@@ -332,8 +332,8 @@ class _AppStateContainerState extends State<AppStateContainer> {
     return fileUrls;
   }
 
-  Future<String> getUsersForm(String formId) async {
-    File file = await getFileFromUrl(formId);
+  Future<String> getUsersForm(String url, String fileName) async {
+    File file = await getFileFromUrl(url, fileName);
     return file.path;
   }
 
