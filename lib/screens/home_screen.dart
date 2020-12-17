@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:splitlegal/dashboard.dart';
 import 'package:splitlegal/models/app_state.dart';
@@ -18,6 +19,9 @@ class HomeScreen extends StatefulWidget {
 class HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final flutterWebviewPlugin = new FlutterWebviewPlugin();
+  InAppWebViewController webView;
+  String url = "";
+  double progress = 0;
 
   AppState appState;
 
@@ -85,8 +89,34 @@ class HomeScreenState extends State<HomeScreen> {
             return new Settings();
             break;
           case homeScreenPages.docusign:
-            return new WebviewScaffold(
-                url: appState.docusignUrl, appBar: _appbar);
+            return InAppWebView(
+              initialUrl: appState.docusignUrl,
+              initialHeaders: {},
+              initialOptions: InAppWebViewGroupOptions(
+                  crossPlatform: InAppWebViewOptions(
+                debuggingEnabled: true,
+              )),
+              onWebViewCreated: (InAppWebViewController controller) {
+                webView = controller;
+              },
+              onLoadStart: (InAppWebViewController controller, String url) {
+                setState(() {
+                  this.url = url;
+                });
+              },
+              onLoadStop:
+                  (InAppWebViewController controller, String url) async {
+                setState(() {
+                  this.url = url;
+                });
+              },
+              onProgressChanged:
+                  (InAppWebViewController controller, int progress) {
+                setState(() {
+                  this.progress = progress / 100;
+                });
+              },
+            );
             break;
           default:
             return new Dashboard();

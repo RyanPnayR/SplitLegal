@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:splitlegal/app_state_container.dart';
 import 'package:splitlegal/screens/home_screen.dart';
@@ -79,6 +80,8 @@ class AppRootWidgetState extends State<AppRootWidget> {
               '/': (BuildContext context) => new SignInPage(),
               '/home': (BuildContext context) => new HomeScreen(),
               '/signUp': (BuildContext context) => new SignUpPage(),
+              '/doc': (BuildContext context) =>
+                  new WebviewScaffold(url: container.state.docusignUrl),
               '/settings': (BuildContext context) {
                 return Scaffold(
                   body: Column(

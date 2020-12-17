@@ -7,7 +7,8 @@ class DocusignService {
   String _authUrl = "https://account-d.docusign.com/oauth/auth";
 
   // Obtain access token for captive user
-  Future<String> getUserInfoUri(auth.User user, Activity activity) async {
+  Future<dynamic> getUserInfoUri(
+      auth.User user, Activity task, UserData userData) async {
     Dio dio = new Dio();
     try {
       Response response = await dio.post(
@@ -15,11 +16,14 @@ class DocusignService {
           data: {
             "roleName": "Signer1",
             "email": user.email,
-            "name": user.displayName,
+            "name": user.displayName != null
+                ? user.displayName
+                : userData.first_name + userData.last_name,
             "clientUserId": user.uid,
-            "templateId": activity.templateId
+            "templateId": task.templateId,
+            "envelopeId": task.activityData['envelopeId']
           });
-      return response.data["url"];
+      return response.data;
     } catch (e) {
       print(e);
     }
