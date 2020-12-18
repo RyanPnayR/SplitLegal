@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
@@ -26,31 +28,7 @@ class HomeScreenState extends State<HomeScreen> {
   AppState appState;
 
   @override
-  void initState() {
-    flutterWebviewPlugin.onStateChanged.listen((event) {
-      var container = AppStateContainer.of(context);
-
-      if (event.url.contains("google.com")) {
-        Uri finishedUri = Uri.parse(event.url.toString());
-        if (finishedUri.queryParameters["event"] == "signing_complete") {
-          appState.selectedTask.status = "pending";
-        }
-        flutterWebviewPlugin.close();
-        setState(() {
-          appState.isLoading = true;
-          appState.currentPage = homeScreenPages.tasks;
-        });
-
-        container.updateActivity(appState.selectedTask).then((value) => {
-              container.setUpUserData().then((value) => {
-                    setState(() {
-                      appState.isLoading = false;
-                    })
-                  })
-            });
-      }
-    });
-  }
+  void initState() {}
 
   Widget get _pageToDisplay {
     if (appState.isLoading) {
@@ -89,33 +67,60 @@ class HomeScreenState extends State<HomeScreen> {
             return new Settings();
             break;
           case homeScreenPages.docusign:
-            return InAppWebView(
-              initialUrl: appState.docusignUrl,
-              initialHeaders: {},
-              initialOptions: InAppWebViewGroupOptions(
-                  crossPlatform: InAppWebViewOptions(
-                debuggingEnabled: true,
-              )),
-              onWebViewCreated: (InAppWebViewController controller) {
-                webView = controller;
-              },
-              onLoadStart: (InAppWebViewController controller, String url) {
-                setState(() {
-                  this.url = url;
-                });
-              },
-              onLoadStop:
-                  (InAppWebViewController controller, String url) async {
-                setState(() {
-                  this.url = url;
-                });
-              },
-              onProgressChanged:
-                  (InAppWebViewController controller, int progress) {
-                setState(() {
-                  this.progress = progress / 100;
-                });
-              },
+            return Scaffold(
+              appBar: _appbar,
+              body: InAppWebView(
+                initialUrl: appState.docusignUrl,
+                initialHeaders: {},
+                initialOptions: InAppWebViewGroupOptions(
+                    crossPlatform: InAppWebViewOptions(
+                  debuggingEnabled: true,
+                )),
+                onWebViewCreated: (InAppWebViewController controller) {
+                  webView = controller;
+                },
+                onLoadStart: (InAppWebViewController controller, String url) {
+                  var container = AppStateContainer.of(context);
+
+                  if (url.contains("google.com")) {
+                    Uri finishedUri = Uri.parse(url.toString());
+                    if (finishedUri.queryParameters["event"] ==
+                        "signing_complete") {
+                      appState.selectedTask.status = "pending";
+                    }
+                    flutterWebviewPlugin.close();
+                    setState(() {
+                      appState.isLoading = true;
+                      appState.currentPage = homeScreenPages.tasks;
+                    });
+
+                    container
+                        .updateActivity(appState.selectedTask)
+                        .then((value) => {
+                              container.setUpUserData().then((value) => {
+                                    setState(() {
+                                      appState.isLoading = false;
+                                    })
+                                  })
+                            });
+                  }
+                  setState(() {
+                    this.url = url;
+                  });
+                },
+                onLoadStop:
+                    (InAppWebViewController controller, String url) async {
+                  setState(() {
+                    this.url = url;
+                  });
+                },
+                onProgressChanged:
+                    (InAppWebViewController controller, int progress) {
+                  setState(() {
+                    this.progress = progress / 100;
+                  });
+                },
+              ),
             );
             break;
           default:
