@@ -42,8 +42,8 @@ class _PaymentTaskState extends State<PaymentTask> {
   List<Widget> getTaskDescription(context) {
     return [
       Text(
-        task.title != null
-            ? task.title
+        task.description != null
+            ? task.description
             : 'There was an issue getting task data.',
         softWrap: true,
         style: TextStyle(

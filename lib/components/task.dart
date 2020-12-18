@@ -37,7 +37,7 @@ class Task extends StatelessWidget {
                     childrenPadding: EdgeInsets.all(20),
                     tilePadding: EdgeInsets.only(top: 10, left: 20),
                     title: Text(
-                      task.name,
+                      task.title,
                       style: TextStyle(
                           fontSize: 18.0,
                           fontWeight: FontWeight.bold,

@@ -8,7 +8,7 @@ part of 'app_state.dart';
 
 Activity _$ActivityFromJson(Map<String, dynamic> json) {
   return Activity(
-    name: json['name'] as String,
+    description: json['description'] as String,
     category: json['category'] as String,
     status: json['status'] as String,
     title: json['title'] as String,
@@ -31,7 +31,7 @@ Activity _$ActivityFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$ActivityToJson(Activity instance) => <String, dynamic>{
-      'name': instance.name,
+      'description': instance.description,
       'category': instance.category,
       'status': instance.status,
       'title': instance.title,

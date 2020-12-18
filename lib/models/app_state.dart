@@ -53,7 +53,7 @@ class UserForm {
 
 @JsonSerializable()
 class Activity {
-  String name;
+  String description;
   String category;
   String status;
   String title;
@@ -69,7 +69,7 @@ class Activity {
   Map<String, dynamic> activityData;
 
   Activity({
-    this.name,
+    this.description,
     this.category,
     this.status,
     this.title,

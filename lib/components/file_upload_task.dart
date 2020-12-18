@@ -28,8 +28,8 @@ class _FileUploadTaskState extends State<FileUploadTask> {
     Activity task = widget.task;
     return [
       Text(
-        task.title != null
-            ? task.title
+        task.description != null
+            ? task.description
             : 'There was an issue getting task data.',
         softWrap: true,
         style: TextStyle(
