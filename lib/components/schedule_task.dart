@@ -31,16 +31,48 @@ class ScheduleTask extends StatelessWidget {
     var container = AppStateContainer.of(context);
     return [
       ...getTaskDescription(context),
+      Text(
+        "On:",
+        style: TextStyle(
+          fontSize: 14.0,
+          color: Colors.white,
+        ),
+      ),
       MaterialButton(
         child: Text('Select Date'),
-        onPressed: () async {},
+        onPressed: () async {
+          showDatePicker(
+              initialDate: DateTime.now(),
+              context: context,
+              firstDate: DateTime.now(),
+              lastDate: DateTime(DateTime.now().year + 1));
+        },
         shape: RoundedRectangleBorder(
           borderRadius: new BorderRadius.circular(18.0),
         ),
         color: theme.secondaryHeaderColor,
         textColor: Colors.white,
         height: 30,
-      )
+      ),
+      Text(
+        "At:",
+        style: TextStyle(
+          fontSize: 14.0,
+          color: Colors.white,
+        ),
+      ),
+      MaterialButton(
+        child: Text('Select time'),
+        onPressed: () async {
+          showTimePicker(context: context, initialTime: TimeOfDay.now());
+        },
+        shape: RoundedRectangleBorder(
+          borderRadius: new BorderRadius.circular(18.0),
+        ),
+        color: theme.secondaryHeaderColor,
+        textColor: Colors.white,
+        height: 30,
+      ),
     ];
   }
 
